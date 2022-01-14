@@ -4,6 +4,7 @@ import React from "react"
 // Components
 import Helmet from "./Helmet"
 import Header from "./Header"
+import Container from "./Container"
 
 function Page(props) {
     return (
@@ -16,7 +17,7 @@ function Page(props) {
 
             <Header />
 
-            {props.children}
+            <Container>{props.children}</Container>
         </>
     )
 }

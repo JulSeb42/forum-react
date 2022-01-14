@@ -1,40 +1,149 @@
 // Packages
 import React, { useState } from "react"
+import styled, { css } from "styled-components"
+
+// Components
+import * as Font from "../styles/Font"
+import * as Variables from "../styles/Variables"
+import InputContainer from "./InputContainer"
+import Icon from "../ui/Icon"
+
+// Styles
+const InputStyled = styled.input`
+    border: 1px solid black;
+    border-radius: ${Variables.Radiuses.S};
+    padding: ${Variables.Margins.XXS} ${Variables.Margins.XS};
+    font-family: ${Variables.FontFamilies.Body};
+    font-size: ${Variables.FontSizes.Body};
+    width: 100%;
+
+    &:focus {
+        border-color: black;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+
+    ${props =>
+        props.inputtype === "textarea" &&
+        css`
+            min-height: 200px;
+
+            ${props =>
+                props.counter &&
+                css`
+                    min-height: calc(
+                        2 * ${Variables.FontSizes.Body} +
+                            ${Variables.LineHeight} *
+                            ${Variables.FontSizes.Body} +
+                            ${Variables.Margins.XXS} * 2
+                    );
+                `}
+        `}
+`
+
+const Password = styled.div`
+    position: relative;
+`
+
+const Button = styled.button`
+    height: 29px;
+    border: none;
+    background: none;
+    color: black;
+    transition: ${Variables.Transitions.Short};
+    position: absolute;
+    top: 0;
+    right: ${Variables.Margins.XS};
+    padding: 0;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+        color: black;
+    }
+`
+
+const Validation = styled(Font.Label)`
+    display: flex;
+    align-items: center;
+
+    & > span {
+        margin-right: ${Variables.Margins.XXS};
+    }
+`
 
 function Input(props) {
     const [isVisible, setIsVisible] = useState(false)
     const visible = isVisible ? "text" : "password"
 
     return (
-        <div>
-            {props.label && <label htmlFor={props.id}>{props.label}</label>}
-
+        <InputContainer label={props.label} id={props.id}>
             {props.inputtype === "password" ? (
-                <div>
-                    <input
+                <>
+                    <Password>
+                        <InputStyled
+                            id={props.id}
+                            name={props.name || props.id}
+                            type={visible}
+                            {...props}
+                        />
+
+                        <Button
+                            type="button"
+                            onClick={() => setIsVisible(!isVisible)}
+                            aria-label="Show / hide password"
+                        >
+                            {isVisible ? "Hide" : "Show"}
+                        </Button>
+                    </Password>
+
+                    {props.value.length > 0 && (
+                        <Validation>
+                            <Icon
+                                name={
+                                    props.value.length < 6
+                                        ? "close-circle"
+                                        : "check-circle"
+                                }
+                                color={
+                                    props.value.length < 6
+                                        ? Variables.Colors.Danger
+                                        : Variables.Colors.Success
+                                }
+                                size={14}
+                            />
+                            Your password must be at least 6 characters long
+                        </Validation>
+                    )}
+                </>
+            ) : props.inputtype === "textarea" ? (
+                <>
+                    <InputStyled
+                        as="textarea"
                         id={props.id}
                         name={props.name || props.id}
-                        type={visible}
+                        maxLength={props.counter && props.counter}
                         {...props}
                     />
 
-                    <button
-                        type="button"
-                        onClick={() => setIsVisible(!isVisible)}
-                    >
-                        {isVisible ? "Hide" : "Show"} password
-                    </button>
-                </div>
-            ) : props.inputtype === "textarea" ? (
-                <textarea
+                    {props.counter && (
+                        <Font.Label>
+                            {props.value.length}/{props.counter}
+                        </Font.Label>
+                    )}
+                </>
+            ) : (
+                <InputStyled
                     id={props.id}
                     name={props.name || props.id}
                     {...props}
                 />
-            ) : (
-                <input id={props.id} name={props.name || props.id} {...props} />
             )}
-        </div>
+
+            {props.helper && <Font.Label>{props.helper}</Font.Label>}
+        </InputContainer>
     )
 }
 

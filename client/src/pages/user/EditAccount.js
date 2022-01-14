@@ -1,14 +1,17 @@
 // Packages
 import React, { useContext, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import axios from "axios"
 
 // Components
 import { AuthContext } from "../../context/auth"
+import * as Font from "../../components/styles/Font"
 import Page from "../../components/layouts/Page"
 import Form from "../../components/forms/Form"
 import Input from "../../components/forms/Input"
 import DangerZone from "../../components/forms/DangerZone"
+import Link from "../../components/utils/LinkScroll"
+import ErrorMessage from "../../components/forms/ErrorMessage"
 
 function EditAccount({ edited, setEdited }) {
     const { user, updateUser, logoutUser } = useContext(AuthContext)
@@ -52,7 +55,7 @@ function EditAccount({ edited, setEdited }) {
 
     return (
         <Page title="Edit your account">
-            <h1>Edit your account</h1>
+            <Font.H1>Edit your account</Font.H1>
 
             <Form
                 btnprimary="Save changes"
@@ -75,11 +78,11 @@ function EditAccount({ edited, setEdited }) {
                 />
             </Form>
 
-            {errorMessage && <p>{errorMessage}</p>}
+            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 
-            <p>
+            <Font.P>
                 <Link to="/my-account/edit-password">Edit your password.</Link>
-            </p>
+            </Font.P>
 
             <DangerZone onClick={handleDelete} />
         </Page>

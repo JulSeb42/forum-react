@@ -5,8 +5,10 @@ import { useNavigate } from "react-router-dom"
 
 // Components
 import Page from "../../components/layouts/Page"
+import * as Font from "../../components/styles/Font"
 import Form from "../../components/forms/Form"
 import Input from "../../components/forms/Input"
+import ErrorMessage from "../../components/forms/ErrorMessage"
 
 function ResetPassword() {
     const [password, setPassword] = useState("")
@@ -38,7 +40,7 @@ function ResetPassword() {
 
     return (
         <Page title="Reset your password">
-            <h1>Reset your password</h1>
+            <Font.H1>Reset your password</Font.H1>
 
             <Form btnprimary="Send" onSubmit={handleSubmit}>
                 <Input
@@ -50,7 +52,7 @@ function ResetPassword() {
                 />
             </Form>
 
-            {errorMessage && <p>{errorMessage}</p>}
+            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         </Page>
     )
 }

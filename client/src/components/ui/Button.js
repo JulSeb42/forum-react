@@ -1,14 +1,18 @@
 // Packages
 import React from "react"
-import { Link } from "react-router-dom"
+import styled from "styled-components"
+
+// Components
+import Link from "../utils/LinkScroll"
+
+// Styles
+const Container = styled.button``
 
 function Button(props) {
-    return props.to ? (
-        <Link to={props.to} {...props}>
+    return (
+        <Container as={props.to && Link} {...props}>
             {props.children}
-        </Link>
-    ) : (
-        <button {...props}>{props.children}</button>
+        </Container>
     )
 }
 

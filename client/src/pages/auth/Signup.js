@@ -1,13 +1,16 @@
 // Packages
 import React, { useContext, useState } from "react"
 import axios from "axios"
-import { useNavigate, Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 // Components
 import { AuthContext } from "../../context/auth"
+import * as Font from "../../components/styles/Font"
 import Page from "../../components/layouts/Page"
 import Form from "../../components/forms/Form"
 import Input from "../../components/forms/Input"
+import Link from "../../components/utils/LinkScroll"
+import ErrorMessage from "../../components/forms/ErrorMessage"
 
 // Utils
 import getRandomString from "../../components/utils/getRandomString"
@@ -50,7 +53,7 @@ function Signup() {
 
     return (
         <Page title="Signup">
-            <h1>Signup</h1>
+            <Font.H1>Signup</Font.H1>
 
             <Form onSubmit={handleSubmit} btnprimary="Create your account">
                 <Input
@@ -78,11 +81,11 @@ function Signup() {
                 />
             </Form>
 
-            <p>
+            <Font.P>
                 You already have an account? <Link to="/login">Login</Link>
-            </p>
+            </Font.P>
 
-            {errorMessage && <p>{errorMessage}</p>}
+            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         </Page>
     )
 }

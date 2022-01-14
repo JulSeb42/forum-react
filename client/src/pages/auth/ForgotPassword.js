@@ -5,9 +5,11 @@ import axios from "axios"
 
 // Components
 import { AuthContext } from "../../context/auth"
+import * as Font from "../../components/styles/Font"
 import Page from "../../components/layouts/Page"
 import Form from "../../components/forms/Form"
 import Input from "../../components/forms/Input"
+import ErrorMessage from "../../components/forms/ErrorMessage"
 
 // Utils
 import getRandomString from "../../components/utils/getRandomString"
@@ -45,12 +47,12 @@ function ForgotPassword() {
         <Navigate to="/my-account" />
     ) : (
         <Page title="I forgot my password">
-            <h1>I forgot my password</h1>
+            <Font.H1>I forgot my password</Font.H1>
 
-            <p>
+            <Font.P>
                 Please enter your email address, we will send you a link to
                 reset your password.
-            </p>
+            </Font.P>
 
             <Form btnprimary="Send" onSubmit={handleSubmit}>
                 <Input
@@ -62,7 +64,7 @@ function ForgotPassword() {
                 />
             </Form>
 
-            {errorMessage && <p>{errorMessage}</p>}
+            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         </Page>
     )
 }

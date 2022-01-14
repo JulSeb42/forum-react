@@ -1,11 +1,13 @@
 // Packages
 import React, { useContext, useState } from "react"
-import { Link } from "react-router-dom"
 import axios from "axios"
 
 // Components
 import Page from "../../components/layouts/Page"
+import * as Font from "../../components/styles/Font"
 import { AuthContext } from "../../context/auth"
+import Link from "../../components/utils/LinkScroll"
+import ErrorMessage from "../../components/forms/ErrorMessage"
 
 function Verify({ edited, setEdited }) {
     const { user, updateUser } = useContext(AuthContext)
@@ -31,14 +33,14 @@ function Verify({ edited, setEdited }) {
 
     return (
         <Page title="Your account is verified!">
-            <h1>Your account is verified!</h1>
+            <Font.H1>Your account is verified!</Font.H1>
 
-            <p>
+            <Font.P>
                 You can now access all the functionalities on our website.{" "}
                 <Link to="/my-account">Go to your account</Link>.
-            </p>
+            </Font.P>
 
-            {errorMessage && <p>{errorMessage}</p>}
+            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         </Page>
     )
 }

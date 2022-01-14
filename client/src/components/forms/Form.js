@@ -1,14 +1,25 @@
 // Packages
 import React from "react"
+import styled from "styled-components"
 
 // Components
+import * as Variables from "../styles/Variables"
 import ButtonsContainer from "./ButtonsContainer"
 import Button from "../ui/Button"
+
+// Styles
+const Container = styled.form`
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: ${Variables.Margins.S};
+    width: 100%;
+    max-width: 60ch;
+`
 
 function Form(props) {
     const conditionsButtons = props.btnprimary || props.btnreset
     return (
-        <form {...props}>
+        <Container {...props}>
             {props.children}
 
             {conditionsButtons && (
@@ -26,7 +37,7 @@ function Form(props) {
                     )}
                 </ButtonsContainer>
             )}
-        </form>
+        </Container>
     )
 }
 

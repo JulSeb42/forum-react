@@ -1,10 +1,11 @@
 // Packages
 import React, { useContext } from "react"
-import { Link } from "react-router-dom"
 
 // Components
 import { AuthContext } from "../../context/auth"
+import * as Font from "../../components/styles/Font"
 import Page from "../../components/layouts/Page"
+import Link from "../../components/utils/LinkScroll"
 
 // Utils
 import getFirstName from "../../components/utils/getFirstName"
@@ -14,13 +15,13 @@ function MyAccount() {
 
     return (
         <Page title={user.fullName}>
-            <h1>Hello {getFirstName(user.fullName)}</h1>
+            <Font.H1>Hello {getFirstName(user.fullName)}</Font.H1>
 
-            {!user.verified && <p>Your account is not verified.</p>}
+            {!user.verified && <Font.P>Your account is not verified.</Font.P>}
 
-            <p>
+            <Font.P>
                 <Link to="/my-account/edit">Edit your account.</Link>
-            </p>
+            </Font.P>
         </Page>
     )
 }

@@ -1,18 +1,19 @@
 // Packages
 import React from "react"
-import { Link } from "react-router-dom"
 
 // Components
+import * as Font from "../components/styles/Font"
 import Page from "../components/layouts/Page"
+import Link from "../components/utils/LinkScroll"
 
 function NotFound() {
     return (
         <Page title="Not found!">
-            <h1>Page not found!</h1>
+            <Font.H1>Page not found!</Font.H1>
 
-            <p>
+            <Font.P>
                 <Link to="/">Back to homepage.</Link>
-            </p>
+            </Font.P>
         </Page>
     )
 }
