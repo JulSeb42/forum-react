@@ -18,7 +18,7 @@ const userSchema = new Schema(
         password: String,
         imageUrl: String,
         gender: String,
-        city: String,
+        location: String,
 
         role: {
             type: String,
