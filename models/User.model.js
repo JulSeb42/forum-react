@@ -17,9 +17,8 @@ const userSchema = new Schema(
 
         password: String,
         imageUrl: String,
-        verified: Boolean,
-        verifyToken: String,
-        resetToken: String,
+        gender: String,
+        city: String,
 
         role: {
             type: String,
@@ -53,6 +52,10 @@ const userSchema = new Schema(
                 ref: "Notification",
             },
         ],
+
+        verified: Boolean,
+        verifyToken: String,
+        resetToken: String,
     },
     {
         timestamps: true,
