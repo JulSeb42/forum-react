@@ -8,14 +8,51 @@ const userSchema = new Schema(
             required: true,
             unique: true,
         },
-        fullName: {
+
+        username: {
             type: String,
+            unique: true,
             required: true,
         },
+
         password: String,
+        imageUrl: String,
         verified: Boolean,
         verifyToken: String,
         resetToken: String,
+
+        role: {
+            type: String,
+            enum: ["admin", "user"],
+        },
+
+        topics: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Topic",
+            },
+        ],
+
+        posts: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Post",
+            },
+        ],
+
+        conversations: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Conversation",
+            },
+        ],
+
+        notifications: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Notification",
+            },
+        ],
     },
     {
         timestamps: true,
