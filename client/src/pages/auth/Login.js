@@ -69,7 +69,7 @@ function Login() {
             </Font.P>
 
             <Font.P>
-                You don't have an account? <Link to="/signup">Signup</Link>
+                You don't have an account? <Link to="/signup">Sign up</Link>
             </Font.P>
 
             {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}

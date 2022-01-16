@@ -19,6 +19,7 @@ const userSchema = new Schema(
         imageUrl: String,
         gender: String,
         location: String,
+        bio: String,
 
         role: {
             type: String,

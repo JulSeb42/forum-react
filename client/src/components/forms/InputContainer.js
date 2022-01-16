@@ -13,7 +13,7 @@ const Container = styled.div`
 `
 
 const Label = styled.label`
-    color: black;
+    color: ${Variables.Colors.Primary};
     font-weight: ${Variables.FontWeights.Bold};
 `
 

@@ -1,5 +1,37 @@
 // Colors
-export const Colors = {}
+export const Colors = {
+    Primary: "#012A4A",
+    Primary70: "#0372C9",
+    Primary10: "#E6F4FF",
+    Secondary: "#014F86",
+    Secondary70: "#0797FD",
+    Secondary10: "#E6F4FF",
+    Success: "#2FBF71",
+    Success70: "#8CE3B4",
+    Success10: "#EBFAF2",
+    Danger: "#F64740",
+    Danger70: "#FCBDBB",
+    Danger10: "#FEE8E7",
+    Warning: "#ED7D3A",
+    Warning70: "#F8CBB0",
+    Warning10: "#FDF0E8",
+    Black: "#000000",
+    DarkGray: "#333333",
+    Gray: "#737373",
+    LightGray: "#D9D9D9",
+    LighterGray: "#F2F2F2",
+    White: "#FFFFFF",
+    Background: "#FDFDFD",
+    Overlay:
+        "linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(255, 255, 255, 0) 100%)",
+    OverlayWhite:
+        "linear-gradient(0deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 100%)",
+}
+
+// Effects
+export const Effects = {
+    Shadow: "0px 2px 4px rgba(0, 0, 0, 0.04), 0px 2px 8px rgba(27, 27, 27, 0.04), 0px 6px 10px rgba(27, 27, 27, 0.01), 0px 2px 10px rgba(27, 27, 27, 0.02)",
+}
 
 // Margins
 export const Margins = {
@@ -61,21 +93,11 @@ export const Transitions = {
 
 // Media queries
 const DevicesSizes = {
-    MobileS: "320px",
-    MobileM: "375px",
-    MobileL: "425px",
+    Mobile: "600px",
     Tablet: "768px",
-    Laptop: "1024px",
-    LaptopL: "1440px",
-    Desktop: "2560px",
 }
 
 export const Breakpoints = {
-    MobileS: `(max-width: ${DevicesSizes.MobileS})`,
-    MobileM: `(max-width: ${DevicesSizes.MobileM})`,
-    MobileL: `(max-width: ${DevicesSizes.MobileL})`,
+    Mobile: `(max-width: ${DevicesSizes.Mobile})`,
     Tablet: `(max-width: ${DevicesSizes.Tablet})`,
-    Laptop: `(max-width: ${DevicesSizes.Laptop})`,
-    LaptopL: `(max-width: ${DevicesSizes.LaptopL})`,
-    Desktop: `(max-width: ${DevicesSizes.Desktop})`,
 }

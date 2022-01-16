@@ -18,6 +18,9 @@ const Wrapper = styled.div`
 
 const Main = styled.main`
     grid-column: 2;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: ${Variables.Margins.L};
 `
 
 function Container(props) {

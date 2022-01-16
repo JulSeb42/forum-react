@@ -24,7 +24,7 @@ export const H1 = styled.h1`
     ${props =>
         props.display &&
         css`
-            @media ${Variables.Breakpoints.MobileL} {
+            @media ${Variables.Breakpoints.Mobile} {
                 font-size: 48px;
             }
         `}
@@ -60,13 +60,13 @@ export const P = styled.p`
     font-weight: ${Variables.FontWeights.Regular};
 
     a {
-        color: black;
+        color: ${Variables.Colors.Primary};
         font-weight: ${Variables.FontWeights.Bold};
         text-decoration: none;
         transition: ${Variables.Transitions.Short};
 
         &:hover {
-            color: black;
+            color: ${Variables.Colors.Primary70};
         }
     }
 

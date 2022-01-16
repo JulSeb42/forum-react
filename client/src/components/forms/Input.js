@@ -6,19 +6,20 @@ import styled, { css } from "styled-components"
 import * as Font from "../styles/Font"
 import * as Variables from "../styles/Variables"
 import InputContainer from "./InputContainer"
-import Icon from "../ui/Icon"
+import Icon, { IconMixin } from "../ui/Icon"
 
 // Styles
 const InputStyled = styled.input`
-    border: 1px solid black;
+    border: 1px solid ${Variables.Colors.LightGray};
     border-radius: ${Variables.Radiuses.S};
     padding: ${Variables.Margins.XXS} ${Variables.Margins.XS};
     font-family: ${Variables.FontFamilies.Body};
     font-size: ${Variables.FontSizes.Body};
     width: 100%;
+    outline: none;
 
     &:focus {
-        border-color: black;
+        border-color: ${Variables.Colors.Primary};
     }
 
     &:disabled {
@@ -51,7 +52,7 @@ const Button = styled.button`
     height: 29px;
     border: none;
     background: none;
-    color: black;
+    color: ${Variables.Colors.Primary};
     transition: ${Variables.Transitions.Short};
     position: absolute;
     top: 0;
@@ -61,7 +62,7 @@ const Button = styled.button`
     align-items: center;
 
     &:hover {
-        color: black;
+        color: ${Variables.Colors.Primary70};
     }
 `
 
@@ -71,6 +72,49 @@ const Validation = styled(Font.Label)`
 
     & > span {
         margin-right: ${Variables.Margins.XXS};
+    }
+`
+
+const SelectContainer = styled.div`
+    position: relative;
+    width: 100%;
+
+    &:after {
+        ${IconMixin({
+            icon: "chevron-down",
+            size: 24,
+            color: Variables.Colors.Primary,
+        })}
+        position: absolute;
+        z-index: 1;
+        top: calc(50% - 24px / 2);
+        right: ${Variables.Margins.XXS};
+    }
+`
+
+const SelectInput = styled.select`
+    border: 1px solid ${Variables.Colors.LightGray};
+    border-radius: ${Variables.Radiuses.S};
+    padding: ${Variables.Margins.XXS} ${Variables.Margins.XS};
+    font-family: ${Variables.FontFamilies.Body};
+    font-size: ${Variables.FontSizes.Label};
+    outline: none;
+    position: relative;
+    appearance: none;
+    cursor: pointer;
+    z-index: 0;
+    width: 100%;
+
+    &::-ms-expand {
+        display: none;
+    }
+
+    &:focus {
+        border-color: ${Variables.Colors.Primary};
+    }
+
+    &:disabled {
+        cursor: not-allowed;
     }
 `
 
@@ -134,6 +178,17 @@ function Input(props) {
                         </Font.Label>
                     )}
                 </>
+            ) : props.as === "select" ? (
+                <SelectContainer>
+                    <SelectInput
+                        id={props.id}
+                        name={props.name ? props.name : props.id}
+                        value={props.value}
+                        {...props}
+                    >
+                        {props.children}
+                    </SelectInput>
+                </SelectContainer>
             ) : (
                 <InputStyled
                     id={props.id}

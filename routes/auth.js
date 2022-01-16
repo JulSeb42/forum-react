@@ -18,9 +18,17 @@ router.get("/loggedin", (req, res) => {
 
 // Signup
 router.put("/signup", isLoggedOut, (req, res, next) => {
-    const { fullName, email, password, verified, verifyToken } = req.body
+    const {
+        username,
+        email,
+        password,
+        verifyToken,
+        imageUrl,
+        gender,
+        location,
+    } = req.body
 
-    if (!fullName) {
+    if (!username) {
         return res
             .status(400)
             .json({ message: "Please provide your full name." })
@@ -40,51 +48,63 @@ router.put("/signup", isLoggedOut, (req, res, next) => {
             return res.status(400).json({ message: "Email already taken." })
         }
 
-        return bcrypt
-            .genSalt(saltRounds)
-            .then(salt => bcrypt.hash(password, salt))
-            .then(hashedPassword => {
-                return User.create({
-                    fullName,
-                    email,
-                    password: hashedPassword,
-                    verified,
-                    verifyToken,
-                })
-            })
-            .then(user => {
-                let mailDetails = {
-                    from: process.env.EMAIL,
-                    to: email,
-                    subject: "Verify your account on our app",
-                    html: `Hello,<br /><br />Thank you for creating your account on our app! <a href="${process.env.ORIGIN}/verify/${verifyToken}/${user._id}">Click here to verify your account</a>.`,
-                }
+        User.findOne({ username }).then(foundUsername => {
+            if (foundUsername) {
+                return res
+                    .status(400)
+                    .json({ message: "Username already taken." })
+            }
 
-                transporter.sendMail(mailDetails, (err, data) => {
-                    if (err) {
-                        console.log(err)
-                    } else {
-                        console.log("Email sent successfully.")
-                    }
-                })
-
-                req.session.user = user
-                res.status(201).json(user)
-            })
-            .catch(err => {
-                if (err instanceof mongoose.Error.ValidationError) {
-                    return res.status(400).json({ message: err.message })
-                }
-
-                if (err.code === 11000) {
-                    return res.status(400).json({
-                        message:
-                            "Email need to be unique. The email you chose is already in use.",
+            return bcrypt
+                .genSalt(saltRounds)
+                .then(salt => bcrypt.hash(password, salt))
+                .then(hashedPassword => {
+                    return User.create({
+                        username,
+                        email,
+                        password: hashedPassword,
+                        verified: false,
+                        verifyToken,
+                        imageUrl,
+                        gender,
+                        location,
+                        role: "user",
                     })
-                }
+                })
+                .then(user => {
+                    let mailDetails = {
+                        from: process.env.EMAIL,
+                        to: email,
+                        subject: "Verify your account on our app",
+                        html: `Hello,<br /><br />Thank you for creating your account on our app! <a href="${process.env.ORIGIN}/verify/${verifyToken}/${user._id}">Click here to verify your account</a>.`,
+                    }
 
-                return res.status(500).json({ message: err.message })
-            })
+                    transporter.sendMail(mailDetails, (err, data) => {
+                        if (err) {
+                            console.log(err)
+                        } else {
+                            console.log("Email sent successfully.")
+                        }
+                    })
+
+                    req.session.user = user
+                    res.status(201).json(user)
+                })
+                .catch(err => {
+                    if (err instanceof mongoose.Error.ValidationError) {
+                        return res.status(400).json({ message: err.message })
+                    }
+
+                    if (err.code === 11000) {
+                        return res.status(400).json({
+                            message:
+                                "Email need to be unique. The email you chose is already in use.",
+                        })
+                    }
+
+                    return res.status(500).json({ message: err.message })
+                })
+        })
     })
 })
 

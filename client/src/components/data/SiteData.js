@@ -1,9 +1,9 @@
 const SiteData = {
-    Name: "App name",
+    Name: "Forum app",
     Description: "",
     Favicon: "/favicon.ico",
-    Email: "",
-    Author: "",
+    Email: "julien.sebag.apps@gmail.com",
+    Author: "Julien Sebag",
     Year: "",
 
     // Metadata
