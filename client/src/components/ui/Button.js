@@ -6,6 +6,7 @@ import styled, { css } from "styled-components"
 import * as Variables from "../styles/Variables"
 import Link from "../utils/LinkScroll"
 import Loader from "./Loader"
+import Icon from "./Icon"
 
 // Styles
 const Container = styled.button`
@@ -19,6 +20,13 @@ const Container = styled.button`
     border-radius: ${Variables.Radiuses.S};
     transition: ${Variables.Transitions.Short};
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & > span {
+        margin-right: ${Variables.Margins.XXS};
+    }
 
     ${props =>
         props.btnstyle === "primary" &&
@@ -75,6 +83,8 @@ function Button(props) {
     return (
         <Container as={props.to && Link} {...props}>
             {props.isLoading && <Loader />}
+
+            {props.icon && <Icon name={props.icon} size={16} color="currentColor" />}
 
             {props.children}
         </Container>

@@ -9,6 +9,11 @@ const postSchema = new Schema(
             },
         ],
 
+        topic: {
+            type: Schema.Types.ObjectId,
+            ref: "Topic",
+        },
+
         body: String,
         dateCreated: String,
         timeCreated: String,

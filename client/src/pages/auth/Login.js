@@ -31,8 +31,8 @@ function Login() {
         axios
             .put("/auth/login", requestBody)
             .then(res => {
-                loginUser(res.data)
                 navigate("/")
+                loginUser(res.data)
             })
             .catch(err => {
                 const errorDescription = err.response.data.message

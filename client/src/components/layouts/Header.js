@@ -129,7 +129,6 @@ const ButtonIcon = styled(Link)`
     border-radius: 50%;
 
     &:hover {
-        color: ${Variables.Colors.Primary70};
         background-color: ${Variables.Colors.LighterGray};
     }
 `
@@ -217,6 +216,10 @@ function Header() {
                             <Icon name="bell" size={24} color="currentColor" />
                         </ButtonIcon>
 
+                        <ButtonIcon to="#" aria-label="Messages">
+                            <Icon name="chat" size={24} color="currentColor" />
+                        </ButtonIcon>
+
                         <ButtonDrawer
                             onClick={() => setIsAccountOpen(!isAccountOpen)}
                         >
@@ -236,6 +239,7 @@ function Header() {
                                 />
                                 My account
                             </LinkDrawer>
+
                             <LinkDrawer to="/my-account/edit">
                                 <Icon
                                     name="edit"

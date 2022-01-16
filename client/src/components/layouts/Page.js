@@ -17,7 +17,10 @@ function Page(props) {
 
             <Header />
 
-            <Container>{props.children}</Container>
+
+            <Container>
+                {props.children}
+            </Container>
         </>
     )
 }
