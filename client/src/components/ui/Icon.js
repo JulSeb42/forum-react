@@ -4,14 +4,14 @@ import styled, { css } from "styled-components"
 import { ReactSVG } from "react-svg"
 
 const IconStyled = styled(ReactSVG)`
-    display: flex;
+    display: inline-flex;
     width: ${props => `${props.size}px`};
     height: ${props => `${props.size}px`};
     align-items: center;
     justify-content: center;
 
     span {
-        display: flex;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
         width: 100%;

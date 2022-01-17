@@ -8,15 +8,16 @@ import Markdown from "markdown-to-jsx"
 import * as Font from "../styles/Font"
 import * as Variables from "../styles/Variables"
 import Icon from "../ui/Icon"
-// import Votes from "./Votes"
+import Votes from "./Votes"
 
 // Utils
 import convertDateShort from "../utils/convertDateShort"
+import getToday from "../utils/getToday"
 
 // Styles
 const Container = styled.div`
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: auto 1fr;
     gap: ${Variables.Margins.S};
     background-color: ${Variables.Colors.White};
     border-radius: ${Variables.Radiuses.M};
@@ -24,15 +25,67 @@ const Container = styled.div`
     padding: ${Variables.Margins.M};
 `
 
-const Content = styled.span``
+const Content = styled.span`
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: ${Variables.Margins.S};
 
-const Title = styled(Font.H3)``
+    hr {
+        width: 100%;
+        border: none;
+        height: 1px;
+        background-color: ${Variables.Colors.LightGray};
+    }
+`
 
-const Text = styled(Markdown)``
+const TitleContainer = styled.span`
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: ${Variables.Margins.XXS};
 
-const Footer = styled.span``
+    p {
+        color: ${Variables.Colors.Gray};
+    }
+`
 
-const TextIcon = styled(Font.Small)``
+const Title = styled(Font.H3)`
+    color: ${Variables.Colors.Primary};
+    text-decoration: none;
+    transition: ${Variables.Transitions.Short};
+
+    &:hover {
+        color: ${Variables.Colors.Primary70};
+    }
+`
+
+const Text = styled(Markdown)`
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5; /* number of lines to show */
+    line-clamp: 5;
+    -webkit-box-orient: vertical;
+`
+
+const Footer = styled.span`
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: ${Variables.Margins.XS};
+
+    small:nth-child(2) {
+        text-align: center;
+    }
+`
+
+const TextIcon = styled(Font.Small)`
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    
+    & > span {
+        margin-right: ${Variables.Margins.XXS};
+    }
+`
 
 // Markdown options
 const options = {
@@ -88,38 +141,48 @@ const options = {
 function CardTopic({ topic }) {
     return (
         <Container>
-            {/* <Votes topic={topic} edited={edited} setEdited={setEdited} /> */}
+            <Votes topic={topic} />
 
             <Content>
-                <Title as={Link} to={`/topics/${topic._id}`}>
-                    {topic.title}
-                </Title>
+                <TitleContainer>
+                    <Title as={Link} to={`/topics/${topic._id}`}>
+                        {topic.title}
+                    </Title>
+
+                    <Font.P>{topic.category.charAt(0).toUpperCase() + topic.category.slice(1)}</Font.P>
+                </TitleContainer>
 
                 <Text options={options}>{topic.posts[0].body}</Text>
 
                 <hr />
 
                 <Footer>
-                    <TextIcon>
+                    <Font.Small>
                         By{" "}
                         <Link to={`/users/${topic.createdBy.username}`}>
                             {topic.createdBy.username}
                         </Link>
-                    </TextIcon>
+                    </Font.Small>
 
                     <Font.Small>
-                        Updated{" "}
-                        {convertDateShort(
-                            topic.posts[topic.posts.length - 1].dateCreated
-                        )}{" "}
-                        at {topic.posts[topic.posts.length - 1].timeCreated}
+                        {topic.posts[topic.posts.length - 1].dateCreated !==
+                            getToday() && (
+                            <>
+                                {convertDateShort(
+                                    topic.posts[topic.posts.length - 1]
+                                        .dateCreated
+                                )}{" "}
+                                at{" "}
+                            </>
+                        )}
+                        {topic.posts[topic.posts.length - 1].timeCreated}
                     </Font.Small>
 
                     <TextIcon>
                         <Icon
                             name="message"
                             color={Variables.Colors.Gray}
-                            size={16}
+                            size={14}
                         />{" "}
                         <span>{topic.posts.length - 1}</span>
                     </TextIcon>

@@ -80,8 +80,14 @@ function Aside(props) {
 
     let sortedUsers = allUsers
         // .filter(foundUser => foundUser._id !== user._id)
-        .sort((a, b) => a.topics.length - b.topics.length)
-        .slice(0, 5)
+        .sort((a, b) => {
+            if (a.topics.length === b.topics.length) {
+                return a.username < b.username ? -1 : 1
+            }
+
+            return b.topics.length - a.topics.length
+        })
+        .slice(0, 6)
 
     if (isLoggedIn) {
         sortedUsers = sortedUsers.filter(

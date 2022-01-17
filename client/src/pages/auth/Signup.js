@@ -102,6 +102,7 @@ function Signup() {
                     id="username"
                     onChange={handleUsername}
                     value={username}
+                    autoFocus
                 />
 
                 <Input

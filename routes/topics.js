@@ -35,7 +35,7 @@ router.get("/topic/:id", (req, res, next) => {
 
 // Create topic
 router.put("/new-topic", (req, res, next) => {
-    const { title, createdBy, body, dateCreated, timeCreated, category } =
+    const { title, createdBy, body, dateCreated, timeCreated, category, likes } =
         req.body
 
     Post.create({ poster: createdBy, body, dateCreated, timeCreated })
@@ -47,7 +47,7 @@ router.put("/new-topic", (req, res, next) => {
                 dateCreated,
                 timeCreated,
                 category,
-                likes: 0,
+                likes,
             }).then(createdTopic => {
                 User.findOneAndUpdate(
                     { _id: createdBy },
@@ -84,7 +84,7 @@ router.put("/dislike/:id", (req, res, next) => {
             User.findByIdAndUpdate(user, {
                 $pull: { likedTopics: updatedTopic._id },
             }).then(updatedUser => {
-                res.status(200).json({ updatedUser })
+                res.status(200).json({ user: updatedUser })
             })
         })
         .catch(err => next(err))

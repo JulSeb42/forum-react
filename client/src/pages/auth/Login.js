@@ -16,7 +16,7 @@ function Login() {
     const { loginUser, isLoggedIn } = useContext(AuthContext)
     const navigate = useNavigate()
 
-    const [email, setEmail] = useState("julien.sebag@me.com")
+    const [email, setEmail] = useState("")
     const [password, setPassword] = useState("Password42")
     const [errorMessage, setErrorMessage] = useState(undefined)
 
@@ -53,6 +53,7 @@ function Login() {
                     id="email"
                     onChange={handleEmail}
                     value={email}
+                    autoFocus
                 />
 
                 <Input

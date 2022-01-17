@@ -54,27 +54,25 @@ function Votes({ topic, edited, setEdited }) {
                 const { user } = res.data
                 updateUser(user)
                 setEdited(!edited)
-                window.location.reload(false)
             })
             .catch(err => console.log(err))
     }
 
-    // const dislike = e => {
-    //     setLikes(topic.likes === 1 ? 0 : topic.likes - 1)
+    const dislike = e => {
+        setLikes(topic.likes === 1 ? 0 : topic.likes - 1)
 
-    //     axios
-    //         .put(`/topics/dislike/${topic._id}`, {
-    //             likes: topic.likes === 1 ? 0 : topic.likes - 1,
-    //             user: user._id,
-    //         })
-    //         .then(res => {
-    //             const { user } = res.data
-    //             updateUser(user)
-    //             // setEdited(!edited)
-    //             window.location.reload(false)
-    //         })
-    //         .catch(err => console.log(err))
-    // }
+        axios
+            .put(`/topics/dislike/${topic._id}`, {
+                likes: topic.likes === 1 ? 0 : topic.likes - 1,
+                user: user._id,
+            })
+            .then(res => {
+                const { user } = res.data
+                updateUser(user)
+                setEdited(!edited)
+            })
+            .catch(err => console.log(err))
+    }
 
     // Components
     const VoteButton = props => {
@@ -85,21 +83,18 @@ function Votes({ topic, edited, setEdited }) {
         )
     }
 
-    console.log(user.likedTopics)
-
     return (
         <Container>
             {isLoggedIn && (
                 <VoteButton
                     onClick={like}
                     icon="arrow-up"
-                    // disabled={user.likedTopics.contains(topic._id) && "disabled"}
                 />
             )}
 
             <Font.P>{likes}</Font.P>
 
-            {/* {isLoggedIn && <VoteButton onClick={dislike} icon="arrow-down" />} */}
+            {isLoggedIn && <VoteButton onClick={dislike} icon="arrow-down" />}
         </Container>
     )
 }

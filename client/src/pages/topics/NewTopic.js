@@ -38,6 +38,7 @@ function NewTopic() {
             dateCreated: getToday(),
             timeCreated: getTimeNow(),
             category,
+            likes: 0,
         }
 
         axios
@@ -65,6 +66,7 @@ function NewTopic() {
                     id="title"
                     onChange={handleTitle}
                     value={title}
+                    autoFocus
                 />
 
                 <Input

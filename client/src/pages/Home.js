@@ -1,7 +1,6 @@
 // Packages
 import React, { useState, useEffect } from "react"
 import axios from "axios"
-import Link from "../components/utils/LinkScroll"
 
 // Components
 import * as Font from "../components/styles/Font"
@@ -25,7 +24,12 @@ function Home({ edited, setEdited }) {
 
             {allTopics.length > 0 ? (
                 <ListTopics>
-                    {allTopics.map(topic => (
+                    {allTopics.sort((a, b) => {
+                        return (
+                            new Date(b.posts[b.posts.length - 1].dateCreated) -
+                            new Date(a.posts[a.posts.length - 1].dateCreated)
+                        )
+                    }).map(topic => (
                         <CardTopic
                             topic={topic}
                             key={topic._id}
@@ -37,16 +41,6 @@ function Home({ edited, setEdited }) {
             ) : (
                 <Font.P>No topic yet.</Font.P>
             )}
-
-            {/* {allTopics.map(topic => (
-                <p key={topic._id}>
-                    <Link to={`/topics/${topic._id}`}>{topic.title}</Link>,
-                    created by{" "}
-                    <Link to={`/users/${topic.createdBy.username}`}>
-                        {topic.createdBy.username}
-                    </Link>
-                </p>
-            ))} */}
         </Page>
     )
 }
