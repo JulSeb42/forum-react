@@ -81,7 +81,7 @@ const TextIcon = styled(Font.Small)`
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    
+
     & > span {
         margin-right: ${Variables.Margins.XXS};
     }
@@ -138,7 +138,7 @@ const options = {
     },
 }
 
-function CardTopic({ topic }) {
+function CardTopic({ topic, ...props }) {
     return (
         <Container>
             <Votes topic={topic} />
@@ -149,7 +149,10 @@ function CardTopic({ topic }) {
                         {topic.title}
                     </Title>
 
-                    <Font.P>{topic.category.charAt(0).toUpperCase() + topic.category.slice(1)}</Font.P>
+                    <Font.P>
+                        {topic.category.charAt(0).toUpperCase() +
+                            topic.category.slice(1)}
+                    </Font.P>
                 </TitleContainer>
 
                 <Text options={options}>{topic.posts[0].body}</Text>

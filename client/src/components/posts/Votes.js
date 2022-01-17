@@ -78,7 +78,7 @@ function Votes({ topic, edited, setEdited }) {
     const VoteButton = props => {
         return (
             <Button onClick={props.onClick}>
-                <Icon name={props.icon} size={24} color="currentColor" />
+                <Icon name={props.icon} size={24} />
             </Button>
         )
     }

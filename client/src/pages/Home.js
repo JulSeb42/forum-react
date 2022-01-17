@@ -8,7 +8,7 @@ import Page from "../components/layouts/Page"
 import ListTopics from "../components/posts/ListTopics"
 import CardTopic from "../components/posts/CardTopic"
 
-function Home({ edited, setEdited }) {
+function Home() {
     const [allTopics, setAllTopics] = useState([])
 
     useEffect(() => {
@@ -24,19 +24,20 @@ function Home({ edited, setEdited }) {
 
             {allTopics.length > 0 ? (
                 <ListTopics>
-                    {allTopics.sort((a, b) => {
-                        return (
-                            new Date(b.posts[b.posts.length - 1].dateCreated) -
-                            new Date(a.posts[a.posts.length - 1].dateCreated)
-                        )
-                    }).map(topic => (
-                        <CardTopic
-                            topic={topic}
-                            key={topic._id}
-                            edited={edited}
-                            setEdited={setEdited}
-                        />
-                    ))}
+                    {allTopics
+                        .sort((a, b) => {
+                            return (
+                                new Date(
+                                    b.posts[b.posts.length - 1].dateCreated
+                                ) -
+                                new Date(
+                                    a.posts[a.posts.length - 1].dateCreated
+                                )
+                            )
+                        })
+                        .map(topic => (
+                            <CardTopic topic={topic} key={topic._id} />
+                        ))}
                 </ListTopics>
             ) : (
                 <Font.P>No topic yet.</Font.P>

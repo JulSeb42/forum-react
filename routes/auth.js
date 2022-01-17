@@ -35,12 +35,22 @@ router.put("/signup", isLoggedOut, (req, res, next) => {
     }
 
     const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/
+    const regexUsername = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{3,}/
 
     if (!regex.test(password)) {
         return res.status(400).json({
             message:
                 "Password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter.",
         })
+    }
+
+    if (!regexUsername.test(username)) {
+        return res
+            .status(400)
+            .json({
+                message:
+                    "Username must be at least 3 chars long, and can not contain any space.",
+            })
     }
 
     User.findOne({ email }).then(found => {

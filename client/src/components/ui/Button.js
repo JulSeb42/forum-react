@@ -84,7 +84,7 @@ function Button(props) {
         <Container as={props.to && Link} {...props}>
             {props.isLoading && <Loader />}
 
-            {props.icon && <Icon name={props.icon} size={16} color="currentColor" />}
+            {props.icon && <Icon name={props.icon} size={16} />}
 
             {props.children}
         </Container>

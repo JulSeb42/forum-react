@@ -68,7 +68,7 @@ function NavAside() {
     const ButtonNav = props => {
         return (
             <Button to={props.to}>
-                <Icon name={props.icon} size={16} color="currentColor" />
+                <Icon name={props.icon} size={16} />
                 {props.text}
             </Button>
         )
@@ -81,7 +81,7 @@ function NavAside() {
             ))}
 
             {isLoggedIn && (
-                <ButtonNav text="My topics" to={`/users/${user.username}/topics/`} icon="question-mark" />
+                <ButtonNav text="My topics" to={`/users/${user.username}`} icon="question-mark" />
             )}
         </Container>
     )

@@ -207,17 +207,17 @@ function Header() {
 
             <Nav className={open}>
                 <ButtonIcon to="#" aria-label="Search">
-                    <Icon name="search" size={24} color="currentColor" />
+                    <Icon name="search" size={24} />
                 </ButtonIcon>
 
                 {isLoggedIn ? (
                     <>
                         <ButtonIcon to="#" aria-label="Notifications">
-                            <Icon name="bell" size={24} color="currentColor" />
+                            <Icon name="bell" size={24} />
                         </ButtonIcon>
 
                         <ButtonIcon to="#" aria-label="Messages">
-                            <Icon name="chat" size={24} color="currentColor" />
+                            <Icon name="chat" size={24} />
                         </ButtonIcon>
 
                         <ButtonDrawer
@@ -235,7 +235,6 @@ function Header() {
                                 <Icon
                                     name="user"
                                     size={16}
-                                    color="currentColor"
                                 />
                                 My account
                             </LinkDrawer>
@@ -244,7 +243,6 @@ function Header() {
                                 <Icon
                                     name="edit"
                                     size={16}
-                                    color="currentColor"
                                 />
                                 Edit your account
                             </LinkDrawer>
@@ -255,7 +253,6 @@ function Header() {
                                 <Icon
                                     name="quit"
                                     size={16}
-                                    color="currentColor"
                                 />
                                 Log out
                             </LinkDrawer>

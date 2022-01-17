@@ -14,6 +14,7 @@ function AuthProviderWrapper(props) {
     const [isLoading, setIsLoading] = useState(true)
 
     const loginUser = user => {
+        console.log(user)
         localStorageExpires("isLoggedIn", true, 864000000)
         localStorage.setItem("user", JSON.stringify(user))
         setUser(JSON.parse(localStorage.getItem("user")))

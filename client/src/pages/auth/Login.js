@@ -17,7 +17,7 @@ function Login() {
     const navigate = useNavigate()
 
     const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("Password42")
+    const [password, setPassword] = useState("")
     const [errorMessage, setErrorMessage] = useState(undefined)
 
     const handleEmail = e => setEmail(e.target.value)

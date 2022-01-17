@@ -22,6 +22,7 @@ router.get("/topics", (req, res, next) => {
 router.get("/topic/:id", (req, res, next) => {
     Topic.findById(req.params.id)
         .populate("createdBy")
+        .populate("posts")
         .populate({
             path: "posts",
             populate: {
@@ -48,6 +49,7 @@ router.put("/new-topic", (req, res, next) => {
                 timeCreated,
                 category,
                 likes,
+                body,
             }).then(createdTopic => {
                 User.findOneAndUpdate(
                     { _id: createdBy },

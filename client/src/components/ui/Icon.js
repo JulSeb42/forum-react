@@ -33,7 +33,7 @@ export default function Icon(props) {
     return (
         <IconStyled
             src={`/icons/${props.name}.svg`}
-            color={props.color}
+            color={props.color || "currentColor"}
             size={props.size}
             wrapper="span"
             {...props}

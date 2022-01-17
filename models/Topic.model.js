@@ -3,6 +3,7 @@ const { Schema, model } = require("mongoose")
 const topicSchema = new Schema(
     {
         title: String,
+        body: String,
 
         createdBy: {
             type: Schema.Types.ObjectId,

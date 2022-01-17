@@ -21,6 +21,7 @@ import Goodbye from "../pages/auth/Goodbye"
 import MyAccount from "../pages/user/MyAccount"
 import EditAccount from "../pages/user/EditAccount"
 import EditPassword from "../pages/user/EditPassword"
+import PublicProfile from "../pages/user/PublicProfile"
 
 // Topics
 import NewTopic from "../pages/topics/NewTopic"
@@ -124,6 +125,14 @@ function Switch() {
                 }
                 preload={scrollToTop()}
             />
+            {allUsers.map(user => (
+                <Route
+                    path={`/users/${user.username}`}
+                    element={<PublicProfile user={user} />}
+                    key={user._id}
+                    preload={scrollToTop()}
+                />
+            ))}
 
             {/* Topics */}
             <Route
