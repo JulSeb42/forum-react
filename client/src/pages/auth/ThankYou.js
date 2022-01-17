@@ -10,7 +10,7 @@ const title = "Thank you for creating your account!"
 
 function ThankYou() {
     return (
-        <Page title={title}>
+        <Page title={title} noAside>
             <Font.H1>{title}</Font.H1>
 
             <Font.P>

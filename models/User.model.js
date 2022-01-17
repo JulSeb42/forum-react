@@ -54,6 +54,13 @@ const userSchema = new Schema(
             },
         ],
 
+        likedTopics: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Topic",
+            },
+        ],
+
         verified: Boolean,
         verifyToken: String,
         resetToken: String,

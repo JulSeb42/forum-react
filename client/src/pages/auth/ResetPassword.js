@@ -39,7 +39,7 @@ function ResetPassword() {
     }
 
     return (
-        <Page title="Reset your password">
+        <Page title="Reset your password" noAside>
             <Font.H1>Reset your password</Font.H1>
 
             <Form btnprimary="Send" onSubmit={handleSubmit}>

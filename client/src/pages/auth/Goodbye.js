@@ -7,7 +7,7 @@ import Page from "../../components/layouts/Page"
 
 function Goodbye() {
     return (
-        <Page title="Goodbye!">
+        <Page title="Goodbye!" noAside>
             <Font.H1>We're sorry to see you go!</Font.H1>
 
             <Font.P>Your account was deleted successfully.</Font.P>

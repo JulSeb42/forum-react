@@ -22,6 +22,9 @@ import MyAccount from "../pages/user/MyAccount"
 import EditAccount from "../pages/user/EditAccount"
 import EditPassword from "../pages/user/EditPassword"
 
+// Topics
+import NewTopic from "../pages/topics/NewTopic"
+
 // Utils
 import ProtectedRoutes from "./utils/ProtectedRoutes"
 import scrollToTop from "./utils/scrollToTop"
@@ -39,7 +42,11 @@ function Switch() {
 
     return (
         <Routes>
-            <Route path="/" element={<Home />} preload={scrollToTop()} />
+            <Route
+                path="/"
+                element={<Home edited={edited} setEdited={setEdited} />}
+                preload={scrollToTop()}
+            />
 
             {/* Auth */}
             <Route
@@ -57,7 +64,7 @@ function Switch() {
                 <Route
                     path={`/verify/${user.verifyToken}/${user._id}`}
                     element={
-                        <ProtectedRoutes redirectTo="/login">
+                        <ProtectedRoutes>
                             <Verify edited={edited} setEdited={setEdited} />
                         </ProtectedRoutes>
                     }
@@ -93,7 +100,7 @@ function Switch() {
             <Route
                 path="/my-account"
                 element={
-                    <ProtectedRoutes redirectTo="/login">
+                    <ProtectedRoutes>
                         <MyAccount />
                     </ProtectedRoutes>
                 }
@@ -102,7 +109,7 @@ function Switch() {
             <Route
                 path="/my-account/edit"
                 element={
-                    <ProtectedRoutes redirectTo="/login">
+                    <ProtectedRoutes>
                         <EditAccount edited={edited} setEdited={setEdited} />
                     </ProtectedRoutes>
                 }
@@ -111,8 +118,19 @@ function Switch() {
             <Route
                 path="/my-account/edit-password"
                 element={
-                    <ProtectedRoutes redirectTo="/login">
+                    <ProtectedRoutes>
                         <EditPassword edited={edited} setEdited={setEdited} />
+                    </ProtectedRoutes>
+                }
+                preload={scrollToTop()}
+            />
+
+            {/* Topics */}
+            <Route
+                path="/topics/new-topic"
+                element={
+                    <ProtectedRoutes>
+                        <NewTopic edited={edited} setEdited={setEdited} />
                     </ProtectedRoutes>
                 }
                 preload={scrollToTop()}

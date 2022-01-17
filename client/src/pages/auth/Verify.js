@@ -32,7 +32,7 @@ function Verify({ edited, setEdited }) {
         })
 
     return (
-        <Page title="Your account is verified!">
+        <Page title="Your account is verified!" noAside>
             <Font.H1>Your account is verified!</Font.H1>
 
             <Font.P>

@@ -11,18 +11,8 @@ const topicSchema = new Schema(
 
         posts: [
             {
-                _id: Schema.Types.ObjectId,
-
-                poster: {
-                    type: Schema.Types.ObjectId,
-                    ref: "User",
-                },
-
-                body: String,
-                dateCreated: String,
-                timeCreated: String,
-                dateEdited: String,
-                timeEdited: String,
+                type: Schema.Types.ObjectId,
+                ref: "Post",
             },
         ],
 
@@ -30,6 +20,7 @@ const topicSchema = new Schema(
         timeCreated: String,
         dateLastPost: String,
         timeLastPost: String,
+        category: String,
         likes: Number,
     },
     {

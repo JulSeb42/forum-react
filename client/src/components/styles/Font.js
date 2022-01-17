@@ -96,6 +96,23 @@ export const Label = styled.label`
         props.big ? Variables.FontSizes.Body : Variables.FontWeights.Label};
 `
 
+export const Small = styled.small`
+    font-size: ${Variables.FontSizes.Label};
+    font-weight: ${Variables.FontWeights.Regular};
+    font-size: ${Variables.FontWeights.Label};
+
+    a {
+        color: ${Variables.Colors.Primary};
+        font-weight: ${Variables.FontWeights.Bold};
+        text-decoration: none;
+        transition: ${Variables.Transitions.Short};
+
+        &:hover {
+            color: ${Variables.Colors.Primary70};
+        }
+    }
+`
+
 export const List = styled.ul`
     padding: 0;
     margin: 0;

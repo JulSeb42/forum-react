@@ -17,10 +17,7 @@ function Page(props) {
 
             <Header />
 
-
-            <Container>
-                {props.children}
-            </Container>
+            <Container noAside={props.noAside}>{props.children}</Container>
         </>
     )
 }

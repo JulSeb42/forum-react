@@ -1,7 +1,7 @@
 // Packages
 import React, { useContext, useState, useEffect } from "react"
 import axios from "axios"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Navigate } from "react-router-dom"
 
 // Components
 import { AuthContext } from "../../context/auth"
@@ -29,7 +29,7 @@ import ListCities from "../../components/data/cities.json"
 // location,
 
 function Signup() {
-    const { loginUser } = useContext(AuthContext)
+    const { loginUser, isLoggedIn } = useContext(AuthContext)
     const navigate = useNavigate()
 
     const [username, setUsername] = useState("")
@@ -81,8 +81,8 @@ function Signup() {
         axios
             .put("/auth/signup", requestBody)
             .then(res => {
-                loginUser(res.data)
                 navigate("/thank-you")
+                loginUser(res.data)
             })
             .catch(err => {
                 const errorDescription = err.response.data.message
@@ -90,8 +90,10 @@ function Signup() {
             })
     }
 
-    return (
-        <Page title="Signup">
+    return isLoggedIn ? (
+        <Navigate to="/my-account" />
+    ) : (
+        <Page title="Signup" noAside>
             <Font.H1>Signup</Font.H1>
 
             <Form onSubmit={handleSubmit} btnprimary="Create your account">

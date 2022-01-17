@@ -16,8 +16,8 @@ function Login() {
     const { loginUser, isLoggedIn } = useContext(AuthContext)
     const navigate = useNavigate()
 
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState("julien.sebag@me.com")
+    const [password, setPassword] = useState("Password42")
     const [errorMessage, setErrorMessage] = useState(undefined)
 
     const handleEmail = e => setEmail(e.target.value)
@@ -43,7 +43,7 @@ function Login() {
     return isLoggedIn ? (
         <Navigate to="/my-account" />
     ) : (
-        <Page title="Login">
+        <Page title="Login" noAside>
             <Font.H1>Login</Font.H1>
 
             <Form onSubmit={handleSubmit} btnprimary="Log in">

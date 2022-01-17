@@ -2,16 +2,9 @@ const { Schema, model } = require("mongoose")
 
 const postSchema = new Schema(
     {
-        poster: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: "User",
-            },
-        ],
-
-        topic: {
+        poster: {
             type: Schema.Types.ObjectId,
-            ref: "Topic",
+            ref: "User",
         },
 
         body: String,

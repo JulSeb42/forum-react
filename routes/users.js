@@ -8,6 +8,8 @@ const saltRounds = 10
 // Get all users
 router.get("/user", (req, res, next) => {
     User.find()
+        .populate("topics")
+        .populate("posts")
         .then(userFromDb => {
             res.status(200).json(userFromDb)
         })

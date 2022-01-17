@@ -115,7 +115,7 @@ function Aside(props) {
     return (
         <Container>
             {isLoggedIn && (
-                <Button icon="plus-circle" btnstyle="primary" to="/new-topic">
+                <Button icon="plus-circle" btnstyle="primary" to="/topics/new-topic">
                     Start a new topic
                 </Button>
             )}

@@ -46,7 +46,7 @@ function ForgotPassword() {
     return isLoggedIn ? (
         <Navigate to="/my-account" />
     ) : (
-        <Page title="I forgot my password">
+        <Page title="I forgot my password" noAside>
             <Font.H1>I forgot my password</Font.H1>
 
             <Font.P>
