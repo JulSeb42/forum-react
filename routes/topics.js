@@ -36,8 +36,29 @@ router.get("/topic/:id", (req, res, next) => {
 
 // Create topic
 router.put("/new-topic", (req, res, next) => {
-    const { title, createdBy, body, dateCreated, timeCreated, category, likes } =
-        req.body
+    const {
+        title,
+        createdBy,
+        body,
+        dateCreated,
+        timeCreated,
+        category,
+        likes,
+    } = req.body
+
+    if (!title) {
+        return res
+            .status(400)
+            .json({ message: "Title can not be empty" })
+    }
+
+    if (!category) {
+        return res.status(400).json({ message: "Category can not be empty" })
+    }
+
+    if (!body) {
+        return res.status(400).json({ message: "Body can not be empty" })
+    }
 
     Post.create({ poster: createdBy, body, dateCreated, timeCreated })
         .then(createdPost => {
@@ -94,7 +115,44 @@ router.put("/dislike/:id", (req, res, next) => {
 
 // Edit topic
 router.put("/edit-topic/:id", (req, res, next) => {
-    
+    const { title, body, dateEdited, timeEdited, category, postId } = req.body
+
+    if (!title) {
+        return res.status(400).json({ message: "Title can not be empty" })
+    }
+
+    if (!category) {
+        return res.status(400).json({ message: "Category can not be empty" })
+    }
+
+    if (!body) {
+        return res.status(400).json({ message: "Body can not be empty" })
+    }
+
+    Post.findByIdAndUpdate(
+        postId,
+        { body, dateEdited, timeEdited },
+        { new: true }
+    )
+        .then(() => {
+            Topic.findByIdAndUpdate(
+                req.params.id,
+                { title, category },
+                { new: true }
+            ).then(editedTopic => {
+                res.status(200).json({ editedTopic })
+            })
+        })
+        .catch(err => next(err))
+})
+
+// Delete topic
+router.delete("/delete-topic/:id", (req, res, next) => {
+    Topic.findByIdAndDelete(req.params.id)
+        .then(() => {
+            res.status(200).json({ message: "Topic deleted." })
+        })
+        .catch(err => next(err))
 })
 
 module.exports = router

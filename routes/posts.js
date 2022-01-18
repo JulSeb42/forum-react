@@ -48,7 +48,7 @@ router.put("/new-post", (req, res, next) => {
 router.put("/edit-post/:id", (req, res, next) => {
     const { body, dateEdited, timeEdited } = req.body
 
-    if (body === "") {
+    if (!body) {
         return res
             .status(400)
             .json({ message: "Your answer can not be empty." })

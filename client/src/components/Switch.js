@@ -26,6 +26,7 @@ import PublicProfile from "../pages/user/PublicProfile"
 // Topics
 import NewTopic from "../pages/topics/NewTopic"
 import TopicDetail from "../pages/topics/TopicDetail"
+import EditTopic from "../pages/topics/EditTopic"
 
 // Utils
 import ProtectedRoutes from "./utils/ProtectedRoutes"
@@ -155,6 +156,18 @@ function Switch() {
                 <Route
                     path={`/topics/${topic._id}`}
                     element={<TopicDetail topic={topic} />}
+                    preload={scrollToTop()}
+                    key={topic._id}
+                />
+            ))}
+            {allTopics.map(topic => (
+                <Route
+                    path={`/topics/${topic._id}/edit`}
+                    element={
+                        <ProtectedRoutes>
+                            <EditTopic topic={topic} />
+                        </ProtectedRoutes>
+                    }
                     preload={scrollToTop()}
                     key={topic._id}
                 />
