@@ -17,7 +17,14 @@ function Page(props) {
 
             <Header />
 
-            <Container noAside={props.noAside}>{props.children}</Container>
+            <Container
+                onChangeSearch={props.onChangeSearch}
+                valueSearch={props.valueSearch}
+                onChangeCategory={props.onChangeCategory}
+                valueCategory={props.valueCategory}
+            >
+                {props.children}
+            </Container>
         </>
     )
 }

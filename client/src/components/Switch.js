@@ -6,6 +6,7 @@ import axios from "axios"
 // Pages
 import Home from "../pages/Home"
 import NotFound from "../pages/NotFound"
+import Search from "../pages/Search"
 
 // Auth
 import Signup from "../pages/auth/Signup"
@@ -54,6 +55,11 @@ function Switch() {
             <Route
                 path="/"
                 element={<Home edited={edited} setEdited={setEdited} />}
+                preload={scrollToTop()}
+            />
+            <Route
+                path="/search"
+                element={<Search />}
                 preload={scrollToTop()}
             />
 

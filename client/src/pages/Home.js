@@ -7,6 +7,8 @@ import * as Font from "../components/styles/Font"
 import Page from "../components/layouts/Page"
 import ListTopics from "../components/posts/ListTopics"
 import CardTopic from "../components/posts/CardTopic"
+import TitleFlex from "../components/ui/TitleFlex"
+import Button from "../components/ui/Button"
 
 function Home() {
     const [allTopics, setAllTopics] = useState([])
@@ -20,7 +22,17 @@ function Home() {
 
     return (
         <Page title="Home">
-            <Font.H1>All topics</Font.H1>
+            <TitleFlex>
+                <Font.H1>All topics</Font.H1>
+
+                <Button
+                    to="/topics/new-topic"
+                    btnstyle="primary"
+                    icon="plus-circle"
+                >
+                    Add a new topic
+                </Button>
+            </TitleFlex>
 
             {allTopics.length > 0 ? (
                 <ListTopics>

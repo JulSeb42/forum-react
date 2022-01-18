@@ -216,17 +216,20 @@ function Header() {
             </Burger>
 
             <Nav className={open}>
+                <ButtonIcon to="/" aria-label="Home">
+                    <Icon name="home" size={24} />
+                </ButtonIcon>
+
+                <ButtonIcon to="/search" aria-label="Search">
+                    <Icon name="search" size={24} />
+                </ButtonIcon>
+
                 {isLoggedIn ? (
                     <>
-                        <ButtonIcon to="/" aria-label="Home">
-                            <Icon name="home" size={24} />
-                        </ButtonIcon>
-
-                        <ButtonIcon to="/search" aria-label="Search">
-                            <Icon name="search" size={24} />
-                        </ButtonIcon>
-
-                        <ButtonIcon to="/notifications" aria-label="Notifications">
+                        <ButtonIcon
+                            to="/notifications"
+                            aria-label="Notifications"
+                        >
                             <Icon name="bell" size={24} />
                         </ButtonIcon>
 
@@ -234,7 +237,11 @@ function Header() {
                             <Icon name="chat" size={24} />
                         </ButtonIcon>
 
-                        <Button to="/topics/new-topic" btnstyle="primary">
+                        <Button
+                            to="/topics/new-topic"
+                            btnstyle="primary"
+                            icon="plus-circle"
+                        >
                             New topic
                         </Button>
 
@@ -269,10 +276,6 @@ function Header() {
                     </>
                 ) : (
                     <>
-                        <ButtonIcon to="#" aria-label="Search">
-                            <Icon name="search" size={24} />
-                        </ButtonIcon>
-
                         <Button
                             to="/signup"
                             className="signup"
@@ -280,6 +283,7 @@ function Header() {
                         >
                             Sign up
                         </Button>
+
                         <StyledLink to="/login">Log in</StyledLink>
                     </>
                 )}

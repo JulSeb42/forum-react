@@ -94,6 +94,7 @@ export const Radiuses = {
 // Container template
 export const Container = {
     Template: "1fr 600px 1fr",
+    TemplateSearch: "1fr 200px 600px 1fr",
     Column: 2,
     Padding: `${Margins.XXL} 0`,
 
