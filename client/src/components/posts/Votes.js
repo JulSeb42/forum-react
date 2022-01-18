@@ -112,7 +112,10 @@ function Votes({ topic, edited, setEdited, ...props }) {
                 <input
                     type="checkbox"
                     id={`likes-${topic._id}`}
-                    disabled={!isLoggedIn && "disabled"}
+                    disabled={
+                        !isLoggedIn ||
+                        (user._id === topic.createdBy._id && "disabled")
+                    }
                     defaultChecked={
                         isLoggedIn && topic.likesBy.includes(user._id) && true
                     }

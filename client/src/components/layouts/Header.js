@@ -1,6 +1,7 @@
 // Packages
 import React, { useContext, useState } from "react"
 import styled from "styled-components"
+import { NavLink } from "react-router-dom"
 
 // Components
 import * as Variables from "../styles/Variables"
@@ -117,7 +118,7 @@ const StyledLink = styled(Link)`
     }
 `
 
-const ButtonIcon = styled(Link)`
+const ButtonIcon = styled(NavLink)`
     --size: 32px;
     width: var(--size);
     height: var(--size);
@@ -130,6 +131,15 @@ const ButtonIcon = styled(Link)`
 
     &:hover {
         background-color: ${Variables.Colors.LighterGray};
+    }
+
+    &.active {
+        background-color: ${Variables.Colors.Primary};
+        color: ${Variables.Colors.White};
+
+        &:hover {
+            background-color: ${Variables.Colors.Primary70};
+        }
     }
 `
 
@@ -206,19 +216,27 @@ function Header() {
             </Burger>
 
             <Nav className={open}>
-                <ButtonIcon to="#" aria-label="Search">
-                    <Icon name="search" size={24} />
-                </ButtonIcon>
-
                 {isLoggedIn ? (
                     <>
-                        <ButtonIcon to="#" aria-label="Notifications">
+                        <ButtonIcon to="/" aria-label="Home">
+                            <Icon name="home" size={24} />
+                        </ButtonIcon>
+
+                        <ButtonIcon to="/search" aria-label="Search">
+                            <Icon name="search" size={24} />
+                        </ButtonIcon>
+
+                        <ButtonIcon to="/notifications" aria-label="Notifications">
                             <Icon name="bell" size={24} />
                         </ButtonIcon>
 
-                        <ButtonIcon to="#" aria-label="Messages">
+                        <ButtonIcon to="/messages" aria-label="Messages">
                             <Icon name="chat" size={24} />
                         </ButtonIcon>
+
+                        <Button to="/topics/new-topic" btnstyle="primary">
+                            New topic
+                        </Button>
 
                         <ButtonDrawer
                             onClick={() => setIsAccountOpen(!isAccountOpen)}
@@ -232,34 +250,29 @@ function Header() {
 
                         <Drawer className={accountOpen}>
                             <LinkDrawer to="/my-account">
-                                <Icon
-                                    name="user"
-                                    size={16}
-                                />
+                                <Icon name="user" size={16} />
                                 My account
                             </LinkDrawer>
 
                             <LinkDrawer to="/my-account/edit">
-                                <Icon
-                                    name="edit"
-                                    size={16}
-                                />
+                                <Icon name="edit" size={16} />
                                 Edit your account
                             </LinkDrawer>
 
                             <hr />
 
                             <LinkDrawer as="button" onClick={logoutUser}>
-                                <Icon
-                                    name="quit"
-                                    size={16}
-                                />
+                                <Icon name="quit" size={16} />
                                 Log out
                             </LinkDrawer>
                         </Drawer>
                     </>
                 ) : (
                     <>
+                        <ButtonIcon to="#" aria-label="Search">
+                            <Icon name="search" size={24} />
+                        </ButtonIcon>
+
                         <Button
                             to="/signup"
                             className="signup"

@@ -1,11 +1,9 @@
 // Packages
 import React from "react"
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 
 // Components
 import * as Variables from "../styles/Variables"
-import NavAside from "./NavAside"
-import Aside from "./Aside"
 
 // Styles
 const Wrapper = styled.div`
@@ -25,20 +23,13 @@ const Main = styled.main`
     grid-template-columns: 1fr;
     gap: ${Variables.Margins.L};
     align-content: start;
-
-    ${props => props.noAside && css`
-        grid-column: 3;
-    `}
+    grid-column: 2;
 `
 
 function Container(props) {
     return (
         <Wrapper>
-            {!props.noAside && <NavAside />}
-
-            <Main noAside={props.noAside}>{props.children}</Main>
-
-            {!props.noAside && <Aside />}
+            <Main>{props.children}</Main>
         </Wrapper>
     )
 }

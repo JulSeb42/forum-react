@@ -93,7 +93,7 @@ export const Radiuses = {
 
 // Container template
 export const Container = {
-    Template: "1fr 250px 600px 250px 1fr",
+    Template: "1fr 600px 1fr",
     Column: 2,
     Padding: `${Margins.XXL} 0`,
 
