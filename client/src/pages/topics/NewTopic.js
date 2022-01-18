@@ -43,8 +43,10 @@ function NewTopic() {
 
         axios
             .put("/topics/new-topic", requestBody)
-            .then(() => {
-                navigate("/")
+            .then(res => {
+                console.log(res)
+                navigate(`/topics/${res.data.createdTopic._id}`)
+                window.location.reload(false)
             })
             .catch(err => {
                 const errorDescription = err.response.data.message

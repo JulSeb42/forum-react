@@ -58,15 +58,6 @@ const Title = styled(Font.H3)`
     }
 `
 
-// const Text = styled(Markdown)`
-//     overflow: hidden;
-//     text-overflow: ellipsis;
-//     display: -webkit-box;
-//     -webkit-line-clamp: 5; /* number of lines to show */
-//     line-clamp: 5;
-//     -webkit-box-orient: vertical;
-// `
-
 const Footer = styled.span`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -86,57 +77,6 @@ const TextIcon = styled(Font.Small)`
         margin-right: ${Variables.Margins.XXS};
     }
 `
-
-// Markdown options
-// const options = {
-//     forceBlock: true,
-
-//     overrides: {
-//         h2: {
-//             component: Font.P,
-//         },
-
-//         h3: {
-//             component: Font.P,
-//         },
-
-//         h4: {
-//             component: Font.P,
-//         },
-
-//         h5: {
-//             component: Font.P,
-//         },
-
-//         h6: {
-//             component: Font.P,
-//         },
-
-//         p: {
-//             component: Font.P,
-//         },
-
-//         strong: {
-//             component: Font.Strong,
-//         },
-
-//         em: {
-//             component: Font.Em,
-//         },
-
-//         ul: {
-//             component: Font.List,
-//         },
-
-//         small: {
-//             component: Font.Small,
-//         },
-
-//         Link: {
-//             component: Link,
-//         },
-//     },
-// }
 
 function CardTopic({ topic, ...props }) {
     return (

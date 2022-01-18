@@ -5,6 +5,7 @@ import axios from "axios"
 
 // Components
 import { AuthContext } from "../../context/auth"
+import * as Font from "../styles/Font"
 import * as Variables from "../styles/Variables"
 import PostHeader from "./PostHeader"
 import Button from "../ui/Button"
@@ -18,12 +19,17 @@ import ButtonsContainer from "../forms/ButtonsContainer"
 // Utils
 import getToday from "../utils/getToday"
 import getTimeNow from "../utils/getTimeNow"
+import convertDateShort from "../utils/convertDateShort"
 
 // Styles
 const Container = styled.div`
     display: grid;
     grid-template-columns: 1fr;
     gap: ${Variables.Margins.M};
+`
+
+const Edited = styled(Font.Small)`
+    color: ${Variables.Colors.Gray};
 `
 
 function CardPost({ post, ...props }) {
@@ -90,9 +96,20 @@ function CardPost({ post, ...props }) {
                 <>
                     <MarkdownContainer body={body} />
 
+                    {post.dateEdited && (
+                        <Edited>
+                            Last edited{" "}
+                            {post.dateEdited === getToday()
+                                ? "today"
+                                : convertDateShort(
+                                      post.dateEdited
+                                  )}{" "}
+                            at {post.timeEdited}
+                        </Edited>
+                    )}
+
                     {isLoggedIn && post.poster._id === user._id && (
                         <ButtonsContainer align="flex-end">
-                            {/* <Button btnstyle="danger-secondary">Delete</Button> */}
                             <ModalDanger
                                 btnopen="Delete"
                                 text="Are you sure you want to delete your answer?"

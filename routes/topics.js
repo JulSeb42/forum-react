@@ -77,7 +77,7 @@ router.put("/new-topic", (req, res, next) => {
                     { $push: { posts: createdPost, topics: createdTopic } },
                     { new: true }
                 ).then(updatedUser => {
-                    res.status(200).json({ user: updatedUser })
+                    res.status(200).json({ user: updatedUser, createdTopic })
                 })
             })
         })

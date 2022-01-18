@@ -15,6 +15,10 @@ import Button from "../ui/Button"
 import PostHeader from "./PostHeader"
 import MarkdownContainer from "./MarkdownContainer"
 
+// Utils
+import getToday from "../utils/getToday"
+import convertDateShort from "../utils/convertDateShort"
+
 // Styles
 const Container = styled.div`
     display: grid;
@@ -30,6 +34,10 @@ const TitleContainer = styled.div`
     p {
         color: ${Variables.Colors.Gray};
     }
+`
+
+const Edited = styled(Font.Small)`
+    color: ${Variables.Colors.Gray};
 `
 
 const Footer = styled.div`
@@ -66,6 +74,16 @@ function TopicIntro({ topic, ...props }) {
             <PostHeader topic={topic} />
 
             <MarkdownContainer body={topic.posts[0].body} />
+
+            {topic.posts[0].dateEdited && (
+                <Edited>
+                    Last edited{" "}
+                    {topic.posts[0].dateEdited === getToday()
+                        ? "today"
+                        : convertDateShort(topic.posts[0].dateEdited)}{" "}
+                    at {topic.posts[0].timeEdited}
+                </Edited>
+            )}
 
             {isLoggedIn && user._id === topic.createdBy._id ? (
                 <Footer>
