@@ -78,7 +78,7 @@ router.put("/signup", isLoggedOut, (req, res, next) => {
                         imageUrl,
                         gender,
                         location,
-                        role: "user",
+                        admin: false,
                     })
                 })
                 .then(user => {

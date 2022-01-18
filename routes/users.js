@@ -76,4 +76,15 @@ router.delete("/delete-user/:id", (req, res, next) => {
         .catch(err => next(err))
 })
 
+// Change user role
+router.put("/admin/:id", (req, res, next) => {
+    const { admin } = req.body
+
+    User.findByIdAndUpdate(req.params.id, { admin }, { new: true })
+        .then(updatedUser => {
+            res.status(200).json({ user: updatedUser })
+        })
+        .catch(err => next(err))
+})
+
 module.exports = router

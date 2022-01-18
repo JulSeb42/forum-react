@@ -101,31 +101,30 @@ function CardPost({ post, ...props }) {
                             Last edited{" "}
                             {post.dateEdited === getToday()
                                 ? "today"
-                                : convertDateShort(
-                                      post.dateEdited
-                                  )}{" "}
+                                : convertDateShort(post.dateEdited)}{" "}
                             at {post.timeEdited}
                         </Edited>
                     )}
 
-                    {isLoggedIn && post.poster._id === user._id && (
-                        <ButtonsContainer align="flex-end">
-                            <ModalDanger
-                                btnopen="Delete"
-                                text="Are you sure you want to delete your answer?"
-                                textbtnprimary="Yes, delete this answer"
-                                onClickPrimary={handleDelete}
-                                topicId={props.topicId}
-                            />
+                    {(isLoggedIn && post.poster._id === user._id) ||
+                        (isLoggedIn && user.admin === true && (
+                            <ButtonsContainer align="flex-end">
+                                <ModalDanger
+                                    btnopen="Delete"
+                                    text="Are you sure you want to delete your answer?"
+                                    textbtnprimary="Yes, delete this answer"
+                                    onClickPrimary={handleDelete}
+                                    topicId={props.topicId}
+                                />
 
-                            <Button
-                                btnstyle="secondary"
-                                onClick={() => setEditMode(true)}
-                            >
-                                Edit
-                            </Button>
-                        </ButtonsContainer>
-                    )}
+                                <Button
+                                    btnstyle="secondary"
+                                    onClick={() => setEditMode(true)}
+                                >
+                                    Edit
+                                </Button>
+                            </ButtonsContainer>
+                        ))}
                 </>
             )}
         </Container>

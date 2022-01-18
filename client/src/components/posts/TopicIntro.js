@@ -85,7 +85,8 @@ function TopicIntro({ topic, ...props }) {
                 </Edited>
             )}
 
-            {isLoggedIn && user._id === topic.createdBy._id ? (
+            {(isLoggedIn && user._id === topic.createdBy._id) ||
+            (isLoggedIn && user.admin === true) ? (
                 <Footer>
                     <Votes topic={topic} post />
 

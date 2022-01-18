@@ -21,10 +21,11 @@ const userSchema = new Schema(
         location: String,
         bio: String,
 
-        role: {
-            type: String,
-            enum: ["admin", "user"],
-        },
+        // role: {
+        //     type: String,
+        //     enum: ["admin", "user"],
+        // },
+        admin: Boolean,
 
         topics: [
             {
