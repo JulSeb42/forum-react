@@ -8,7 +8,7 @@ import * as Variables from "../styles/Variables"
 const ButtonsContainer = styled.div`
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: ${props => props.align || "flex-start"};
     width: 100%;
 
     button:not(:last-child) {

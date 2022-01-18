@@ -2,13 +2,13 @@
 import React from "react"
 import styled from "styled-components"
 import Link from "../utils/LinkScroll"
-import Markdown from "markdown-to-jsx"
 
 // Components
 import * as Font from "../styles/Font"
 import * as Variables from "../styles/Variables"
 import Icon from "../ui/Icon"
 import Votes from "./Votes"
+import MarkdownContainer from "./MarkdownContainer"
 
 // Utils
 import convertDateShort from "../utils/convertDateShort"
@@ -58,14 +58,14 @@ const Title = styled(Font.H3)`
     }
 `
 
-const Text = styled(Markdown)`
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 5; /* number of lines to show */
-    line-clamp: 5;
-    -webkit-box-orient: vertical;
-`
+// const Text = styled(Markdown)`
+//     overflow: hidden;
+//     text-overflow: ellipsis;
+//     display: -webkit-box;
+//     -webkit-line-clamp: 5; /* number of lines to show */
+//     line-clamp: 5;
+//     -webkit-box-orient: vertical;
+// `
 
 const Footer = styled.span`
     display: grid;
@@ -88,55 +88,55 @@ const TextIcon = styled(Font.Small)`
 `
 
 // Markdown options
-const options = {
-    forceBlock: true,
+// const options = {
+//     forceBlock: true,
 
-    overrides: {
-        h2: {
-            component: Font.P,
-        },
+//     overrides: {
+//         h2: {
+//             component: Font.P,
+//         },
 
-        h3: {
-            component: Font.P,
-        },
+//         h3: {
+//             component: Font.P,
+//         },
 
-        h4: {
-            component: Font.P,
-        },
+//         h4: {
+//             component: Font.P,
+//         },
 
-        h5: {
-            component: Font.P,
-        },
+//         h5: {
+//             component: Font.P,
+//         },
 
-        h6: {
-            component: Font.P,
-        },
+//         h6: {
+//             component: Font.P,
+//         },
 
-        p: {
-            component: Font.P,
-        },
+//         p: {
+//             component: Font.P,
+//         },
 
-        strong: {
-            component: Font.Strong,
-        },
+//         strong: {
+//             component: Font.Strong,
+//         },
 
-        em: {
-            component: Font.Em,
-        },
+//         em: {
+//             component: Font.Em,
+//         },
 
-        ul: {
-            component: Font.List,
-        },
+//         ul: {
+//             component: Font.List,
+//         },
 
-        small: {
-            component: Font.Small,
-        },
+//         small: {
+//             component: Font.Small,
+//         },
 
-        Link: {
-            component: Link,
-        },
-    },
-}
+//         Link: {
+//             component: Link,
+//         },
+//     },
+// }
 
 function CardTopic({ topic, ...props }) {
     return (
@@ -155,7 +155,7 @@ function CardTopic({ topic, ...props }) {
                     </Font.P>
                 </TitleContainer>
 
-                <Text options={options}>{topic.posts[0].body}</Text>
+                <MarkdownContainer body={topic.posts[0].body} card />
 
                 <hr />
 

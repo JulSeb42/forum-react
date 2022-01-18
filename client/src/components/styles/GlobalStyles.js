@@ -11,6 +11,11 @@ const GlobalStyles = createGlobalStyle`
         font-family: ${Variables.FontFamilies.Body};
         line-height: ${Variables.LineHeight};
         background-color: ${Variables.Colors.Background};
+
+        &.stop-scrolling {
+            height: 100vh;
+            overflow: hidden !important;
+        }
     }
 
     hr {

@@ -64,6 +64,16 @@ const Container = styled.button`
                 background-color: ${Variables.Colors.Danger70};
             }
         `}
+
+    ${props =>
+        props.btnstyle === "danger-secondary" &&
+        css`{Variables.Colors.Danger};
+            color: ${Variables.Colors.Danger};
+
+            &:hover {
+                color: ${Variables.Colors.Danger70};
+            }
+        `}
     
     ${props =>
         props.justify &&

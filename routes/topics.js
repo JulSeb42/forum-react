@@ -92,4 +92,9 @@ router.put("/dislike/:id", (req, res, next) => {
         .catch(err => next(err))
 })
 
+// Edit topic
+router.put("/edit-topic/:id", (req, res, next) => {
+    
+})
+
 module.exports = router
