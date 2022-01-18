@@ -1,7 +1,7 @@
 // Packages
 import React, { useContext } from "react"
 import styled from "styled-components"
-import { NavLink } from "react-router-dom"
+import { NavLink, useLocation } from "react-router-dom"
 
 // Components
 import * as Variables from "../styles/Variables"
@@ -54,6 +54,7 @@ const Button = styled(NavLink)`
 
 function NavAside() {
     const { user, isLoggedIn } = useContext(AuthContext)
+    const location = useLocation().pathname
 
     // Links
     const Links = [
@@ -67,7 +68,7 @@ function NavAside() {
     // Components
     const ButtonNav = props => {
         return (
-            <Button to={props.to}>
+            <Button to={props.to} className={props.className}>
                 <Icon name={props.icon} size={16} />
                 {props.text}
             </Button>
@@ -77,11 +78,21 @@ function NavAside() {
     return (
         <Container>
             {Links.map((link, i) => (
-                <ButtonNav text={link.text} to={link.to} icon={link.icon} key={i} />
+                <ButtonNav
+                    text={link.text}
+                    to={link.to}
+                    icon={link.icon}
+                    key={i}
+                    className={location.match(/^\/topics.*$/gim) && "active"}
+                />
             ))}
 
             {isLoggedIn && (
-                <ButtonNav text="My topics" to={`/users/${user.username}`} icon="question-mark" />
+                <ButtonNav
+                    text="My topics"
+                    to={`/users/${user.username}`}
+                    icon="question-mark"
+                />
             )}
         </Container>
     )

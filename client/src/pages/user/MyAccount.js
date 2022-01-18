@@ -10,7 +10,6 @@ import Link from "../../components/utils/LinkScroll"
 import Item from "../../components/layouts/Item"
 import ListTopics from "../../components/posts/ListTopics"
 import CardTopic from "../../components/posts/CardTopic"
-import TitlePicture from "../../components/user/TitlePicture"
 import UserCard from "../../components/user/UserCard"
 
 function MyAccount() {

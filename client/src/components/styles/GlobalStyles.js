@@ -12,6 +12,14 @@ const GlobalStyles = createGlobalStyle`
         line-height: ${Variables.LineHeight};
         background-color: ${Variables.Colors.Background};
     }
+
+    hr {
+        width: 100%;
+        height: 1px;
+        border: none;
+        background-color: ${Variables.Colors.LightGray};
+        margin: 0;
+    }
 `
 
 export default GlobalStyles

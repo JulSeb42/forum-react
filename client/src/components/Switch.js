@@ -25,6 +25,7 @@ import PublicProfile from "../pages/user/PublicProfile"
 
 // Topics
 import NewTopic from "../pages/topics/NewTopic"
+import TopicDetail from "../pages/topics/TopicDetail"
 
 // Utils
 import ProtectedRoutes from "./utils/ProtectedRoutes"
@@ -32,12 +33,18 @@ import scrollToTop from "./utils/scrollToTop"
 
 function Switch() {
     const [allUsers, setAllUsers] = useState([])
+    const [allTopics, setAllTopics] = useState([])
     const [edited, setEdited] = useState(false)
 
     useEffect(() => {
         axios
             .get("/users/user")
             .then(res => setAllUsers(res.data))
+            .catch(err => console.log(err))
+        
+        axios
+            .get("/topics/topics")
+            .then(res => setAllTopics(res.data))
             .catch(err => console.log(err))
     }, [])
 
@@ -144,6 +151,14 @@ function Switch() {
                 }
                 preload={scrollToTop()}
             />
+            {allTopics.map(topic => (
+                <Route
+                    path={`/topics/${topic._id}`}
+                    element={<TopicDetail topic={topic} />}
+                    preload={scrollToTop()}
+                    key={topic._id}
+                />
+            ))}
 
             {/* 404 */}
             <Route path="*" element={<NotFound />} preload={scrollToTop()} />

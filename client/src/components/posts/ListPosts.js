@@ -4,10 +4,11 @@ import styled from "styled-components"
 // Components
 import * as Variables from "../styles/Variables"
 
-const Item = styled.div`
+// Styles
+const ListPosts = styled.div`
     display: grid;
     grid-template-columns: 1fr;
-    gap: ${props => props.gap || Variables.Margins.S};
+    gap: ${Variables.Margins.XS};
 `
 
-export default Item
+export default ListPosts

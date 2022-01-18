@@ -23,6 +23,7 @@ const topicSchema = new Schema(
         timeLastPost: String,
         category: String,
         likes: Number,
+        likesBy: Array,
     },
     {
         timestamps: true,

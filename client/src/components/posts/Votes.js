@@ -1,6 +1,6 @@
 // Packages
 import React, { useState, useContext } from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import axios from "axios"
 
 // Components
@@ -16,9 +16,31 @@ const Container = styled.span`
     align-content: start;
     justify-items: center;
     gap: ${Variables.Margins.XS};
+
+    ${props =>
+        props.post &&
+        css`
+            display: flex;
+            align-items: center;
+        `}
 `
 
-const Button = styled.button`
+const InputContainer = styled.span`
+    input {
+        display: none;
+
+        &:disabled ~ label {
+            color: ${Variables.Colors.Gray};
+            cursor: not-allowed;
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
+    }
+`
+
+const Label = styled.label`
     padding: 0;
     border: none;
     background: none;
@@ -31,70 +53,78 @@ const Button = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 
     &:hover {
         background-color: ${Variables.Colors.LighterGray};
     }
 `
 
-function Votes({ topic, edited, setEdited }) {
+function Votes({ topic, edited, setEdited, ...props }) {
     const { user, updateUser, isLoggedIn } = useContext(AuthContext)
 
     const [likes, setLikes] = useState(topic.likes)
+    const [checked, setChecked] = useState(
+        isLoggedIn ? topic.likesBy.includes(user._id) : false
+    )
 
-    const like = e => {
-        setLikes(topic.likes + 1)
+    const handleLike = e => {
+        e.preventDefault()
 
-        axios
-            .put(`/topics/like/${topic._id}`, {
-                likes: topic.likes + 1,
-                user: user._id,
-            })
-            .then(res => {
-                const { user } = res.data
-                updateUser(user)
-                setEdited(!edited)
-            })
-            .catch(err => console.log(err))
-    }
-
-    const dislike = e => {
-        setLikes(topic.likes === 1 ? 0 : topic.likes - 1)
-
-        axios
-            .put(`/topics/dislike/${topic._id}`, {
-                likes: topic.likes === 1 ? 0 : topic.likes - 1,
-                user: user._id,
-            })
-            .then(res => {
-                const { user } = res.data
-                updateUser(user)
-                setEdited(!edited)
-            })
-            .catch(err => console.log(err))
-    }
-
-    // Components
-    const VoteButton = props => {
-        return (
-            <Button onClick={props.onClick}>
-                <Icon name={props.icon} size={24} />
-            </Button>
-        )
+        if (isLoggedIn) {
+            if (e.target.checked) {
+                setLikes(likes + 1)
+                setChecked(true)
+                axios
+                    .put(`/topics/like/${topic._id}`, {
+                        likes: topic.likes + 1,
+                        user: user._id,
+                        likesBy: user._id,
+                    })
+                    .then(res => {
+                        const { user } = res.data
+                        updateUser(user)
+                        setEdited(!edited)
+                    })
+                    .catch(err => console.log(err))
+            } else {
+                setLikes(likes - 1)
+                setChecked(false)
+                axios
+                    .put(`/topics/dislike/${topic._id}`, {
+                        likes: topic.likes === 1 ? 0 : topic.likes - 1,
+                        user: user._id,
+                        likesBy: user._id,
+                    })
+                    .then(res => {
+                        const { user } = res.data
+                        updateUser(user)
+                        setEdited(!edited)
+                    })
+                    .catch(err => console.log(err))
+            }
+        }
     }
 
     return (
-        <Container>
-            {isLoggedIn && (
-                <VoteButton
-                    onClick={like}
-                    icon="arrow-up"
+        <Container {...props}>
+            <InputContainer>
+                <input
+                    type="checkbox"
+                    id={`likes-${topic._id}`}
+                    disabled={!isLoggedIn && "disabled"}
+                    defaultChecked={
+                        isLoggedIn && topic.likesBy.includes(user._id) && true
+                    }
+                    onChange={handleLike}
                 />
-            )}
+
+                <Label htmlFor={`likes-${topic._id}`}>
+                    <Icon name={checked ? "heart-full" : "heart"} size={24} />
+                </Label>
+            </InputContainer>
 
             <Font.P>{likes}</Font.P>
-
-            {isLoggedIn && <VoteButton onClick={dislike} icon="arrow-down" />}
         </Container>
     )
 }

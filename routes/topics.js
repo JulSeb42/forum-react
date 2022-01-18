@@ -65,9 +65,9 @@ router.put("/new-topic", (req, res, next) => {
 
 // Like and dislike topic
 router.put("/like/:id", (req, res, next) => {
-    const { likes, user } = req.body
+    const { likes, user, likesBy } = req.body
 
-    Topic.findByIdAndUpdate(req.params.id, { likes })
+    Topic.findByIdAndUpdate(req.params.id, { likes, $push: { likesBy } })
         .then(updatedTopic => {
             User.findByIdAndUpdate(user, {
                 $push: { likedTopics: updatedTopic },
@@ -79,9 +79,9 @@ router.put("/like/:id", (req, res, next) => {
 })
 
 router.put("/dislike/:id", (req, res, next) => {
-    const { likes, user } = req.body
+    const { likes, user, likesBy } = req.body
 
-    Topic.findByIdAndUpdate(req.params.id, { likes })
+    Topic.findByIdAndUpdate(req.params.id, { likes, $pull: { likesBy } })
         .then(updatedTopic => {
             User.findByIdAndUpdate(user, {
                 $pull: { likedTopics: updatedTopic._id },
