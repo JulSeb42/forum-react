@@ -128,6 +128,12 @@ const ButtonIcon = styled(NavLink)`
     color: ${Variables.Colors.Primary};
     transition: ${Variables.Transitions.Short};
     border-radius: 50%;
+    position: relative;
+
+    .icon {
+        position: relative;
+        z-index: 0;
+    }
 
     &:hover {
         background-color: ${Variables.Colors.LighterGray};
@@ -194,6 +200,17 @@ const LinkDrawer = styled(Link)`
     }
 `
 
+const Badge = styled.span`
+    --size: 8px;
+    width: var(--size);
+    height: var(--size);
+    background-color: ${Variables.Colors.Danger};
+    position: absolute;
+    top: ${Variables.Margins.XXS};
+    right: ${Variables.Margins.XXS};
+    border-radius: 50%;
+`
+
 function Header() {
     const { isLoggedIn, user, logoutUser } = useContext(AuthContext)
 
@@ -220,17 +237,15 @@ function Header() {
                     <Icon name="home" size={24} />
                 </ButtonIcon>
 
-                <ButtonIcon to="/search" aria-label="Search">
-                    <Icon name="search" size={24} />
-                </ButtonIcon>
-
                 {isLoggedIn ? (
                     <>
                         <ButtonIcon
                             to="/notifications"
                             aria-label="Notifications"
                         >
-                            <Icon name="bell" size={24} />
+                            <Icon name="bell" size={24} className="icon" />
+
+                            {user.unreadNotification && <Badge />}
                         </ButtonIcon>
 
                         <ButtonIcon to="/messages" aria-label="Messages">

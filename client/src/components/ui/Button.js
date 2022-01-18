@@ -28,6 +28,10 @@ const Container = styled.button`
         margin-right: ${Variables.Margins.XXS};
     }
 
+    &:disabled {
+        cursor: not-allowed;
+    }
+
     ${props =>
         props.btnstyle === "primary" &&
         css`
@@ -91,8 +95,12 @@ const Container = styled.button`
 
 function Button(props) {
     return (
-        <Container as={props.to && Link} {...props}>
-            {props.isLoading && <Loader />}
+        <Container
+            as={props.to && Link}
+            disabled={props.isLoading && "disabled"}
+            {...props}
+        >
+            {props.isLoading && <Loader size={16} />}
 
             {props.icon && <Icon name={props.icon} size={16} />}
 

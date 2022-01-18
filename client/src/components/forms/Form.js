@@ -25,7 +25,7 @@ function Form(props) {
             {conditionsButtons && (
                 <ButtonsContainer>
                     {props.btnprimary && (
-                        <Button type="submit" btnstyle="primary">
+                        <Button type="submit" btnstyle="primary" isLoading={props.isLoading}>
                             {props.btnprimary}
                         </Button>
                     )}

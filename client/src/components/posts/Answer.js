@@ -34,12 +34,30 @@ function Answer({ topic, ...props }) {
         axios
             .put("/posts/new-post", requestBody)
             .then(() => {
-                window.location.reload(false)
+                if (user._id === topic.createdBy._id) {
+                    window.location.reload(false)
+                }
             })
             .catch(err => {
                 const errorDescription = err.response.data.message
                 setErrorMessage(errorDescription)
             })
+
+        const requestNotif = {
+            sender: user._id,
+            receiver: topic.createdBy._id,
+            topic: topic._id,
+            type: "response",
+            date: getToday(),
+            time: getTimeNow(),
+        }
+
+        if (user._id !== topic.createdBy._id) {
+            axios
+                .put("/notifications/new-notification", requestNotif)
+                .then(() => window.location.reload(false))
+                .catch(err => console.log(err))
+        }
     }
 
     return (

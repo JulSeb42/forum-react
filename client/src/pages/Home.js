@@ -10,6 +10,9 @@ import CardTopic from "../components/posts/CardTopic"
 import TitleFlex from "../components/ui/TitleFlex"
 import Button from "../components/ui/Button"
 
+// Utils
+import slugify from "../components/utils/slugify"
+
 function Home() {
     const [allTopics, setAllTopics] = useState([])
 
@@ -20,8 +23,51 @@ function Home() {
             .catch(err => console.log(err))
     }, [])
 
+    // Search
+    const [search, setSearch] = useState("")
+    const [category, setCategory] = useState("all")
+
+    const handleSearch = e => setSearch(e.target.value)
+    const handleCategory = e => setCategory(e.target.value)
+
+    let sortedTopics = allTopics.sort((a, b) => {
+        if (
+            a.posts[a.posts.length - 1].dateCreated ===
+            b.posts[b.posts.length - 1].dateCreated
+        ) {
+            return b.posts[b.posts.length - 1].timeCreated.localeCompare(
+                a.posts[a.posts.length - 1].timeCreated
+            )
+        }
+            return (
+                new Date(b.posts[b.posts.length - 1].dateCreated) -
+                new Date(a.posts[a.posts.length - 1].dateCreated)
+            )
+    })
+
+    let results = sortedTopics
+        .filter(topic => {
+            return (
+                topic.title.toLowerCase().includes(search.toLowerCase()) ||
+                topic.createdBy.username
+                    .toLowerCase()
+                    .includes(search.toLowerCase())
+            )
+        })
+        
+
+    if (category !== "all") {
+        results = results.filter(topic => slugify(topic.category) === category)
+    }
+
     return (
-        <Page title="Home">
+        <Page
+            title="Home"
+            onChangeSearch={handleSearch}
+            valueSearch={search}
+            onChangeCategory={handleCategory}
+            valueCategory={category}
+        >
             <TitleFlex>
                 <Font.H1>All topics</Font.H1>
 
@@ -36,8 +82,19 @@ function Home() {
 
             {allTopics.length > 0 ? (
                 <ListTopics>
-                    {allTopics
+                    {results
                         .sort((a, b) => {
+                            if (
+                                a.posts[a.posts.length - 1].dateCreated ===
+                                b.posts[b.posts.length - 1].dateCreated
+                            ) {
+                                return b.posts[
+                                    b.posts.length - 1
+                                ].timeCreated.localeCompare(
+                                    a.posts[a.posts.length - 1].timeCreated
+                                )
+                            }
+
                             return (
                                 new Date(
                                     b.posts[b.posts.length - 1].dateCreated

@@ -73,6 +73,8 @@ function CardPost({ post, ...props }) {
             .catch(err => console.log(err))
     }
 
+    const conditionButtons = isLoggedIn ? post.poster._id === user._id || user.admin === true : ""
+
     return (
         <Container>
             <PostHeader post={post} />
@@ -106,25 +108,24 @@ function CardPost({ post, ...props }) {
                         </Edited>
                     )}
 
-                    {(isLoggedIn && post.poster._id === user._id) ||
-                        (isLoggedIn && user.admin === true && (
-                            <ButtonsContainer align="flex-end">
-                                <ModalDanger
-                                    btnopen="Delete"
-                                    text="Are you sure you want to delete your answer?"
-                                    textbtnprimary="Yes, delete this answer"
-                                    onClickPrimary={handleDelete}
-                                    topicId={props.topicId}
-                                />
+                    {isLoggedIn && conditionButtons && (
+                        <ButtonsContainer align="flex-end">
+                            <ModalDanger
+                                btnopen="Delete"
+                                text="Are you sure you want to delete your answer?"
+                                textbtnprimary="Yes, delete this answer"
+                                onClickPrimary={handleDelete}
+                                topicId={props.topicId}
+                            />
 
-                                <Button
-                                    btnstyle="secondary"
-                                    onClick={() => setEditMode(true)}
-                                >
-                                    Edit
-                                </Button>
-                            </ButtonsContainer>
-                        ))}
+                            <Button
+                                btnstyle="secondary"
+                                onClick={() => setEditMode(true)}
+                            >
+                                Edit
+                            </Button>
+                        </ButtonsContainer>
+                    )}
                 </>
             )}
         </Container>

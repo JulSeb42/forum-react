@@ -20,11 +20,7 @@ const userSchema = new Schema(
         gender: String,
         location: String,
         bio: String,
-
-        // role: {
-        //     type: String,
-        //     enum: ["admin", "user"],
-        // },
+        
         admin: Boolean,
 
         topics: [
@@ -54,6 +50,8 @@ const userSchema = new Schema(
                 ref: "Notification",
             },
         ],
+
+        unreadNotification: Boolean,
 
         likedTopics: [
             {

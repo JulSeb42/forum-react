@@ -6,7 +6,7 @@ import axios from "axios"
 // Pages
 import Home from "../pages/Home"
 import NotFound from "../pages/NotFound"
-import Search from "../pages/Search"
+import Notifications from "../pages/user/Notifications"
 
 // Auth
 import Signup from "../pages/auth/Signup"
@@ -55,11 +55,6 @@ function Switch() {
             <Route
                 path="/"
                 element={<Home edited={edited} setEdited={setEdited} />}
-                preload={scrollToTop()}
-            />
-            <Route
-                path="/search"
-                element={<Search />}
                 preload={scrollToTop()}
             />
 
@@ -147,6 +142,15 @@ function Switch() {
                     preload={scrollToTop()}
                 />
             ))}
+            <Route
+                path="/notifications"
+                element={
+                    <ProtectedRoutes>
+                        <Notifications />
+                    </ProtectedRoutes>
+                }
+                preload={scrollToTop()}
+            />
 
             {/* Topics */}
             <Route

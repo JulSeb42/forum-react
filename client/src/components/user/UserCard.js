@@ -63,6 +63,8 @@ function UserCard(props) {
         }
     }
 
+    const conditionToggle = user.admin === true && user._id !== props.user._id
+
     return (
         <Container>
             <TitleContainer>
@@ -80,7 +82,7 @@ function UserCard(props) {
 
             <Font.P>{props.user.bio}</Font.P>
 
-            {isLoggedIn && user.admin === true && (
+            {isLoggedIn && conditionToggle  && (
                 <Toggle
                     label="Set user as an admin"
                     id="admin"

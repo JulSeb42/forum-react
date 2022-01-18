@@ -16,14 +16,15 @@ const Rotation = keyframes`
 `
 
 const Container = styled.span`
-    width: 48px;
-    height: 48px;
+    width: ${props => `${props.size}px`};
+    height: ${props => `${props.size}px`};
     border: ${props => `${props.border}px`} solid ${Variables.Colors.White};
     border-bottom-color: ${props => props.color};
     border-radius: 50%;
     display: inline-block;
     box-sizing: border-box;
     animation: ${Rotation} 1s linear infinite;
+    margin-right: ${Variables.Margins.XS};
 `
 
 function Loader(props) {
@@ -31,6 +32,7 @@ function Loader(props) {
         <Container
             border={props.border || 2}
             color={props.color || Variables.Colors.DarkGray}
+            size={props.size || 48}
         />
     )
 }
