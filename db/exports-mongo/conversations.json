@@ -1,0 +1,118 @@
+[{
+  "_id": {
+    "$oid": "61e74d3e5fadf4191d4a4b5d"
+  },
+  "user1": {
+    "$oid": "61e5775acb716656dd26510f"
+  },
+  "user2": {
+    "$oid": "61e5775acb716656dd265115"
+  },
+  "read": true,
+  "messages": [
+    {
+      "sender": {
+        "$oid": "61e5775acb716656dd26510f"
+      },
+      "message": "Hello",
+      "createdDay": "2022-01-19",
+      "createdTime": "01:20",
+      "_id": {
+        "$oid": "61e7593e2e60ce144b4cdfb7"
+      }
+    },
+    {
+      "sender": {
+        "$oid": "61e5775acb716656dd26510f"
+      },
+      "message": "How are you?",
+      "createdDay": "2022-01-19",
+      "createdTime": "15:43",
+      "_id": {
+        "$oid": "61e8238f83f0d49048b58175"
+      }
+    },
+    {
+      "sender": {
+        "$oid": "61e5775acb716656dd26510f"
+      },
+      "message": "Check this link!",
+      "createdDay": "2022-01-19",
+      "createdTime": "15:43",
+      "_id": {
+        "$oid": "61e8239483f0d49048b58189"
+      }
+    },
+    {
+      "sender": {
+        "$oid": "61e5775acb716656dd26510f"
+      },
+      "message": "https://julien-sebag.design/",
+      "createdDay": "2022-01-19",
+      "createdTime": "15:43",
+      "_id": {
+        "$oid": "61e823a683f0d49048b581a0"
+      }
+    },
+    {
+      "sender": {
+        "$oid": "61e5775acb716656dd265115"
+      },
+      "message": "And now?",
+      "createdDay": "2022-01-19",
+      "createdTime": "16:06",
+      "_id": {
+        "$oid": "61e828e361a853053f1aed8e"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2022-01-18T23:29:02.451Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-19T15:12:36.449Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e82d3bddc3b55fba344def"
+  },
+  "user1": {
+    "$oid": "61e5775acb716656dd26510f"
+  },
+  "user2": {
+    "$oid": "61e5775acb716656dd26511c"
+  },
+  "read": true,
+  "messages": [
+    {
+      "sender": {
+        "$oid": "61e5775acb716656dd26510f"
+      },
+      "message": "Hey, let's test this!",
+      "createdDay": "2022-01-19",
+      "createdTime": "16:27",
+      "_id": {
+        "$oid": "61e82dc94bd421792890402d"
+      }
+    },
+    {
+      "sender": {
+        "$oid": "61e5775acb716656dd26511c"
+      },
+      "message": "Is it working now?",
+      "createdDay": "2022-01-19",
+      "createdTime": "16:29",
+      "_id": {
+        "$oid": "61e82e476f7d16d3d376b941"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2022-01-19T15:24:43.668Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-19T15:31:21.460Z"
+  },
+  "__v": 0
+}]

@@ -1,0 +1,1305 @@
+[{
+  "_id": {
+    "$oid": "61e578c6bcb60bc29e2e63f9"
+  },
+  "title": "The truth about Berlin is about to be revealed",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265110"
+  },
+  "posts": [
+    {
+      "$oid": "61e578c6bcb60bc29e2e63f7"
+    }
+  ],
+  "dateCreated": "2021-01-26",
+  "timeCreated": "11:15",
+  "category": "code",
+  "likes": 314,
+  "createdAt": {
+    "$date": "2022-01-17T14:10:14.197Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:10:14.197Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e578fcdbb84fed28a7bad3"
+  },
+  "title": "7 ways Berlin can improve your business",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265110"
+  },
+  "posts": [
+    {
+      "$oid": "61e578fcdbb84fed28a7bad1"
+    }
+  ],
+  "dateCreated": "2021-08-06",
+  "timeCreated": "09:27",
+  "category": "development",
+  "likes": 476,
+  "createdAt": {
+    "$date": "2022-01-17T14:11:08.709Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:11:08.709Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e57900dbb84fed28a7bae2"
+  },
+  "title": "5 reasons why people love Berlin",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265110"
+  },
+  "posts": [
+    {
+      "$oid": "61e57900dbb84fed28a7bae0"
+    }
+  ],
+  "dateCreated": "2021-05-22",
+  "timeCreated": "15:08",
+  "category": "travel",
+  "likes": 568,
+  "createdAt": {
+    "$date": "2022-01-17T14:11:12.939Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:11:12.939Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e57913dbb84fed28a7bafc"
+  },
+  "title": "Seven things you should do in Berlin",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265111"
+  },
+  "posts": [
+    {
+      "$oid": "61e57913dbb84fed28a7bafa"
+    }
+  ],
+  "dateCreated": "2021-05-13",
+  "timeCreated": "17:01",
+  "category": "development",
+  "likes": 728,
+  "createdAt": {
+    "$date": "2022-01-17T14:11:31.414Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:11:31.414Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e57917dbb84fed28a7bb0b"
+  },
+  "title": "Seven ways code can improve your business",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265111"
+  },
+  "posts": [
+    {
+      "$oid": "61e57917dbb84fed28a7bb09"
+    }
+  ],
+  "dateCreated": "2021-03-13",
+  "timeCreated": "12:45",
+  "category": "development",
+  "likes": 624,
+  "createdAt": {
+    "$date": "2022-01-17T14:11:35.910Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:11:35.910Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e5791cdbb84fed28a7bb1a"
+  },
+  "title": "15 disadvantages of code and how you can workaround it",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265111"
+  },
+  "posts": [
+    {
+      "$oid": "61e5791cdbb84fed28a7bb18"
+    }
+  ],
+  "dateCreated": "2021-09-07",
+  "timeCreated": "11:38",
+  "category": "development",
+  "likes": 668,
+  "createdAt": {
+    "$date": "2022-01-17T14:11:40.366Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:11:40.366Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e5792ddbb84fed28a7bb34"
+  },
+  "title": "Things that make you love and hate Berlin",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265112"
+  },
+  "posts": [
+    {
+      "$oid": "61e5792ddbb84fed28a7bb32"
+    }
+  ],
+  "dateCreated": "2021-04-18",
+  "timeCreated": "16:44",
+  "category": "code",
+  "likes": 283,
+  "createdAt": {
+    "$date": "2022-01-17T14:11:57.616Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:11:57.616Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e57944dbb84fed28a7bb4e"
+  },
+  "title": "5 beautiful reasons we can't help but fall in love with Berlin",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265113"
+  },
+  "posts": [
+    {
+      "$oid": "61e57944dbb84fed28a7bb4c"
+    }
+  ],
+  "dateCreated": "2021-06-01",
+  "timeCreated": "09:31",
+  "category": "code",
+  "likes": 777,
+  "createdAt": {
+    "$date": "2022-01-17T14:12:20.448Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:12:20.448Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e57948dbb84fed28a7bb5d"
+  },
+  "title": "Eliminate your fears and doubts about code",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265113"
+  },
+  "posts": [
+    {
+      "$oid": "61e57948dbb84fed28a7bb5b"
+    }
+  ],
+  "dateCreated": "2021-04-19",
+  "timeCreated": "17:03",
+  "category": "development",
+  "likes": 468,
+  "createdAt": {
+    "$date": "2022-01-17T14:12:24.887Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:12:24.887Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e57963dbb84fed28a7bb77"
+  },
+  "title": "Five ways to introduce Berlin",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265114"
+  },
+  "posts": [
+    {
+      "$oid": "61e57963dbb84fed28a7bb75"
+    }
+  ],
+  "dateCreated": "2021-02-13",
+  "timeCreated": "10:19",
+  "category": "food",
+  "likes": 304,
+  "createdAt": {
+    "$date": "2022-01-17T14:12:51.053Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:12:51.053Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e57967dbb84fed28a7bb86"
+  },
+  "title": "Code will make you tons of cash here's how!",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265114"
+  },
+  "posts": [
+    {
+      "$oid": "61e57967dbb84fed28a7bb84"
+    }
+  ],
+  "dateCreated": "2021-04-06",
+  "timeCreated": "11:36",
+  "category": "react",
+  "likes": 121,
+  "createdAt": {
+    "$date": "2022-01-17T14:12:55.265Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:12:55.265Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e5796bdbb84fed28a7bb95"
+  },
+  "title": "Top seven trends in code to watch",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265114"
+  },
+  "posts": [
+    {
+      "$oid": "61e5796bdbb84fed28a7bb93"
+    }
+  ],
+  "dateCreated": "2021-05-04",
+  "timeCreated": "11:38",
+  "category": "food",
+  "likes": 774,
+  "createdAt": {
+    "$date": "2022-01-17T14:12:59.348Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:12:59.348Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e57970dbb84fed28a7bba4"
+  },
+  "title": "Seven code tips you need to learn now",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265114"
+  },
+  "posts": [
+    {
+      "$oid": "61e5796fdbb84fed28a7bba2"
+    }
+  ],
+  "dateCreated": "2021-10-10",
+  "timeCreated": "09:14",
+  "category": "food",
+  "likes": 630,
+  "createdAt": {
+    "$date": "2022-01-17T14:13:04.006Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:13:04.006Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e57982dbb84fed28a7bbbe"
+  },
+  "title": "Ten ugly truth about Berlin",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265115"
+  },
+  "posts": [
+    {
+      "$oid": "61e57982dbb84fed28a7bbbc"
+    },
+    {
+      "$oid": "61e7297328e6e0e12de06c11"
+    }
+  ],
+  "dateCreated": "2021-11-26",
+  "timeCreated": "10:25",
+  "category": "berlin",
+  "likes": 698,
+  "createdAt": {
+    "$date": "2022-01-17T14:13:22.564Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-18T20:56:19.143Z"
+  },
+  "__v": 0,
+  "dateLastPost": "2022-01-18",
+  "timeLastPost": "21:56"
+},{
+  "_id": {
+    "$oid": "61e57987dbb84fed28a7bbcd"
+  },
+  "title": "Five reasons why you should go Berlin for your next vacation",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265115"
+  },
+  "posts": [
+    {
+      "$oid": "61e57987dbb84fed28a7bbcb"
+    }
+  ],
+  "dateCreated": "2021-04-11",
+  "timeCreated": "12:19",
+  "category": "travel",
+  "likes": 92,
+  "createdAt": {
+    "$date": "2022-01-17T14:13:27.193Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:13:27.193Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e5798bdbb84fed28a7bbdc"
+  },
+  "title": "Dining in Berlin: here's what you need to know about the food",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265115"
+  },
+  "posts": [
+    {
+      "$oid": "61e5798bdbb84fed28a7bbda"
+    }
+  ],
+  "dateCreated": "2021-09-11",
+  "timeCreated": "12:57",
+  "category": "development",
+  "likes": 147,
+  "createdAt": {
+    "$date": "2022-01-17T14:13:31.200Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:13:31.200Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e57990dbb84fed28a7bbeb"
+  },
+  "title": "Seven solid evidences why code is bad for your career development",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265115"
+  },
+  "posts": [
+    {
+      "$oid": "61e57990dbb84fed28a7bbe9"
+    }
+  ],
+  "dateCreated": "2021-09-24",
+  "timeCreated": "13:38",
+  "category": "berlin",
+  "likes": 144,
+  "createdAt": {
+    "$date": "2022-01-17T14:13:36.209Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:13:36.209Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e579c1dbb84fed28a7bc05"
+  },
+  "title": "15 secrets about Berlin that nobody will tell you",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265116"
+  },
+  "posts": [
+    {
+      "$oid": "61e579c1dbb84fed28a7bc03"
+    }
+  ],
+  "dateCreated": "2021-11-21",
+  "timeCreated": "09:26",
+  "category": "food",
+  "likes": 515,
+  "createdAt": {
+    "$date": "2022-01-17T14:14:25.070Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:14:25.070Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e579c5dbb84fed28a7bc14"
+  },
+  "title": "Seven tricks you should know when travelling to Berlin",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265116"
+  },
+  "posts": [
+    {
+      "$oid": "61e579c5dbb84fed28a7bc12"
+    }
+  ],
+  "dateCreated": "2021-02-24",
+  "timeCreated": "09:15",
+  "category": "travel",
+  "likes": 128,
+  "createdAt": {
+    "$date": "2022-01-17T14:14:29.924Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:14:29.924Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e579c9dbb84fed28a7bc23"
+  },
+  "title": "5 things you probably didn't know about Berlin",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265116"
+  },
+  "posts": [
+    {
+      "$oid": "61e579c9dbb84fed28a7bc21"
+    }
+  ],
+  "dateCreated": "2021-04-22",
+  "timeCreated": "08:20",
+  "category": "code",
+  "likes": 529,
+  "createdAt": {
+    "$date": "2022-01-17T14:14:33.847Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:14:33.847Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e579cedbb84fed28a7bc32"
+  },
+  "title": "Ten benefits of code that may change your perspective",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265116"
+  },
+  "posts": [
+    {
+      "$oid": "61e579cedbb84fed28a7bc30"
+    }
+  ],
+  "dateCreated": "2021-07-26",
+  "timeCreated": "11:20",
+  "category": "travel",
+  "likes": 309,
+  "createdAt": {
+    "$date": "2022-01-17T14:14:38.490Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:14:38.490Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e579f2dbb84fed28a7bc56"
+  },
+  "title": "Five reliable sources to learn about Berlin",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265117"
+  },
+  "posts": [
+    {
+      "$oid": "61e579f2dbb84fed28a7bc54"
+    }
+  ],
+  "dateCreated": "2021-05-19",
+  "timeCreated": "12:32",
+  "category": "berlin",
+  "likes": 553,
+  "createdAt": {
+    "$date": "2022-01-17T14:15:14.734Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:15:14.734Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e579f7dbb84fed28a7bc65"
+  },
+  "title": "Here's what no one tells you about code",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265117"
+  },
+  "posts": [
+    {
+      "$oid": "61e579f7dbb84fed28a7bc63"
+    }
+  ],
+  "dateCreated": "2021-11-10",
+  "timeCreated": "08:12",
+  "category": "code",
+  "likes": 137,
+  "createdAt": {
+    "$date": "2022-01-17T14:15:19.351Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:15:19.351Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e579fbdbb84fed28a7bc74"
+  },
+  "title": "The 15 reasons tourists love code",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265117"
+  },
+  "posts": [
+    {
+      "$oid": "61e579fbdbb84fed28a7bc72"
+    }
+  ],
+  "dateCreated": "2021-09-20",
+  "timeCreated": "12:12",
+  "category": "development",
+  "likes": 178,
+  "createdAt": {
+    "$date": "2022-01-17T14:15:23.466Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:15:23.466Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e57a09dbb84fed28a7bc8e"
+  },
+  "title": "The 10 secrets that you shouldn't know about Berlin",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265118"
+  },
+  "posts": [
+    {
+      "$oid": "61e57a09dbb84fed28a7bc8c"
+    }
+  ],
+  "dateCreated": "2021-07-20",
+  "timeCreated": "18:02",
+  "category": "travel",
+  "likes": 152,
+  "createdAt": {
+    "$date": "2022-01-17T14:15:37.722Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:15:37.722Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e57a0ddbb84fed28a7bc9d"
+  },
+  "title": "15 important facts that you should know about code",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265118"
+  },
+  "posts": [
+    {
+      "$oid": "61e57a0ddbb84fed28a7bc9b"
+    }
+  ],
+  "dateCreated": "2021-01-03",
+  "timeCreated": "12:24",
+  "category": "travel",
+  "likes": 512,
+  "createdAt": {
+    "$date": "2022-01-17T14:15:41.704Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:15:41.704Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e57a1edbb84fed28a7bcc6"
+  },
+  "title": "Prevent culture shock! 15 things you should know about Berlin and their people!",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265119"
+  },
+  "posts": [
+    {
+      "$oid": "61e57a1edbb84fed28a7bcc4"
+    }
+  ],
+  "dateCreated": "2021-09-10",
+  "timeCreated": "10:04",
+  "category": "travel",
+  "likes": 549,
+  "createdAt": {
+    "$date": "2022-01-17T14:15:58.720Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:15:58.720Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e57a670e60d315290ec7d9"
+  },
+  "title": "Eliminate your fears and doubts about Berlin",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd26511a"
+  },
+  "posts": [
+    {
+      "$oid": "61e57a670e60d315290ec7d7"
+    }
+  ],
+  "dateCreated": "2021-03-12",
+  "timeCreated": "14:26",
+  "category": "react",
+  "likes": 451,
+  "createdAt": {
+    "$date": "2022-01-17T14:17:11.714Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:17:11.714Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e57a770e60d315290ec7f3"
+  },
+  "title": "Ten Berlin that will actually make your life better",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd26511b"
+  },
+  "posts": [
+    {
+      "$oid": "61e57a770e60d315290ec7f1"
+    }
+  ],
+  "dateCreated": "2021-01-20",
+  "timeCreated": "18:10",
+  "category": "development",
+  "likes": 796,
+  "createdAt": {
+    "$date": "2022-01-17T14:17:27.082Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:17:27.082Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e57a7b0e60d315290ec802"
+  },
+  "title": "Introducing a revolutionary method to master code",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd26511b"
+  },
+  "posts": [
+    {
+      "$oid": "61e57a7b0e60d315290ec800"
+    }
+  ],
+  "dateCreated": "2021-11-15",
+  "timeCreated": "09:02",
+  "category": "berlin",
+  "likes": 102,
+  "createdAt": {
+    "$date": "2022-01-17T14:17:31.259Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:17:31.259Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e57aad0e60d315290ec81c"
+  },
+  "title": "Seven things you most likely didn't know about Berlin",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd26511c"
+  },
+  "posts": [
+    {
+      "$oid": "61e57aad0e60d315290ec81a"
+    }
+  ],
+  "dateCreated": "2021-02-22",
+  "timeCreated": "16:22",
+  "category": "development",
+  "likes": 260,
+  "createdAt": {
+    "$date": "2022-01-17T14:18:21.695Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:18:21.695Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e57ab20e60d315290ec82b"
+  },
+  "title": "7 basic tools you will need to learn code",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd26511c"
+  },
+  "posts": [
+    {
+      "$oid": "61e57ab20e60d315290ec829"
+    }
+  ],
+  "dateCreated": "2021-05-07",
+  "timeCreated": "16:39",
+  "category": "berlin",
+  "likes": 96,
+  "createdAt": {
+    "$date": "2022-01-17T14:18:26.529Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:18:26.529Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e57ab90e60d315290ec83a"
+  },
+  "title": "10 unconventional knowledge about code that you can't learn from books",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd26511c"
+  },
+  "posts": [
+    {
+      "$oid": "61e57ab90e60d315290ec838"
+    },
+    {
+      "$oid": "61e6da7bc6ecb3efe8a00b64"
+    },
+    {
+      "$oid": "61e71f4b2c879cdd4e7ece22"
+    },
+    {
+      "$oid": "61e71f617baf331145edefe7"
+    },
+    {
+      "$oid": "61e725b4546784c0588cacae"
+    }
+  ],
+  "dateCreated": "2021-11-29",
+  "timeCreated": "15:01",
+  "category": "react",
+  "likes": 683,
+  "createdAt": {
+    "$date": "2022-01-17T14:18:33.286Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-18T20:40:20.035Z"
+  },
+  "__v": 0,
+  "likesBy": [],
+  "dateLastPost": "2022-01-18",
+  "timeLastPost": "21:40"
+},{
+  "_id": {
+    "$oid": "61e57ac70e60d315290ec854"
+  },
+  "title": "Ten things you need to know about Berlin today",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd26511d"
+  },
+  "posts": [
+    {
+      "$oid": "61e57ac70e60d315290ec852"
+    }
+  ],
+  "dateCreated": "2021-06-25",
+  "timeCreated": "10:24",
+  "category": "react",
+  "likes": 353,
+  "createdAt": {
+    "$date": "2022-01-17T14:18:47.974Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:18:47.974Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e57acb0e60d315290ec863"
+  },
+  "title": "Fully utilize code to enhance your business",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd26511d"
+  },
+  "posts": [
+    {
+      "$oid": "61e57acb0e60d315290ec861"
+    }
+  ],
+  "dateCreated": "2021-06-19",
+  "timeCreated": "12:04",
+  "category": "travel",
+  "likes": 660,
+  "createdAt": {
+    "$date": "2022-01-17T14:18:51.669Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:18:51.669Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e57adc0e60d315290ec87d"
+  },
+  "title": "What I wish everyone knew about Berlin",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd26511e"
+  },
+  "posts": [
+    {
+      "$oid": "61e57adc0e60d315290ec87b"
+    }
+  ],
+  "dateCreated": "2021-06-05",
+  "timeCreated": "11:28",
+  "category": "development",
+  "likes": 566,
+  "createdAt": {
+    "$date": "2022-01-17T14:19:08.910Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:19:08.910Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e57ae00e60d315290ec88c"
+  },
+  "title": "Five things to know about code",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd26511e"
+  },
+  "posts": [
+    {
+      "$oid": "61e57ae00e60d315290ec88a"
+    }
+  ],
+  "dateCreated": "2021-10-23",
+  "timeCreated": "12:25",
+  "category": "food",
+  "likes": 377,
+  "createdAt": {
+    "$date": "2022-01-17T14:19:12.533Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:19:12.533Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e57aee0e60d315290ec8a6"
+  },
+  "title": "5 life-changing experiences in Berlin you should have before you die",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd26511f"
+  },
+  "posts": [
+    {
+      "$oid": "61e57aee0e60d315290ec8a4"
+    }
+  ],
+  "dateCreated": "2021-03-15",
+  "timeCreated": "10:42",
+  "category": "berlin",
+  "likes": 767,
+  "createdAt": {
+    "$date": "2022-01-17T14:19:26.183Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:19:26.183Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e57af40e60d315290ec8b5"
+  },
+  "title": "10 facts you never knew about Berlin",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd26511f"
+  },
+  "posts": [
+    {
+      "$oid": "61e57af40e60d315290ec8b3"
+    }
+  ],
+  "dateCreated": "2021-01-06",
+  "timeCreated": "09:30",
+  "category": "react",
+  "likes": 716,
+  "createdAt": {
+    "$date": "2022-01-17T14:19:32.264Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:19:32.264Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e57b020e60d315290ec8cf"
+  },
+  "title": "The history of Berlin",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265120"
+  },
+  "posts": [
+    {
+      "$oid": "61e57b020e60d315290ec8cd"
+    }
+  ],
+  "dateCreated": "2021-06-07",
+  "timeCreated": "08:00",
+  "category": "development",
+  "likes": 321,
+  "createdAt": {
+    "$date": "2022-01-17T14:19:46.525Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T14:19:46.525Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e590800e60d315290ec96d"
+  },
+  "title": "7 top risks of Berlin",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265121"
+  },
+  "posts": [
+    {
+      "$oid": "61e590800e60d315290ec96b"
+    }
+  ],
+  "dateCreated": "2021-11-18",
+  "timeCreated": "15:33",
+  "category": "travel",
+  "likes": 102,
+  "createdAt": {
+    "$date": "2022-01-17T15:51:28.095Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T15:51:28.095Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e590850e60d315290ec97c"
+  },
+  "title": "10 little tricks to achieve the best results in code",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265121"
+  },
+  "posts": [
+    {
+      "$oid": "61e590850e60d315290ec97a"
+    }
+  ],
+  "dateCreated": "2021-10-01",
+  "timeCreated": "10:51",
+  "category": "berlin",
+  "likes": 345,
+  "createdAt": {
+    "$date": "2022-01-17T15:51:33.059Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T15:51:33.059Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e590890e60d315290ec98b"
+  },
+  "title": "The millionaire guide on code to help you get rich",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265121"
+  },
+  "posts": [
+    {
+      "$oid": "61e590890e60d315290ec989"
+    }
+  ],
+  "dateCreated": "2021-01-21",
+  "timeCreated": "09:36",
+  "category": "travel",
+  "likes": 6,
+  "createdAt": {
+    "$date": "2022-01-17T15:51:37.271Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T15:51:37.271Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e5908d0e60d315290ec99a"
+  },
+  "title": "15 advices that you must listen before studying code",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265121"
+  },
+  "posts": [
+    {
+      "$oid": "61e5908d0e60d315290ec998"
+    }
+  ],
+  "dateCreated": "2021-05-24",
+  "timeCreated": "18:10",
+  "category": "code",
+  "likes": 81,
+  "createdAt": {
+    "$date": "2022-01-17T15:51:41.316Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T15:51:41.316Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e590b10e60d315290ec9be"
+  },
+  "title": "10 disadvantages of code and how you can workaround it",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265122"
+  },
+  "posts": [
+    {
+      "$oid": "61e590b10e60d315290ec9bc"
+    }
+  ],
+  "dateCreated": "2021-09-21",
+  "timeCreated": "18:01",
+  "category": "development",
+  "likes": 468,
+  "createdAt": {
+    "$date": "2022-01-17T15:52:17.305Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T15:52:17.305Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e590b50e60d315290ec9cd"
+  },
+  "title": "15 useful tips from experts in code",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265122"
+  },
+  "posts": [
+    {
+      "$oid": "61e590b50e60d315290ec9cb"
+    }
+  ],
+  "dateCreated": "2021-04-25",
+  "timeCreated": "10:42",
+  "category": "development",
+  "likes": 7,
+  "createdAt": {
+    "$date": "2022-01-17T15:52:21.269Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T15:52:21.269Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e590ce0e60d315290ec9e7"
+  },
+  "title": "The 5 steps needed for putting code into action",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265123"
+  },
+  "posts": [
+    {
+      "$oid": "61e590ce0e60d315290ec9e5"
+    }
+  ],
+  "dateCreated": "2021-08-15",
+  "timeCreated": "11:46",
+  "category": "berlin",
+  "likes": 290,
+  "createdAt": {
+    "$date": "2022-01-17T15:52:46.462Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T15:52:46.462Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e590d20e60d315290ec9f6"
+  },
+  "title": "What I wish everyone knew about code",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265123"
+  },
+  "posts": [
+    {
+      "$oid": "61e590d20e60d315290ec9f4"
+    }
+  ],
+  "dateCreated": "2021-11-27",
+  "timeCreated": "16:23",
+  "category": "berlin",
+  "likes": 118,
+  "createdAt": {
+    "$date": "2022-01-17T15:52:50.672Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T15:52:50.672Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e590d60e60d315290eca05"
+  },
+  "title": "This year will be the year of code",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd265123"
+  },
+  "posts": [
+    {
+      "$oid": "61e590d60e60d315290eca03"
+    }
+  ],
+  "dateCreated": "2021-07-04",
+  "timeCreated": "12:16",
+  "category": "food",
+  "likes": 332,
+  "createdAt": {
+    "$date": "2022-01-17T15:52:54.507Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T15:52:54.507Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e590fd0e60d315290eca1f"
+  },
+  "title": "7 benefits of Berlin that may change your perspective",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd26510f"
+  },
+  "posts": [
+    {
+      "$oid": "61e590fd0e60d315290eca1d"
+    }
+  ],
+  "dateCreated": "2021-10-18",
+  "timeCreated": "12:07",
+  "category": "travel",
+  "likes": 581,
+  "createdAt": {
+    "$date": "2022-01-17T15:53:33.300Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T15:53:33.300Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e591060e60d315290eca2e"
+  },
+  "title": "Code is not rocket science! Learn it now!",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd26510f"
+  },
+  "posts": [
+    {
+      "$oid": "61e591060e60d315290eca2c"
+    }
+  ],
+  "dateCreated": "2021-04-20",
+  "timeCreated": "09:14",
+  "category": "code",
+  "likes": 553,
+  "createdAt": {
+    "$date": "2022-01-17T15:53:42.607Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T15:53:42.607Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e5910e0e60d315290eca3d"
+  },
+  "title": "Ten things nobody told you about code",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd26510f"
+  },
+  "posts": [
+    {
+      "$oid": "61e5910e0e60d315290eca3b"
+    }
+  ],
+  "dateCreated": "2021-11-20",
+  "timeCreated": "17:10",
+  "category": "react",
+  "likes": 537,
+  "createdAt": {
+    "$date": "2022-01-17T15:53:50.307Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-17T15:53:50.307Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61e6d8412983ca3f1168e038"
+  },
+  "title": "Test topic",
+  "createdBy": {
+    "$oid": "61e5775acb716656dd26510f"
+  },
+  "posts": [
+    {
+      "$oid": "61e6d8412983ca3f1168e036"
+    },
+    {
+      "$oid": "61e6d86b2983ca3f1168e06a"
+    },
+    {
+      "$oid": "61e72598546784c0588cac97"
+    },
+    {
+      "$oid": "61e728210587d83b76cee271"
+    }
+  ],
+  "dateCreated": "2022-01-18",
+  "timeCreated": "16:09",
+  "category": "tests",
+  "likes": 0,
+  "likesBy": [],
+  "createdAt": {
+    "$date": "2022-01-18T15:09:53.585Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-18T20:50:41.932Z"
+  },
+  "__v": 0,
+  "dateLastPost": "2022-01-18",
+  "timeLastPost": "21:50"
+}]
