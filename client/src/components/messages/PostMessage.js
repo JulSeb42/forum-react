@@ -4,7 +4,6 @@ import styled from "styled-components"
 
 // Components
 import * as Variables from "../styles/Variables"
-import MarkdownEditor from "../forms/MarkdownEditor"
 import Icon from "../ui/Icon"
 
 // Styles
@@ -13,16 +12,14 @@ const Container = styled.form`
     align-items: center;
 `
 
-const TextField = styled(MarkdownEditor)`
-    height: auto !important;
+const TextField = styled.textarea`
+    height: calc(${Variables.FontSizes.Body} * ${Variables.LineHeight} * 2) !important;
     flex-grow: 1;
     margin-right: ${Variables.Margins.XS};
-
-    & * {
-        height: calc(
-            ${Variables.FontSizes.Body} * ${Variables.LineHeight} * 2
-        ) !important;
-    }
+    border: none;
+    font-family: ${Variables.FontFamilies.Body};
+    font-size: ${Variables.FontSizes.Body};
+    resize: none;
 `
 
 const Button = styled.button`
@@ -52,6 +49,7 @@ function PostMessage(props) {
                 visiableDragbar={false}
                 onChange={props.onChange}
                 value={props.value}
+                placeholder="Type your message..."
             />
 
             <Button>

@@ -1,7 +1,8 @@
 // Packages
-import React, { useContext, useState } from "react"
+import React, { useContext, useState, useEffect } from "react"
 import styled from "styled-components"
 import { NavLink } from "react-router-dom"
+import axios from "axios"
 
 // Components
 import * as Variables from "../styles/Variables"
@@ -222,6 +223,33 @@ function Header() {
     const [isAccountOpen, setIsAccountOpen] = useState(false)
     const accountOpen = isAccountOpen ? "open" : ""
 
+    // Check if user has any unread conversation
+    const [allConversations, setAllConversations] = useState([])
+    const [hasRead, setHasRead] = useState(false)
+
+    useEffect(() => {
+        axios
+            .get("/conversations/conversations")
+            .then(res => setAllConversations(res.data))
+            .catch(err => console.log(err))
+    }, [])
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            let filteredConversations = allConversations.filter(
+                conversation =>
+                    conversation.user1._id === user._id ||
+                    conversation.user2._id === user._id
+            )
+
+            let unread = filteredConversations.filter(conversation => conversation.read === false)
+
+            if (unread.length > 0) {
+                setHasRead(true)
+            }
+        }
+    })
+
     return (
         <Container>
             <StyledLink to="/">{SiteData.Name}</StyledLink>
@@ -250,6 +278,8 @@ function Header() {
 
                         <ButtonIcon to="/messages" aria-label="Messages">
                             <Icon name="chat" size={24} />
+
+                            {hasRead && <Badge />}
                         </ButtonIcon>
 
                         <Button

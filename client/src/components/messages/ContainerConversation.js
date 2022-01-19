@@ -12,6 +12,11 @@ const ContainerConversation = styled.div`
     padding: ${Variables.Margins.M};
     display: flex;
     flex-direction: column;
+    border-radius: ${Variables.Radiuses.M};
+
+    hr {
+        margin: ${Variables.Margins.S} 0;
+    }
 `
 
 export default ContainerConversation

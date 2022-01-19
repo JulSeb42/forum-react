@@ -115,6 +115,7 @@ function UserCard(props) {
 
         axios.put("/conversations/new-conversation", requestBody).then(res => {
             navigate(`/messages/${res.data.createdConversation._id}`)
+            window.location.reload(false)
         })
     }
 
@@ -134,11 +135,11 @@ function UserCard(props) {
                     </TextIcon>
                 </TitleContainer>
 
-                {isLoggedIn && !hasContacted ? (
+                {isLoggedIn && !hasContacted && user._id !== props.user._id ? (
                     <Button btnstyle="primary" onClick={createConversation}>
                         Contact {props.user.username}
                     </Button>
-                ) : isLoggedIn && hasContacted ? (
+                ) : isLoggedIn && hasContacted && user._id !== props.user._id ? (
                     <Button
                         btnstyle="primary"
                         to={`/messages/${foundConversation._id}`}

@@ -86,4 +86,13 @@ router.put("/new-message", (req, res, next) => {
         .catch(err => next(err))
 })
 
+// Set conversation as read
+router.put("/read/:id", (req, res, next) => {
+    Conversation.findByIdAndUpdate(req.params.id, { read: true }, { new: true })
+        .then(updatedConversation => {
+            res.status(200).json({ conversation: updatedConversation })
+        })
+        .catch(err => next(err))
+})
+
 module.exports = router

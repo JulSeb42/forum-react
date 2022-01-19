@@ -9,7 +9,8 @@ const ListNotifications = styled.div`
     grid-template-columns: 1fr;
     gap: ${Variables.Margins.M};
 
-    & > div:not(:last-child) {
+    & > div:not(:last-child),
+    & > a:not(:last-child) {
         border-bottom: 1px solid ${Variables.Colors.LightGray};
         padding-bottom: ${Variables.Margins.M};
     }
