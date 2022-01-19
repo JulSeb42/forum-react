@@ -44,7 +44,6 @@ function NewTopic() {
         axios
             .put("/topics/new-topic", requestBody)
             .then(res => {
-                console.log(res)
                 navigate(`/topics/${res.data.createdTopic._id}`)
                 window.location.reload(false)
             })

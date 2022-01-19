@@ -20,7 +20,7 @@ const userSchema = new Schema(
         gender: String,
         location: String,
         bio: String,
-        
+
         admin: Boolean,
 
         topics: [
@@ -41,6 +41,20 @@ const userSchema = new Schema(
             {
                 type: Schema.Types.ObjectId,
                 ref: "Conversation",
+            },
+        ],
+
+        contacted: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "User",
+            },
+        ],
+        
+        contactedBy: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "User",
             },
         ],
 

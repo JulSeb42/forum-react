@@ -14,6 +14,8 @@ const IconStyled = styled(ReactSVG)`
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        width: ${props => `${props.size}px`};
+        height: ${props => `${props.size}px`};
         width: 100%;
         height: 100%;
     }

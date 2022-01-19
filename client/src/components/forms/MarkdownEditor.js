@@ -8,7 +8,7 @@ import InputContainer from "./InputContainer"
 function MarkdownEditor(props) {
     return (
         <InputContainer label={props.label} id={props.id}>
-            <MDEditor value={props.value} onChange={props.onChange} preview="edit" />
+            <MDEditor value={props.value} onChange={props.onChange} preview="edit" {...props} />
         </InputContainer>
     )
 }

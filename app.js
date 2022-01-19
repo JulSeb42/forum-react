@@ -37,6 +37,9 @@ app.use("/posts", posts)
 const notifications = require("./routes/notifications")
 app.use("/notifications", notifications)
 
+const conversations = require("./routes/conversations")
+app.use("/conversations", conversations)
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app)
 

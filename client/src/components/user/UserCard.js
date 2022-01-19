@@ -1,7 +1,8 @@
 // Packages
-import React, { useContext, useState } from "react"
+import React, { useContext, useState, useEffect } from "react"
 import styled from "styled-components"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 // Components
 import { AuthContext } from "../../context/auth"
@@ -10,6 +11,12 @@ import * as Font from "../styles/Font"
 import TitlePicture from "./TitlePicture"
 import Icon from "../ui/Icon"
 import Toggle from "../forms/Toggle"
+import TitleFlex from "../ui/TitleFlex"
+import Button from "../ui/Button"
+
+// Utils
+import getToday from "../utils/getToday"
+import getTimeNow from "../utils/getTimeNow"
 
 // Styles
 const Container = styled.div`
@@ -40,6 +47,7 @@ const TextIcon = styled(Font.P)`
 
 function UserCard(props) {
     const { isLoggedIn, user } = useContext(AuthContext)
+    const navigate = useNavigate()
 
     const [admin, setAdmin] = useState(props.user.admin)
 
@@ -63,26 +71,88 @@ function UserCard(props) {
         }
     }
 
-    const conditionToggle = user.admin === true && user._id !== props.user._id
+    const conditionToggle =
+        isLoggedIn && user.admin === true && user._id !== props.user._id
+
+    // Check if there is already a conversation
+    const [allConversations, setAllConversations] = useState([])
+    const [hasContacted, setHasContacted] = useState(false)
+    const [foundConversation, setFoundConversation] = useState(undefined)
+
+    useEffect(() => {
+        axios
+            .get("/conversations/conversations")
+            .then(res => setAllConversations(res.data))
+            .catch(err => console.log(err))
+    }, [])
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            let contacted = allConversations.find(
+                conversation =>
+                    (user._id === conversation.user1._id &&
+                        props.user._id === conversation.user2._id) ||
+                    (user._id === conversation.user2._id &&
+                        props.user._id === conversation.user1._id)
+            )
+
+            if (contacted !== undefined) {
+                setHasContacted(true)
+                setFoundConversation(contacted)
+            }
+        }
+    })
+
+    const createConversation = e => {
+        e.preventDefault()
+
+        const requestBody = {
+            user1: user,
+            user2: props.user,
+            createdDay: getToday(),
+            createdTime: getTimeNow(),
+        }
+
+        axios.put("/conversations/new-conversation", requestBody).then(res => {
+            navigate(`/messages/${res.data.createdConversation._id}`)
+        })
+    }
 
     return (
         <Container>
-            <TitleContainer>
-                <TitlePicture
-                    user={props.user}
-                    size={32}
-                    dashboard={props.dashboard}
-                />
+            <TitleFlex>
+                <TitleContainer>
+                    <TitlePicture
+                        user={props.user}
+                        size={32}
+                        dashboard={props.dashboard}
+                    />
 
-                <TextIcon>
-                    <Icon name="map" size={16} />
-                    {props.user.location}
-                </TextIcon>
-            </TitleContainer>
+                    <TextIcon>
+                        <Icon name="map" size={16} />
+                        {props.user.location}
+                    </TextIcon>
+                </TitleContainer>
+
+                {isLoggedIn && !hasContacted ? (
+                    <Button btnstyle="primary" onClick={createConversation}>
+                        Contact {props.user.username}
+                    </Button>
+                ) : isLoggedIn && hasContacted ? (
+                    <Button
+                        btnstyle="primary"
+                        to={`/messages/${foundConversation._id}`}
+                    >
+                        Contact {props.user.username}
+                    </Button>
+                ) : (
+                    ""
+                )}
+            </TitleFlex>
 
             <Font.P>{props.user.bio}</Font.P>
 
-            {isLoggedIn && conditionToggle  && (
+            {conditionToggle && (
                 <Toggle
                     label="Set user as an admin"
                     id="admin"

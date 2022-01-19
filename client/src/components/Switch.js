@@ -23,6 +23,8 @@ import MyAccount from "../pages/user/MyAccount"
 import EditAccount from "../pages/user/EditAccount"
 import EditPassword from "../pages/user/EditPassword"
 import PublicProfile from "../pages/user/PublicProfile"
+import Messages from "../pages/user/Messages"
+import Conversation from "../pages/user/Conversation"
 
 // Topics
 import NewTopic from "../pages/topics/NewTopic"
@@ -36,6 +38,7 @@ import scrollToTop from "./utils/scrollToTop"
 function Switch() {
     const [allUsers, setAllUsers] = useState([])
     const [allTopics, setAllTopics] = useState([])
+    const [allConversations, setAllConversations] = useState([])
     const [edited, setEdited] = useState(false)
 
     useEffect(() => {
@@ -43,10 +46,15 @@ function Switch() {
             .get("/users/user")
             .then(res => setAllUsers(res.data))
             .catch(err => console.log(err))
-        
+
         axios
             .get("/topics/topics")
             .then(res => setAllTopics(res.data))
+            .catch(err => console.log(err))
+
+        axios
+            .get("/conversations/conversations")
+            .then(res => setAllConversations(res.data))
             .catch(err => console.log(err))
     }, [])
 
@@ -151,6 +159,27 @@ function Switch() {
                 }
                 preload={scrollToTop()}
             />
+            <Route
+                path="/messages"
+                element={
+                    <ProtectedRoutes>
+                        <Messages />
+                    </ProtectedRoutes>
+                }
+                preload={scrollToTop()}
+            />
+            {allConversations.map(conversation => (
+                <Route
+                    path={`/messages/${conversation._id}`}
+                    element={
+                        <ProtectedRoutes>
+                            <Conversation conversation={conversation} />
+                        </ProtectedRoutes>
+                    }
+                    preload={scrollToTop()}
+                    key={conversation._id}
+                />
+            ))}
 
             {/* Topics */}
             <Route
