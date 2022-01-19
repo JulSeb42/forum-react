@@ -902,8 +902,8 @@
   "_id": {
     "$oid": "61e5775acb716656dd26510f"
   },
-  "email": "julien.sebag@me.com",
-  "username": "julseb",
+  "email": "admin@email.com",
+  "username": "admin",
   "password": "$2a$10$lAF71okXdRO/6NKiayKQMeHg8JlAW4IVozoVZtVHKdM3TcRy93nam",
   "imageUrl": "https://res.cloudinary.com/dyfxmafvr/image/upload/v1642540745/forum-app/lqsfv8ra00a9ji3bvvg7.jpg",
   "gender": "male",
