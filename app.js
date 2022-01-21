@@ -40,6 +40,9 @@ app.use("/notifications", notifications)
 const conversations = require("./routes/conversations")
 app.use("/conversations", conversations)
 
+const search = require("./routes/search")
+app.use("/search", search)
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app)
 

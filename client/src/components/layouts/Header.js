@@ -1,7 +1,7 @@
 // Packages
 import React, { useContext, useState, useEffect } from "react"
 import styled from "styled-components"
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import axios from "axios"
 
 // Components
@@ -11,6 +11,7 @@ import Link from "../utils/LinkScroll"
 import ProfilePicture from "../user/ProfilePicture"
 import Icon from "../ui/Icon"
 import Button from "../ui/Button"
+import Input from "../forms/Input"
 
 // Data
 import SiteData from "../data/SiteData"
@@ -214,6 +215,7 @@ const Badge = styled.span`
 
 function Header() {
     const { isLoggedIn, user, logoutUser } = useContext(AuthContext)
+    const navigate = useNavigate()
 
     // Burger
     const [isOpen, setIsOpen] = useState(false)
@@ -250,6 +252,22 @@ function Header() {
         }
     })
 
+    // Search
+    const [query, setQuery] = useState("")
+    const handleQuery = e => setQuery(e.target.value)
+
+    const handleSearch = e => {
+        e.preventDefault()
+
+        axios
+            .put(`/search/search/${query}`)
+            .then(() => {
+                navigate(`/search/${query}`)
+                window.location.reload(false)
+            })
+            .catch(err => console.log(err))
+    }
+
     return (
         <Container>
             <StyledLink to="/">{SiteData.Name}</StyledLink>
@@ -261,6 +279,10 @@ function Header() {
             </Burger>
 
             <Nav className={open}>
+                <form onSubmit={handleSearch}>
+                    <Input type="search" placeholder="Search topics or users" id="search" onChange={handleQuery} value={query} />
+                </form>
+
                 <ButtonIcon to="/" aria-label="Home">
                     <Icon name="home" size={24} />
                 </ButtonIcon>

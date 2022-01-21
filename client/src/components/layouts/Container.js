@@ -35,8 +35,8 @@ function Container(props) {
     const location = useLocation().pathname
 
     return (
-        <Wrapper search={location === "/" && true}>
-            {location === "/" && (
+        <Wrapper search={location.match(/^\/search.*$/gim) && true}>
+            {location.match(/^\/search.*$/gim) && (
                 <SearchContainer
                     onChangeSearch={props.onChangeSearch}
                     valueSearch={props.valueSearch}
@@ -45,7 +45,7 @@ function Container(props) {
                 />
             )}
 
-            <Main search={location === "/" && true}>
+            <Main search={location.match(/^\/search.*$/gim) && true}>
                 {props.children}
             </Main>
         </Wrapper>

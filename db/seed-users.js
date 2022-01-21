@@ -10,6 +10,7 @@ const bcrypt = require("bcryptjs")
 const password = "Password42"
 const salt = bcrypt.genSaltSync()
 const hash = bcrypt.hashSync(password, salt)
+
 const convertToEmail = require("../utils/convertToEmail")
 const getRandomString = require("../utils/getRandomString")
 const getRandomLocation = require("../utils/getRandomLocation")

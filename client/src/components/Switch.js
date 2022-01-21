@@ -7,6 +7,7 @@ import axios from "axios"
 import Home from "../pages/Home"
 import NotFound from "../pages/NotFound"
 import Notifications from "../pages/user/Notifications"
+import Search from "../pages/Search"
 
 // Auth
 import Signup from "../pages/auth/Signup"
@@ -63,6 +64,12 @@ function Switch() {
             <Route
                 path="/"
                 element={<Home edited={edited} setEdited={setEdited} />}
+                preload={scrollToTop()}
+            />
+
+            <Route
+                path="/search/:keywords"
+                element={<Search />}
                 preload={scrollToTop()}
             />
 
