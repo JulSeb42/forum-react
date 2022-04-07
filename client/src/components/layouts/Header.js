@@ -227,12 +227,16 @@ function Header() {
 
     // Check if user has any unread conversation
     const [allConversations, setAllConversations] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
     const [hasRead, setHasRead] = useState(false)
 
     useEffect(() => {
         axios
             .get("/conversations/conversations")
-            .then(res => setAllConversations(res.data))
+            .then(res => {
+                setAllConversations(res.data)
+                setIsLoading(false)
+            })
             .catch(err => console.log(err))
     }, [])
 

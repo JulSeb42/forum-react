@@ -12,11 +12,15 @@ import Button from "../components/ui/Button"
 
 function Home() {
     const [allTopics, setAllTopics] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         axios
             .get("/topics/topics")
-            .then(res => setAllTopics(res.data))
+            .then(res => {
+                setAllTopics(res.data)
+                setIsLoading(false)
+            })
             .catch(err => console.log(err))
     }, [])
 
@@ -36,6 +40,8 @@ function Home() {
         )
     })
 
+    console.log(allTopics)
+
     return (
         <Page title="Home">
             <TitleFlex>
@@ -50,7 +56,7 @@ function Home() {
                 </Button>
             </TitleFlex>
 
-            {allTopics.length > 0 ? (
+            {!isLoading && allTopics.length > 0 ? (
                 <ListTopics>
                     {sortedTopics
                         .sort((a, b) => {

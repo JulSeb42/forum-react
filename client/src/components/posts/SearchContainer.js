@@ -20,11 +20,15 @@ const Container = styled(Item)`
 
 function SearchContainer(props) {
     const [allTopics, setAllTopics] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         axios
             .get("/topics/topics")
-            .then(res => setAllTopics(res.data))
+            .then(res => {
+                setAllTopics(res.data)
+                setIsLoading(false)
+            })
             .catch(err => console.log(err))
     }, [])
 
@@ -54,7 +58,7 @@ function SearchContainer(props) {
                 >
                     <option value="all">All</option>
 
-                    {uniqCategories.map(category => (
+                    {!isLoading && uniqCategories.map(category => (
                         <option value={slugify(category)} key={category}>
                             {category.charAt(0).toUpperCase() +
                                 category.slice(1)}

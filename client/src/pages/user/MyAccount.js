@@ -17,11 +17,15 @@ function MyAccount() {
 
     // Get and filter all topics
     const [allTopics, setAllTopics] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         axios
             .get("/topics/topics")
-            .then(res => setAllTopics(res.data))
+            .then(res => {
+                setAllTopics(res.data)
+                setIsLoading(false)
+            })
             .catch(err => console.log(err))
     }, [])
 
@@ -45,7 +49,7 @@ function MyAccount() {
 
                 {user.topics.length > 0 ? (
                     <ListTopics>
-                        {filteredTopics.map(topic => (
+                        {!isLoading && filteredTopics.map(topic => (
                             <CardTopic topic={topic} key={topic._id} />
                         ))}
 

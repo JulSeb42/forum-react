@@ -12,11 +12,15 @@ import CardMessage from "../../components/messages/CardMessage"
 function Messages(props) {
     const { user } = useContext(AuthContext)
     const [allConversations, setAllConversations] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         axios
             .get("/conversations/conversations")
-            .then(res => setAllConversations(res.data))
+            .then(res => {
+                setAllConversations(res.data)
+                setIsLoading(false)
+            })
             .catch(err => console.log(err))
     }, [])
 
@@ -32,7 +36,7 @@ function Messages(props) {
         <Page title="Messages">
             <Font.H1>All conversations</Font.H1>
 
-            {filteredConversations.length > 0 ? (
+            {!isLoading && filteredConversations.length > 0 ? (
                 <ListNotifications>
                     {filteredConversations.map(conversation => (
                         <CardMessage conversation={conversation} key={conversation._id} />

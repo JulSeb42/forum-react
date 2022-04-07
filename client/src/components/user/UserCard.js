@@ -78,29 +78,36 @@ function UserCard(props) {
     const [allConversations, setAllConversations] = useState([])
     const [hasContacted, setHasContacted] = useState(false)
     const [foundConversation, setFoundConversation] = useState(undefined)
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         axios
             .get("/conversations/conversations")
-            .then(res => setAllConversations(res.data))
+            .then(res => {
+                setAllConversations(res.data)
+                setIsLoading(false)
+            })
             .catch(err => console.log(err))
     }, [])
 
     useEffect(() => {
-        if (isLoggedIn) {
-            let contacted = allConversations.find(
-                conversation =>
-                    (user._id === conversation.user1._id &&
-                        props.user._id === conversation.user2._id) ||
-                    (user._id === conversation.user2._id &&
-                        props.user._id === conversation.user1._id)
-            )
+        if (!isLoading) {
+            if (isLoggedIn) {
+                let contacted = allConversations.find(
+                    conversation =>
+                        (user._id === conversation.user1._id &&
+                            props.user._id === conversation.user2._id) ||
+                        (user._id === conversation.user2._id &&
+                            props.user._id === conversation.user1._id)
+                )
 
-            if (contacted !== undefined) {
-                setHasContacted(true)
-                setFoundConversation(contacted)
+                if (contacted !== undefined) {
+                    setHasContacted(true)
+                    setFoundConversation(contacted)
+                }
             }
         }
+        
     })
 
     const createConversation = e => {

@@ -19,11 +19,15 @@ function Search() {
     const searchKeywords = location.split("/")[2].replace("%20", " ")
 
     const [allTopics, setAllTopics] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         axios
             .get("/topics/topics")
-            .then(res => setAllTopics(res.data))
+            .then(res => {
+                setAllTopics(res.data)
+                setIsLoading(false)
+            })
             .catch(err => console.log(err))
     }, [])
 
@@ -72,7 +76,7 @@ function Search() {
         >
             <Font.H1>Results</Font.H1>
 
-            {results.length > 0 ? (
+            {!isLoading && results.length > 0 ? (
                 <ListTopics>
                     {results
                         .sort((a, b) => {
