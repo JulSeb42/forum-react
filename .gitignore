@@ -8,6 +8,5 @@ npm-debug.log
 # Environment Variables should NEVER be published
 .env
 
-# Misc
 .DS_Store
 */.DS_Store

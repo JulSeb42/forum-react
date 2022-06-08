@@ -1,33 +1,29 @@
 {
-    "name": "forum",
+    "name": "forum-new",
     "version": "0.0.0",
     "private": true,
     "scripts": {
         "start": "node server.js",
-        "install": "cd client && npm install",
-        "build": "cd client && npm run build",
-        "server": "nodemon server.js",
-        "client": "npm start --prefix client",
-        "dev": "concurrently --kill-others \"npm run server\" \"npm run client\""
+        "dev": "nodemon server.js"
     },
     "dependencies": {
         "bcryptjs": "^2.4.3",
-        "bson": "^4.6.1",
-        "cloudinary": "^1.28.1",
-        "concurrently": "^7.0.0",
-        "connect-mongo": "^4.6.0",
+        "cloudinary": "^1.30.0",
+        "concurrently": "^7.2.1",
         "cookie-parser": "^1.4.6",
         "cors": "^2.8.5",
-        "dotenv": "^11.0.0",
-        "express": "^4.17.2",
-        "express-session": "^1.17.2",
-        "mongoose": "^6.1.6",
+        "dotenv": "^16.0.1",
+        "express": "^4.18.1",
+        "express-jwt": "^7.7.5",
+        "js-utils-julseb": "^2.0.0",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^6.3.5",
         "morgan": "^1.10.0",
-        "multer": "^1.4.4",
+        "multer": "^1.4.5-lts.1",
         "multer-storage-cloudinary": "^4.0.0",
-        "nodemailer": "^6.7.2"
+        "nodemailer": "^6.7.5"
     },
     "devDependencies": {
-        "nodemon": "^2.0.15"
+        "nodemon": "^2.0.16"
     }
 }

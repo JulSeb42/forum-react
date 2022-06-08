@@ -19,30 +19,6 @@ require("./config")(app)
 const allRoutes = require("./routes")
 app.use("/api", allRoutes)
 
-const auth = require("./routes/auth")
-app.use("/auth", auth)
-
-const users = require("./routes/users")
-app.use("/users", users)
-
-const uploader = require("./routes/uploader")
-app.use("/uploader", uploader)
-
-const topics = require("./routes/topics")
-app.use("/topics", topics)
-
-const posts = require("./routes/posts")
-app.use("/posts", posts)
-
-const notifications = require("./routes/notifications")
-app.use("/notifications", notifications)
-
-const conversations = require("./routes/conversations")
-app.use("/conversations", conversations)
-
-const search = require("./routes/search")
-app.use("/search", search)
-
 // Deploy Heroku
 const path = require("path")
 app.use(express.static(path.join(__dirname, "/client/build")))

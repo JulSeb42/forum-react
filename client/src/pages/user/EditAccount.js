@@ -1,61 +1,75 @@
-// Packages
+// Imports
 import React, { useContext, useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
 import axios from "axios"
+import { useNavigate, Link } from "react-router-dom"
+import {
+    Font,
+    Form,
+    Input,
+    Alert,
+    Autocomplete,
+    InputImage,
+} from "tsx-library-julseb"
 
-// Components
 import { AuthContext } from "../../context/auth"
-import * as Font from "../../components/styles/Font"
+import usersService from "../../api/users.service"
+import cloudinaryService from "../../api/cloudinary.service"
+
 import Page from "../../components/layouts/Page"
-import Form from "../../components/forms/Form"
-import Input from "../../components/forms/Input"
-import DangerZone from "../../components/forms/DangerZone"
-import Link from "../../components/utils/LinkScroll"
-import ErrorMessage from "../../components/forms/ErrorMessage"
-import service from "../../components/service/cloudinary-service"
-import ListSuggestions from "../../components/forms/ListSuggestions"
-import InputProfilePicture from "../../components/forms/InputProfilePicture"
+import DangerZone from "../../components/DangerZone"
 
-// Data
-import ListCities from "../../components/data/cities.json"
-
-function EditAccount({ edited, setEdited }) {
-    const { user, updateUser, logoutUser } = useContext(AuthContext)
+const EditAccount = ({ edited, setEdited }) => {
+    const { user, setUser, setToken, logoutUser } = useContext(AuthContext)
     const navigate = useNavigate()
 
-    const [username, setUsername] = useState(user.username)
-    const [bio, setBio] = useState(user.bio || "")
-    const [gender, setGender] = useState(user.gender)
-    const [location, setLocation] = useState(user.location)
-    const [imageUrl, setImageUrl] = useState(user.imageUrl)
-    const [picture, setPicture] = useState(user.imageUrl)
-    const [isLoading, setIsLoading] = useState(false)
-    const [errorMessage, setErrorMessage] = useState(undefined)
-
-    const handleUsername = e => setUsername(e.target.value)
-    const handleBio = e => setBio(e.target.value)
-    const handleGender = e => setGender(e.target.value)
-
+    // Autocomplete
     const [cities, setCities] = useState([])
+    const [filteredCities, setFilteredCities] = useState("")
 
     useEffect(() => {
-        setCities(ListCities.map(city => `${city.name}, ${city.country}`))
+        axios
+            .get("/allCities.json")
+            .then(res =>
+                setCities(res.data.map(city => `${city.name}, ${city.country}`))
+            )
+            .catch(err => console.log(err))
     }, [])
-
-    const [filteredCities, setFilteredCities] = useState("")
 
     const handleFilterLocation = e => {
         setLocation(e.target.value)
         setFilteredCities(e.target.value)
     }
 
-    let resultsCities = cities.filter(city => {
-        return city.toLowerCase().includes(filteredCities.toLowerCase())
-    })
+    let resultsCities = cities.filter(city =>
+        city.toLowerCase().includes(filteredCities.toLowerCase())
+    )
 
-    const handleClickSuggestion = e => {
-        setLocation(e.target.innerText)
+    // Form items
+    const [inputs, setInputs] = useState({
+        bio: user.bio,
+        imageUrl: user.imageUrl,
+    })
+    const [username, setUsername] = useState(user.username)
+    const [location, setLocation] = useState(user.location)
+    const [validationUsername, setValidationUsername] = useState(
+        username.length >= 3 ? "passed" : "not-passed"
+    )
+    const [isLoading, setIsLoading] = useState(false)
+    const [errorMessage, setErrorMessage] = useState(undefined)
+
+    // Form handles
+    const handleUsername = e => {
+        setUsername(e.target.value)
+
+        if (e.target.value.length >= 3) {
+            setValidationUsername("passed")
+        } else {
+            setValidationUsername("not-passed")
+        }
     }
+
+    const handleChange = e =>
+        setInputs({ ...inputs, [e.target.id]: e.target.value })
 
     const handleFileUpload = e => {
         e.preventDefault()
@@ -64,48 +78,65 @@ function EditAccount({ edited, setEdited }) {
 
         uploadData.append("imageUrl", e.target.files[0])
 
-        service
+        cloudinaryService
             .uploadImage(uploadData)
             .then(res => {
-                setImageUrl(res.secure_url)
+                setInputs({
+                    ...inputs,
+                    imageUrl: res.secure_url,
+                })
                 setIsLoading(false)
             })
             .catch(err => console.log(err))
 
         if (e.target.files[0]) {
-            setPicture(e.target.files[0])
+            setInputs({
+                ...inputs,
+                imageUrl: e.target.files[0],
+            })
             const reader = new FileReader()
             reader.addEventListener("load", () => {
-                setPicture(reader.result)
+                setInputs({
+                    ...inputs,
+                    imageUrl: reader.result,
+                })
             })
             reader.readAsDataURL(e.target.files[0])
         }
     }
 
-    // Edit account
+    const handleClickSuggestion = e => setLocation(e.target.innerText)
+
+    // Submit form
     const handleSubmit = e => {
         e.preventDefault()
 
-        const requestBody = { id: user._id, username, bio, gender, location, imageUrl }
+        const requestBody = {
+            ...inputs,
+            username,
+            location,
+        }
 
-        axios
-            .put("/users/edit", requestBody)
+        usersService
+            .editAccount(user._id, requestBody)
             .then(res => {
-                const { user } = res.data
-                updateUser(user)
+                setUser(res.data.user)
+                setToken(res.data.authToken)
                 setEdited(!edited)
-                navigate("/my-account")
+                navigate(-1)
             })
             .catch(err => {
-                const errorDescription = err.response.data.message
-                setErrorMessage(errorDescription)
+                setErrorMessage(err.response.data.message)
+                console.log(err)
             })
     }
 
     // Delete account
-    const handleDelete = () => {
-        axios
-            .delete(`/users/delete-user/${user._id}`)
+    const handleDelete = e => {
+        e.preventDefault()
+
+        usersService
+            .deleteAccount(user._id)
             .then(() => {
                 logoutUser()
                 navigate("/goodbye")
@@ -114,43 +145,32 @@ function EditAccount({ edited, setEdited }) {
     }
 
     return (
-        <Page title="Edit your account">
+        <Page title="Edit your account" mainWidth={400}>
             <Font.H1>Edit your account</Font.H1>
 
             <Form
-                btnprimary="Save changes"
-                btncancel="/my-account"
+                btnPrimary="Save changes"
                 onSubmit={handleSubmit}
-                isLoading={isLoading}
+                loading={isLoading}
             >
                 <Input
-                    label="Full name"
-                    id="fullName"
+                    label="Username"
+                    id="username"
                     onChange={handleUsername}
                     value={username}
+                    validationText="Username must be at least 3 characters long"
+                    validation={validationUsername}
+                    autoFocus
                 />
 
                 <Input
                     label="Email"
-                    type="email"
-                    id="email"
                     value={user.email}
+                    helperBottom="You can not edit your email"
                     disabled
                 />
 
-                <Input
-                    label="Gender"
-                    as="select"
-                    id="gender"
-                    onChange={handleGender}
-                    defaultValue={gender}
-                >
-                    <option value="male">Man</option>
-                    <option value="female">Woman</option>
-                    <option value="other">Other</option>
-                </Input>
-
-                <ListSuggestions
+                <Autocomplete
                     label="Location"
                     id="location"
                     onChange={handleFilterLocation}
@@ -159,31 +179,39 @@ function EditAccount({ edited, setEdited }) {
                     onMouseDown={handleClickSuggestion}
                 />
 
-                <Input
-                    label="Bio"
-                    id="bio"
-                    inputtype="textarea"
-                    onChange={handleBio}
-                    value={bio}
-                    counter={140}
+                <InputImage
+                    label="Avatar"
+                    id="imageUrl"
+                    src={inputs.imageUrl}
+                    alt="Avatar"
+                    onChange={e => handleFileUpload(e)}
                 />
 
-                <InputProfilePicture
-                    label="Profile picture"
-                    src={picture}
-                    alt={user.fullName}
-                    onChange={e => handleFileUpload(e)}
-                    id="imageUrl"
+                <Input
+                    label="Bio"
+                    type="textarea"
+                    id="bio"
+                    onChange={handleChange}
+                    value={inputs.bio}
                 />
             </Form>
 
-            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+            {errorMessage && (
+                <Alert as={Font.P} color="danger">
+                    {errorMessage}
+                </Alert>
+            )}
 
             <Font.P>
                 <Link to="/my-account/edit-password">Edit your password.</Link>
             </Font.P>
 
-            <DangerZone onClickPrimary={handleDelete} />
+            <DangerZone
+                textBtnOpen="Delete account"
+                text="Are you sure you want to delete your account?"
+                textBtnPrimary="Yes, delete my account"
+                onClickPrimary={handleDelete}
+            />
         </Page>
     )
 }

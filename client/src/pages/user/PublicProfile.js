@@ -1,65 +1,58 @@
-// Packages
+// Imports
 import React, { useState, useEffect } from "react"
-import axios from "axios"
+import { useParams } from "react-router-dom"
+import { PageLoading, Font } from "tsx-library-julseb"
 
-// Components
-import * as Font from "../../components/styles/Font"
+import usersService from "../../api/users.service"
+import topicsService from "../../api/topics.service"
+
 import Page from "../../components/layouts/Page"
-import Item from "../../components/layouts/Item"
-import ListTopics from "../../components/posts/ListTopics"
-import CardTopic from "../../components/posts/CardTopic"
-import UserCard from "../../components/user/UserCard"
+import CardUser from "../../components/user/CardUser"
+import TopicList from "../../components/topics/TopicList"
 
-function PublicProfile({ user }) {
-    // Get and filter all topics
-    const [allTopics, setAllTopics] = useState([])
+const PublicProfile = ({ edited, setEdited }) => {
+    const { username } = useParams()
+
+    const [person, setPerson] = useState()
+    const [userTopics, setUserTopics] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        axios
-            .get("/topics/topics")
+        usersService
+            .getUsername(username)
+            .then(res => setPerson(res.data))
+            .catch(err => console.log(err))
+
+        topicsService
+            .allTopics()
             .then(res => {
-                setAllTopics(res.data)
+                setUserTopics(
+                    res.data.filter(
+                        topic => topic.createdBy.username === username
+                    )
+                )
                 setIsLoading(false)
             })
             .catch(err => console.log(err))
-    }, [])
-
-    const filteredTopics = allTopics
-        .filter(topic => topic.createdBy._id === user._id)
-        .sort((a, b) => {
-            return (
-                new Date(b.posts[b.posts.length - 1].dateCreated) -
-                new Date(a.posts[a.posts.length - 1].dateCreated)
-            )
-        })
+    }, [username])
 
     return (
-        <Page title={user.username}>
-            <UserCard user={user} />
+        <Page title={username}>
+            {isLoading ? (
+                <PageLoading />
+            ) : (
+                <>
+                    <CardUser
+                        user={person}
+                        edited={edited}
+                        setEdited={setEdited}
+                    />
 
-            <Item>
-                <Font.H2>
-                    {user.gender === "male"
-                        ? "His"
-                        : user.gender === "female"
-                        ? "Her"
-                        : "Their"}{" "}
-                    topic{filteredTopics.length > 1 && "s"}
-                </Font.H2>
+                    <Font.H2>Their topics</Font.H2>
 
-                {!isLoading && user.topics.length > 0 ? (
-                    <ListTopics>
-                        {filteredTopics.map(topic => (
-                            <CardTopic topic={topic} key={topic._id} />
-                        ))}
-                    </ListTopics>
-                ) : (
-                    <Font.P>
-                        {user.username} did not create any topic yet.
-                    </Font.P>
-                )}
-            </Item>
+                    <TopicList topics={userTopics} isLoading={isLoading} />
+                </>
+            )}
         </Page>
     )
 }

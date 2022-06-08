@@ -1,16 +1,57 @@
-// Packages
-import React from "react"
+// Imports
+import React, { useState } from "react"
+import { Routes, Route, Navigate } from "react-router-dom"
+import { v4 as uuid } from "uuid"
 
-// Components
-import GlobalStyles from "./components/styles/GlobalStyles"
-import Switch from "./components/Switch"
+import routes from "./routes/routes"
+import redirects from "./routes/redirects"
 
-function App() {
+import ProtectedRoutes from "./routes/ProtectedRoutes"
+import AnonRoutes from "./routes/AnonRoutes"
+
+const App = () => {
+    const [edited, setEdited] = useState(false)
+
     return (
-        <>
-            <GlobalStyles />
-            <Switch />
-        </>
+        <Routes>
+            {routes.map(route => (
+                <Route
+                    path={route.path}
+                    element={
+                        route.protected ? (
+                            <ProtectedRoutes>
+                                <route.element
+                                    edited={edited}
+                                    setEdited={setEdited}
+                                />
+                            </ProtectedRoutes>
+                        ) : route.anon ? (
+                            <AnonRoutes>
+                                <route.element
+                                    edited={edited}
+                                    setEdited={setEdited}
+                                />
+                            </AnonRoutes>
+                        ) : (
+                            <route.element
+                                edited={edited}
+                                setEdited={setEdited}
+                            />
+                        )
+                    }
+                    key={uuid()}
+                />
+            ))}
+
+            {redirects.length > 0 &&
+                redirects.map(route => (
+                    <Route
+                        path={route.path}
+                        element={<Navigate to={route.to} />}
+                        key={uuid()}
+                    />
+                ))}
+        </Routes>
     )
 }
 

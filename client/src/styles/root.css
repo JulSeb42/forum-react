@@ -1,0 +1,32 @@
+:root {
+    /* Add your overrides here */
+    --color-primary-50: #e9ebfc;
+    --color-primary-300: #b3bdf4;
+    --color-primary-500: #445be4;
+    --color-primary-600: #1f39d6;
+    --color-success-50: #eafaf3;
+    --color-success-300: #71dfac;
+    --color-success-500: #26a96c;
+    --color-success-600: #1d8152;
+    --color-danger-50: #fcebe8;
+    --color-danger-300: #f5b2a8;
+    --color-danger-500: #e94f37;
+    --color-danger-600: #d33117;
+    --color-warning-50: #fef4e7;
+    --color-warning-300: #fbe1bc;
+    --color-warning-500: #f4ac45;
+    --color-warning-600: #f19613;
+    --color-black: #020300;
+    --background-color: #fafafa;
+
+    --template-conversation: 150px 1fr;
+}
+
+html, body {
+    background-color: var(--background-color);
+    min-height: 100vh;
+}
+
+.stop-scrolling {
+    overflow: hidden !important;
+}

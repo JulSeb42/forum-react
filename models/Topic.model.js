@@ -3,27 +3,22 @@ const { Schema, model } = require("mongoose")
 const topicSchema = new Schema(
     {
         title: String,
-        body: String,
-
-        createdBy: {
-            type: Schema.Types.ObjectId,
-            ref: "User",
-        },
-
         posts: [
             {
                 type: Schema.Types.ObjectId,
                 ref: "Post",
             },
         ],
-
         dateCreated: String,
         timeCreated: String,
-        dateLastPost: String,
-        timeLastPost: String,
+        createdBy: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+        },
         category: String,
         likes: Number,
-        likesBy: Array,
+        likedBy: Array,
+        search: Array,
     },
     {
         timestamps: true,

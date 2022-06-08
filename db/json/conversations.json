@@ -1,0 +1,88 @@
+[{
+  "_id": {
+    "$oid": "62a08a6fa71f00625e43fd6a"
+  },
+  "user1": {
+    "$oid": "629bf7704dde1f9a74d730c4"
+  },
+  "user2": {
+    "$oid": "629bf7704dde1f9a74d730c1"
+  },
+  "dateCreated": "2022-06-08",
+  "timeCreated": "13:39:27:886",
+  "messages": [
+    {
+      "sender": {
+        "$oid": "629bf7704dde1f9a74d730c4"
+      },
+      "message": "Proin euismod dui justo Lorem ipsum dolor sit amet, consectetur adipiscing elit. A porta urna placerat id. Pellentesque pharetra egestas dui a consequat. Nulla lacinia rhoncus sapien ornare porttitor.",
+      "date": "2022-06-08",
+      "time": "13:39:31:36",
+      "_id": {
+        "$oid": "62a08a73a71f00625e43fd7d"
+      }
+    },
+    {
+      "sender": {
+        "$oid": "629bf7704dde1f9a74d730c1"
+      },
+      "message": "Proin euismod dui justo Lorem ipsum dolor sit amet, consectetur adipiscing elit. A porta urna placerat id. Pellentesque pharetra egestas dui a consequat. Nulla lacinia rhoncus sapien ornare porttitor.",
+      "date": "2022-06-08",
+      "time": "13:39:45:417",
+      "_id": {
+        "$oid": "62a08a81a71f00625e43fdb3"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1654688367894"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654688385930"
+    }
+  },
+  "__v": 0,
+  "readUser1": false,
+  "readUser2": true
+},{
+  "_id": {
+    "$oid": "62a08a93a71f00625e43fe00"
+  },
+  "user1": {
+    "$oid": "629bf7704dde1f9a74d730c1"
+  },
+  "user2": {
+    "$oid": "629bf7704dde1f9a74d730b4"
+  },
+  "dateCreated": "2022-06-08",
+  "timeCreated": "13:40:3:635",
+  "messages": [
+    {
+      "sender": {
+        "$oid": "629bf7704dde1f9a74d730c1"
+      },
+      "message": "Proin euismod dui justo Lorem ipsum dolor sit amet, consectetur adipiscing elit. A porta urna placerat id. Pellentesque pharetra egestas dui a consequat. Nulla lacinia rhoncus sapien ornare porttitor.",
+      "date": "2022-06-08",
+      "time": "13:40:6:850",
+      "_id": {
+        "$oid": "62a08a96a71f00625e43fe16"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1654688403643"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1654688407349"
+    }
+  },
+  "__v": 0,
+  "readUser1": true,
+  "readUser2": false
+}]

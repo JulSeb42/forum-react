@@ -1,37 +1,46 @@
-// Packages
+// Imports
 import React, { useState } from "react"
-import axios from "axios"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+import { Font, Form, Input, Alert } from "tsx-library-julseb"
+import { passwordRegex } from "js-utils-julseb"
 
-// Components
+import authService from "../../api/auth.service"
+
 import Page from "../../components/layouts/Page"
-import * as Font from "../../components/styles/Font"
-import Form from "../../components/forms/Form"
-import Input from "../../components/forms/Input"
-import ErrorMessage from "../../components/forms/ErrorMessage"
 
-function ResetPassword() {
-    const [password, setPassword] = useState("")
-    const [errorMessage, setErrorMessage] = useState(undefined)
-
-    const handlePassword = e => setPassword(e.target.value)
-
+const ResetPassword = () => {
     const navigate = useNavigate()
 
-    const data = window.location.href.split("/")
-    const token = data[4]
-    const id = data[5]
+    const title = "Reset your password"
 
+    // Form items
+    const [password, setPassword] = useState("")
+    const [validation, setValidation] = useState("not-passed")
+    const [errorMessage, setErrorMessage] = useState(undefined)
+
+    // Form handles
+    const handlePassword = e => {
+        setPassword(e.target.value)
+
+        if (passwordRegex.test(e.target.value)) {
+            setValidation("passed")
+        } else {
+            setValidation("not-passed")
+        }
+    }
+
+    // Get token and ID from url
+    const { token, id } = useParams()
+
+    // Submit form
     const handleSubmit = e => {
         e.preventDefault()
 
-        const requestBody = { id, password }
+        const requestBody = { password, resetToken: token, id }
 
-        axios
-            .put(`/auth/reset-password/${token}/${id}`, requestBody)
-            .then(() => {
-                navigate("/login")
-            })
+        authService
+            .resetPassword(requestBody)
+            .then(() => navigate("/login"))
             .catch(err => {
                 const errorDescription = err.response.data.message
                 setErrorMessage(errorDescription)
@@ -39,21 +48,28 @@ function ResetPassword() {
     }
 
     return (
-        <Page title="Reset your password" noAside>
-            <Font.H1>Reset your password</Font.H1>
+        <Page title={title} mainWidth={400}>
+            <Font.H1>{title}</Font.H1>
 
-            <Form btnprimary="Send" onSubmit={handleSubmit}>
+            <Form btnPrimary="Reset your password" onSubmit={handleSubmit}>
                 <Input
                     label="New password"
-                    inputtype="password"
                     id="password"
+                    password
+                    iconPassword
                     onChange={handlePassword}
                     value={password}
+                    validationText="Password must be at least 6 characters long and must contain at least one number, one lowercase and one uppercase letter."
+                    validation={validation}
                     autoFocus
                 />
             </Form>
 
-            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+            {errorMessage && (
+                <Alert as={Font.P} color="danger">
+                    {errorMessage}
+                </Alert>
+            )}
         </Page>
     )
 }

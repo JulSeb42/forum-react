@@ -1,39 +1,73 @@
-# Forum app
+# React Express JWT
 
-Simple forum made with React, Express and MongoDb.
+A boilerplate for fullstack projects written in React, Express and MongoDb.
 
-## How to use
+## Install project
 
-Download the project, run `npm install && cd client && npm install`, then create a `.env` file in the root folder with this data:
+Create a `.env` file at the root of the project, and add:
 
 ```
 PORT=5005
 ORIGIN=http://localhost:3000
 
-MONGODB_URI=mongodb://localhost/forum-app
+MONGODB_URI=mongodb://localhost/name-of-db
 
-EMAIL=your.email@gmail.com
-WORD=YourPassword
+EMAIL=address@gmail.com
+WORD=password
 
-CLOUDINARY_NAME=your-cloudinary-name
-CLOUDINARY_KEY=your-cloudinary-key
-CLOUDINARY_SECRET=your-cloudinary-secret
+TOKEN_SECRET=T0kEnSecREt
 ```
 
-### Seed data
+Then run `npm install` at the root of the project. Since we're using [Concurrently](https://www.npmjs.com/package/concurrently) this will install packages for backend and frontend.
 
-If you want to create fake data, you can use the json files in the `db/exports-mongo` folder. Simply import all the files to MongoDb.
+## Run project
 
-## Login
+Run `npm run dev` at the root of the project. Once again, thanks to Concurrently, backend and frontend will run at the same time.
 
-If you are using the demo seeds, you can use `admin@email.com` and `Password42` as credentials.
+## Packages
 
-## Features
+### Backend
 
--   Create / edit / delete account.
--   Create / edit / delete topic.
--   Admin can delete and edit other users posts.
--   Answer to topics.
--   Like topics.
--   Notifications are sent to the user who created the topic when someone posts an answer or likes it.
--   Users can contact other users with internal messages.
+-   [Express](https://expressjs.com/)
+-   [Express JWT](https://www.npmjs.com/package/express-jwt)
+-   [JSON web token](https://jwt.io/)
+-   [Bcrypt js](https://www.npmjs.com/package/bcryptjs)
+-   [Mongoose](https://mongoosejs.com/)
+-   [Nodemailer](https://nodemailer.com/about/)
+-   [JS utils](https://www.npmjs.com/package/js-utils-julseb): own package, with basic functions written in JavaScript
+
+### Frontend
+
+-   [React](https://reactjs.org/)
+-   [Axios](https://axios-http.com/docs/intro)
+-   [Styled components](https://styled-components.com/)
+-   [TSX library](https://documentation-components-react.vercel.app/): own package, with basic React UI components
+-   [JS utils](https://www.npmjs.com/package/js-utils-julseb)
+
+## Backend
+
+### API
+
+All the functions can be found in the `routes` folder.
+
+### Models
+
+All the models can be found in `models` folder.
+
+### Create data
+
+Find an example for adding bulk data inside a database in `db/seed.js`.
+
+## Frontend
+
+### API
+
+For backend calls, use the folder `client/src/api`, and follow the same pattern. You can see an example on the page `client/src/pages/auth/Login.js`.
+
+### Add pages
+
+Create your pages in `client/src/pages`. Then, go to `client/src/routes/routes.js` and add them in the array `const routes`.
+
+### Styling
+
+Most of components come from `TSX library` package. If you need new components, you can add them in `client/src/components`.

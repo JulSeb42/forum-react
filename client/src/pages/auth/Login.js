@@ -1,38 +1,37 @@
-// Packages
-import React, { useContext, useState } from "react"
-import axios from "axios"
-import { useNavigate, Navigate } from "react-router-dom"
+// Imports
+import React, { useState, useContext } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { Font, Form, Input, Alert, Grid, Button } from "tsx-library-julseb"
 
-// Components
 import { AuthContext } from "../../context/auth"
-import * as Font from "../../components/styles/Font"
-import Page from "../../components/layouts/Page"
-import Form from "../../components/forms/Form"
-import Input from "../../components/forms/Input"
-import Link from "../../components/utils/LinkScroll"
-import ErrorMessage from "../../components/forms/ErrorMessage"
+import authService from "../../api/auth.service"
 
-function Login() {
-    const { loginUser, isLoggedIn } = useContext(AuthContext)
+import Page from "../../components/layouts/Page"
+
+const Login = () => {
+    const { loginUser } = useContext(AuthContext)
     const navigate = useNavigate()
 
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [errorMessage, setErrorMessage] = useState(undefined)
+    // Form items
+    const [inputs, setInputs] = useState({
+        email: "",
+        password: "",
+    })
+    const [errorMessage, setErrorMessage] = useState("")
 
-    const handleEmail = e => setEmail(e.target.value)
-    const handlePassword = e => setPassword(e.target.value)
+    // Form handles
+    const handleChange = e =>
+        setInputs({ ...inputs, [e.target.id]: e.target.value })
 
+    // Submit form
     const handleSubmit = e => {
         e.preventDefault()
 
-        const requestBody = { email, password }
-
-        axios
-            .put("/auth/login", requestBody)
+        authService
+            .login(inputs)
             .then(res => {
-                navigate("/")
-                loginUser(res.data)
+                loginUser(res.data.authToken)
+                navigate(-1)
             })
             .catch(err => {
                 const errorDescription = err.response.data.message
@@ -40,40 +39,88 @@ function Login() {
             })
     }
 
-    return isLoggedIn ? (
-        <Navigate to="/my-account" />
-    ) : (
-        <Page title="Login" noAside>
-            <Font.H1>Login</Font.H1>
+    const loginAs = email => {
+        const requestBody = {
+            email,
+            password: "Password42",
+        }
 
-            <Form onSubmit={handleSubmit} btnprimary="Log in">
+        authService
+            .login(requestBody)
+            .then(res => {
+                loginUser(res.data.authToken)
+                navigate(-1)
+            })
+            .catch(err => {
+                const errorDescription = err.response.data.message
+                setErrorMessage(errorDescription)
+            })
+    }
+
+    return (
+        <Page title="Login" mainWidth={400}>
+            <Font.H1>Log in</Font.H1>
+
+            <Form btnPrimary="Login" onSubmit={handleSubmit}>
                 <Input
                     label="Email"
-                    type="email"
                     id="email"
-                    onChange={handleEmail}
-                    value={email}
+                    type="email"
+                    onChange={handleChange}
+                    value={inputs.email}
                     autoFocus
                 />
 
                 <Input
                     label="Password"
-                    inputtype="password"
                     id="password"
-                    onChange={handlePassword}
-                    value={password}
+                    password
+                    iconPassword
+                    onChange={handleChange}
+                    value={inputs.password}
                 />
             </Form>
+
+            {errorMessage && (
+                <Alert as={Font.P} color="danger">
+                    {errorMessage}
+                </Alert>
+            )}
 
             <Font.P>
                 <Link to="/login/forgot-password">I forgot my password.</Link>
             </Font.P>
 
             <Font.P>
-                You don't have an account? <Link to="/signup">Sign up</Link>
+                You don't have an account? <Link to="/signup">Sign up</Link>.
             </Font.P>
 
-            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+            <Grid gap="xs">
+                <Font.H4>Demo</Font.H4>
+
+                <Grid col={3} gap="xs">
+                    <Button
+                        onClick={() => loginAs("admin@email.com")}
+                        justify="stretch"
+                    >
+                        Log in as admin
+                    </Button>
+
+                    <Button
+                        onClick={() => loginAs("jayden.berry@email.com")}
+                        justify="stretch"
+                    >
+                        Log in as user 1
+                    </Button>
+
+                    <Button
+                        onClick={() => loginAs("elliot.carr@email.com")}
+                        justify="stretch"
+                    >
+                        Login as user 2
+                    </Button>
+                </Grid>
+            </Grid>
         </Page>
     )
 }

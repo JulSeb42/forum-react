@@ -1,10 +1,15 @@
-// Packages
+// Imports
 const router = require("express").Router()
-const Topic = require("../models/Topic.model")
-const User = require("../models/User.model")
-const Post = require("../models/Post.model")
+const jwt = require("jsonwebtoken")
 
-router.get("/topics", (req, res, next) => {
+const Topic = require("../models/Topic.model")
+const Post = require("../models/Post.model")
+const User = require("../models/User.model")
+
+const jwtConfig = require("../utils/jwtConfig")
+
+// Get all topics
+router.get("/all-topics", (req, res, next) => {
     Topic.find()
         .populate("createdBy")
         .populate({
@@ -14,7 +19,7 @@ router.get("/topics", (req, res, next) => {
                 model: "User",
             },
         })
-        .then(topicFromDb => res.status(200).json(topicFromDb))
+        .then(foundTopics => res.status(200).json(foundTopics))
         .catch(err => next(err))
 })
 
@@ -22,7 +27,6 @@ router.get("/topics", (req, res, next) => {
 router.get("/topic/:id", (req, res, next) => {
     Topic.findById(req.params.id)
         .populate("createdBy")
-        .populate("posts")
         .populate({
             path: "posts",
             populate: {
@@ -30,34 +34,17 @@ router.get("/topic/:id", (req, res, next) => {
                 model: "User",
             },
         })
-        .then(topicFromDb => res.status(200).json(topicFromDb))
+        .then(foundTopic => res.status(200).json(foundTopic))
         .catch(err => next(err))
 })
 
 // Create topic
-router.put("/new-topic", (req, res, next) => {
-    const {
-        title,
-        createdBy,
-        body,
-        dateCreated,
-        timeCreated,
-        category,
-        likes,
-    } = req.body
+router.post("/new-topic", (req, res, next) => {
+    const { title, dateCreated, timeCreated, createdBy, category, body } =
+        req.body
 
-    if (!title) {
-        return res
-            .status(400)
-            .json({ message: "Title can not be empty" })
-    }
-
-    if (!category) {
-        return res.status(400).json({ message: "Category can not be empty" })
-    }
-
-    if (!body) {
-        return res.status(400).json({ message: "Body can not be empty" })
+    if (!title || !category || !body) {
+        return res.status(400).json({ message: "All items are mandatory." })
     }
 
     Post.create({ poster: createdBy, body, dateCreated, timeCreated })
@@ -65,49 +52,35 @@ router.put("/new-topic", (req, res, next) => {
             Topic.create({
                 title,
                 createdBy,
-                posts: createdPost,
+                posts: [createdPost],
                 dateCreated,
                 timeCreated,
                 category,
-                likes,
-                body,
+                likes: 0,
+                search: `${title}, ${createdBy.username}, ${category}`,
             }).then(createdTopic => {
-                User.findOneAndUpdate(
-                    { _id: createdBy },
-                    { $push: { posts: createdPost, topics: createdTopic } },
+                User.findByIdAndUpdate(
+                    createdBy._id,
+                    {
+                        $push: { posts: createdPost, topics: createdTopic },
+                    },
                     { new: true }
                 ).then(updatedUser => {
-                    res.status(200).json({ user: updatedUser, createdTopic })
+                    const payload = { user: updatedUser }
+
+                    const authToken = jwt.sign(
+                        payload,
+                        process.env.TOKEN_SECRET,
+                        jwtConfig
+                    )
+
+                    res.status(201).json({
+                        user: updatedUser,
+                        authToken: authToken,
+                        createdTopic,
+                        createdPost,
+                    })
                 })
-            })
-        })
-        .catch(err => next(err))
-})
-
-// Like and dislike topic
-router.put("/like/:id", (req, res, next) => {
-    const { likes, user, likesBy } = req.body
-
-    Topic.findByIdAndUpdate(req.params.id, { likes, $push: { likesBy } })
-        .then(updatedTopic => {
-            User.findByIdAndUpdate(user, {
-                $push: { likedTopics: updatedTopic },
-            }).then(updatedUser => {
-                res.status(200).json({ user: updatedUser })
-            })
-        })
-        .catch(err => next(err))
-})
-
-router.put("/dislike/:id", (req, res, next) => {
-    const { likes, user, likesBy } = req.body
-
-    Topic.findByIdAndUpdate(req.params.id, { likes, $pull: { likesBy } })
-        .then(updatedTopic => {
-            User.findByIdAndUpdate(user, {
-                $pull: { likedTopics: updatedTopic._id },
-            }).then(updatedUser => {
-                res.status(200).json({ user: updatedUser })
             })
         })
         .catch(err => next(err))
@@ -115,18 +88,10 @@ router.put("/dislike/:id", (req, res, next) => {
 
 // Edit topic
 router.put("/edit-topic/:id", (req, res, next) => {
-    const { title, body, dateEdited, timeEdited, category, postId } = req.body
+    const { title, body, category, dateEdited, timeEdited, postId } = req.body
 
-    if (!title) {
-        return res.status(400).json({ message: "Title can not be empty" })
-    }
-
-    if (!category) {
-        return res.status(400).json({ message: "Category can not be empty" })
-    }
-
-    if (!body) {
-        return res.status(400).json({ message: "Body can not be empty" })
+    if (!title || !category || !body) {
+        return res.status(400).json({ message: "All items are mandatory." })
     }
 
     Post.findByIdAndUpdate(
@@ -134,13 +99,81 @@ router.put("/edit-topic/:id", (req, res, next) => {
         { body, dateEdited, timeEdited },
         { new: true }
     )
-        .then(() => {
+        .then(updatedPost => {
             Topic.findByIdAndUpdate(
                 req.params.id,
                 { title, category },
                 { new: true }
-            ).then(editedTopic => {
-                res.status(200).json({ editedTopic })
+            ).then(updatedTopic =>
+                res.status(200).json({ updatedPost, updatedTopic })
+            )
+        })
+        .catch(err => next(err))
+})
+
+// Like topic
+router.put("/like/:id", (req, res, next) => {
+    const { likes, user, likedBy } = req.body
+
+    Topic.findByIdAndUpdate(
+        req.params.id,
+        { likes: likes, $push: { likedBy } },
+        { new: true }
+    )
+        .then(updatedTopic => {
+            User.findByIdAndUpdate(
+                user,
+                { $push: { likedTopics: updatedTopic } },
+                { new: true }
+            ).then(updatedUser => {
+                const payload = { user: updatedUser }
+
+                const authToken = jwt.sign(
+                    payload,
+                    process.env.TOKEN_SECRET,
+                    jwtConfig
+                )
+
+                res.status(201).json({
+                    user: updatedUser,
+                    authToken: authToken,
+                    topic: updatedTopic,
+                    likes: likes,
+                })
+            })
+        })
+        .catch(err => next(err))
+})
+
+// Dislike topic
+router.put("/dislike/:id", (req, res, next) => {
+    const { likes, user, likedBy } = req.body
+
+    Topic.findByIdAndUpdate(
+        req.params.id,
+        { likes: likes, $pull: { likedBy } },
+        { new: true }
+    )
+        .then(updatedTopic => {
+            User.findByIdAndUpdate(
+                user,
+                { $pull: { likedTopics: updatedTopic } },
+                { new: true }
+            ).then(updatedUser => {
+                const payload = { user: updatedUser }
+
+                const authToken = jwt.sign(
+                    payload,
+                    process.env.TOKEN_SECRET,
+                    jwtConfig
+                )
+
+                res.status(201).json({
+                    user: updatedUser,
+                    authToken: authToken,
+                    topic: updatedTopic,
+                    likes: likes
+                })
             })
         })
         .catch(err => next(err))
@@ -149,9 +182,7 @@ router.put("/edit-topic/:id", (req, res, next) => {
 // Delete topic
 router.delete("/delete-topic/:id", (req, res, next) => {
     Topic.findByIdAndDelete(req.params.id)
-        .then(() => {
-            res.status(200).json({ message: "Topic deleted." })
-        })
+        .then(() => res.status(200).json({ message: "Topic deleted." }))
         .catch(err => next(err))
 })
 

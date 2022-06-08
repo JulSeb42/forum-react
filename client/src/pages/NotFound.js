@@ -1,14 +1,13 @@
-// Packages
+// Imports
 import React from "react"
+import { Link } from "react-router-dom"
+import { Font } from "tsx-library-julseb"
 
-// Components
-import * as Font from "../components/styles/Font"
 import Page from "../components/layouts/Page"
-import Link from "../components/utils/LinkScroll"
 
-function NotFound() {
+const NotFound = () => {
     return (
-        <Page title="Not found!">
+        <Page title="404">
             <Font.H1>Page not found!</Font.H1>
 
             <Font.P>

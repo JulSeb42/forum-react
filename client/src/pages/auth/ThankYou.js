@@ -1,17 +1,13 @@
-// Packages
+// Imports
 import React from "react"
+import { Font } from "tsx-library-julseb"
 
-// Components
-import * as Font from "../../components/styles/Font"
 import Page from "../../components/layouts/Page"
 
-// Title
-const title = "Thank you for creating your account!"
-
-function ThankYou() {
+const ThankYou = () => {
     return (
-        <Page title={title} noAside>
-            <Font.H1>{title}</Font.H1>
+        <Page title="Thank you!">
+            <Font.H1>Thank you for creating your account!</Font.H1>
 
             <Font.P>
                 You are now logged in. We just sent you an email to verify your

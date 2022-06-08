@@ -1,91 +1,93 @@
-// Packages
+// Imports
 import React, { useState, useContext } from "react"
-import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { Font, Form, Input, Alert } from "tsx-library-julseb"
+import { slugify, getToday } from "js-utils-julseb"
 
-// Components
 import { AuthContext } from "../../context/auth"
-import * as Font from "../../components/styles/Font"
+import topicsService from "../../api/topics.service"
+
 import Page from "../../components/layouts/Page"
-import Form from "../../components/forms/Form"
-import Input from "../../components/forms/Input"
-import MarkdownEditor from "../../components/forms/MarkdownEditor"
-import ErrorMessage from "../../components/forms/ErrorMessage"
 
-// Utils
-import getToday from "../../components/utils/getToday"
-import getTimeNow from "../../components/utils/getTimeNow"
+import { commandsMarkdown } from "../../config/markdown.config"
+import getTimeSeconds from "../../utils/getTimeSeconds"
 
-function NewTopic() {
-    const { user } = useContext(AuthContext)
+const NewTopic = ({ edited, setEdited }) => {
     const navigate = useNavigate()
+    const { user, setUser, setToken } = useContext(AuthContext)
 
-    const [title, setTitle] = useState("")
-    const [category, setCategory] = useState("")
+    const [inputs, setInputs] = useState({
+        title: "",
+        category: "",
+    })
     const [body, setBody] = useState("")
     const [errorMessage, setErrorMessage] = useState(undefined)
 
-    const handleTitle = e => setTitle(e.target.value)
-    const handleCategory = e => setCategory(e.target.value)
+    const handleChange = e =>
+        setInputs({ ...inputs, [e.target.id]: e.target.value })
 
     const handleSubmit = e => {
         e.preventDefault()
 
         const requestBody = {
-            title,
-            createdBy: user,
+            category: slugify(inputs.category),
+            title: inputs.title,
             body,
+            createdBy: user,
             dateCreated: getToday(),
-            timeCreated: getTimeNow(),
-            category,
-            likes: 0,
+            timeCreated: getTimeSeconds(),
         }
 
-        axios
-            .put("/topics/new-topic", requestBody)
+        topicsService
+            .newTopic(requestBody)
             .then(res => {
+                setUser(res.data.user)
+                setToken(res.data.authToken)
+                setEdited(!edited)
                 navigate(`/topics/${res.data.createdTopic._id}`)
-                window.location.reload(false)
             })
-            .catch(err => {
-                const errorDescription = err.response.data.message
-                setErrorMessage(errorDescription)
-            })
+            .catch(err => setErrorMessage(err.response.data.message))
     }
 
     return (
-        <Page title="Add a new topic" noAside>
+        <Page title="Create a new topic" mainWidth={400}>
             <Font.H1>Create a new topic</Font.H1>
 
             <Form
-                btnprimary="Create a new topic"
-                btncancel="/"
+                btnPrimary="Create a new topic"
+                btnCancel={-1}
                 onSubmit={handleSubmit}
             >
                 <Input
                     label="Title"
                     id="title"
-                    onChange={handleTitle}
-                    value={title}
+                    onChange={handleChange}
+                    value={inputs.title}
                     autoFocus
                 />
 
                 <Input
                     label="Category"
                     id="category"
-                    onChange={handleCategory}
-                    value={category}
+                    onChange={handleChange}
+                    value={inputs.category}
                 />
 
-                <MarkdownEditor
+                <Input
                     label="Body"
+                    type="markdown"
                     id="body"
                     onChange={setBody}
                     value={body}
+                    commands={commandsMarkdown}
                 />
             </Form>
 
-            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+            {errorMessage && (
+                <Alert as={Font.P} color="danger">
+                    {errorMessage}
+                </Alert>
+            )}
         </Page>
     )
 }

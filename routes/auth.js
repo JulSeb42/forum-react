@@ -1,92 +1,81 @@
-// Packages
+// Imports
 const router = require("express").Router()
 const bcrypt = require("bcryptjs")
-const mongoose = require("mongoose")
+const jwt = require("jsonwebtoken")
 
 const User = require("../models/User.model")
-let transporter = require("../utils/transporter")
 
-const isLoggedIn = require("../middleware/isLoggedIn")
-const isLoggedOut = require("../middleware/isLoggedOut")
+const { isAuthenticated } = require("../middleware/jwt.middleware")
 
+const {
+    passwordRegex,
+    emailRegex,
+    getRandomString,
+} = require("js-utils-julseb")
+const jwtConfig = require("../utils/jwtConfig")
+const transporter = require("../utils/transporter")
+
+// Salt password
 const saltRounds = 10
 
-// Logged in user
-router.get("/loggedin", (req, res) => {
-    res.json(req.user)
-})
-
 // Signup
-router.put("/signup", isLoggedOut, (req, res, next) => {
-    const {
-        username,
-        email,
-        password,
-        verifyToken,
-        imageUrl,
-        gender,
-        location,
-    } = req.body
+router.post("/signup", (req, res, next) => {
+    const { email, username, password, imageUrl, location, bio } =
+        req.body
+    const verifyToken = getRandomString(20)
 
     if (!username) {
         return res
             .status(400)
-            .json({ message: "Please provide your full name." })
+            .json({ message: "Please provide your username." })
     }
 
-    const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/
-    const regexUsername = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{3,}/
+    if (!emailRegex.test(email)) {
+        return res
+            .status(400)
+            .json({ message: "Please provide a valid email address." })
+    }
 
-    if (!regex.test(password)) {
+    if (!passwordRegex.test(password)) {
         return res.status(400).json({
             message:
                 "Password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter.",
         })
     }
 
-    if (!regexUsername.test(username)) {
-        return res
-            .status(400)
-            .json({
-                message:
-                    "Username must be at least 3 chars long, and can not contain any space.",
-            })
-    }
-
-    User.findOne({ email }).then(found => {
-        if (found) {
-            return res.status(400).json({ message: "Email already taken." })
-        }
-
-        User.findOne({ username }).then(foundUsername => {
-            if (foundUsername) {
+    User.findOne({ email })
+        .then(foundUser => {
+            if (foundUser) {
                 return res
                     .status(400)
-                    .json({ message: "Username already taken." })
+                    .json({ message: "This email is already taken." })
             }
 
-            return bcrypt
-                .genSalt(saltRounds)
-                .then(salt => bcrypt.hash(password, salt))
-                .then(hashedPassword => {
-                    return User.create({
-                        username,
-                        email,
-                        password: hashedPassword,
-                        verified: false,
-                        verifyToken,
-                        imageUrl,
-                        gender,
-                        location,
-                        admin: false,
-                    })
-                })
-                .then(user => {
+            User.findOne({ username }).then(foundUsername => {
+                if (foundUsername) {
+                    return res.status(400).json({ message: "This username is already taken." })
+                }
+
+                const salt = bcrypt.genSaltSync(saltRounds)
+                const hashedPassword = bcrypt.hashSync(password, salt)
+
+                return User.create({
+                    email,
+                    username,
+                    password: hashedPassword,
+                    imageUrl,
+                    verified: false,
+                    verifyToken,
+                    admin: false,
+                    location,
+                    bio,
+                }).then(createdUser => {
+                    // Send email to verify the account
                     let mailDetails = {
                         from: process.env.EMAIL,
                         to: email,
                         subject: "Verify your account on our app",
-                        html: `Hello,<br /><br />Thank you for creating your account on our app! <a href="${process.env.ORIGIN}/verify/${verifyToken}/${user._id}">Click here to verify your account</a>.`,
+                        html: `Hello,<br /><br />Thank you for creating your account on our app! <a href="${process.env.ORIGIN}/verify/${verifyToken}/${createdUser._id}">Click here to verify your account</a>.`,
                     }
 
                     transporter.sendMail(mailDetails, (err, data) => {
@@ -97,148 +86,165 @@ router.put("/signup", isLoggedOut, (req, res, next) => {
                         }
                     })
 
-                    req.session.user = user
-                    res.status(201).json(user)
+                    // Payload
+                    const payload = { user: createdUser }
+
+                    const authToken = jwt.sign(
+                        payload,
+                        process.env.TOKEN_SECRET,
+                        jwtConfig
+                    )
+
+                    res.status(201).json({
+                        user: createdUser,
+                        authToken: authToken,
+                    })
                 })
-                .catch(err => {
-                    if (err instanceof mongoose.Error.ValidationError) {
-                        return res.status(400).json({ message: err.message })
-                    }
-
-                    if (err.code === 11000) {
-                        return res.status(400).json({
-                            message:
-                                "Email need to be unique. The email you chose is already in use.",
-                        })
-                    }
-
-                    return res.status(500).json({ message: err.message })
-                })
-        })
-    })
-})
-
-// Login
-router.put("/login", isLoggedOut, (req, res, next) => {
-    const { email, password } = req.body
-
-    if (!email) {
-        return res.status(400).json({ message: "Please provide your email." })
-    }
-
-    if (password.length < 6) {
-        return res.status(400).json({
-            message: "Your password needs to be at least 6 characters long.",
-        })
-    }
-
-    User.findOne({ email })
-        .then(user => {
-            if (!user) {
-                return res
-                    .status(400)
-                    .json({ message: "This user does not exist." })
-            }
-
-            bcrypt.compare(password, user.password).then(isSamePassword => {
-                if (!isSamePassword) {
-                    return res
-                        .status(400)
-                        .json({ message: "Wrong credentials." })
-                }
-
-                req.session.user = user
-
-                return res.json(user)
             })
         })
         .catch(err => next(err))
 })
 
-// Logout
-router.put("/logout", isLoggedIn, (req, res) => {
-    req.session.destroy(err => {
-        if (err) {
-            return res.status(500).json({ message: err.message })
-        }
-        res.json({ message: "Done" })
-    })
-})
+// Login
+router.post("/login", (req, res, next) => {
+    const { email, password } = req.body
 
-// Verify account
-router.put("/verify", (req, res, next) => {
-    const { id, verifyToken, verified } = req.body
-
-    User.findByIdAndUpdate(id, { id, verifyToken, verified }, { new: true })
-        .then(updatedUser => {
-            res.status(200).json({ user: updatedUser })
-        })
-        .catch(err => next(err))
-})
-
-// Forgot password
-router.put("/forgot", (req, res, next) => {
-    const { email, resetToken } = req.body
+    if (email === "" || password === "") {
+        return res
+            .status(400)
+            .json({ message: "Please provide your email and password." })
+    }
 
     User.findOne({ email })
-        .then(found => {
-            if (!found) {
-                res.status(400).json({
-                    message: "This user does not exist.",
-                })
+        .then(foundUser => {
+            if (!foundUser) {
+                return res
+                    .status(401)
+                    .json({ message: "This user does not exist." })
+            }
+
+            const passwordCorrect = bcrypt.compareSync(
+                password,
+                foundUser.password
+            )
+
+            if (passwordCorrect) {
+                const payload = { user: foundUser }
+                const authToken = jwt.sign(
+                    payload,
+                    process.env.TOKEN_SECRET,
+                    jwtConfig
+                )
+
+                res.status(200).json({ authToken: authToken })
             } else {
-                User.findOneAndUpdate(
-                    { email },
-                    { resetToken },
-                    { new: true }
-                ).then(foundUser => {
-                    let mailDetails = {
-                        from: process.env.EMAIL,
-                        to: email,
-                        subject: "Reset your password on our app",
-                        html: `Hello,<br /><br />To reset your password, <a href="${process.env.ORIGIN}/reset-password/${resetToken}/${foundUser._id}">click here</a>.`,
-                    }
-
-                    transporter.sendMail(mailDetails, function (err, data) {
-                        if (err) {
-                            console.log(err)
-                        } else {
-                            console.log("Email sent successfully")
-                        }
-                    })
-
-                    res.status(200).json(res.body)
+                res.status(401).json({
+                    message: "Unable to authenticate the user.",
                 })
             }
         })
         .catch(err => next(err))
 })
 
+// Verify if user is logged in
+router.get("/loggedin", isAuthenticated, (req, res, next) => {
+    console.log(`req.payload: ${req.payload}`)
+    res.status(200).json(req.payload)
+})
+
+// Verify account
+router.put("/verify", (req, res, next) => {
+    const { id } = req.body
+
+    User.findByIdAndUpdate(id, { verified: true }, { new: true })
+        .then(updatedUser => {
+            const payload = { user: updatedUser }
+            const authToken = jwt.sign(
+                payload,
+                process.env.TOKEN_SECRET,
+                jwtConfig
+            )
+
+            res.status(200).json({ authToken: authToken, user: updatedUser })
+        })
+        .catch(err => next(err))
+})
+
+// Forgot password
+router.post("/forgot-password", (req, res, next) => {
+    const { email } = req.body
+    const resetToken = getRandomString(20)
+
+    if (!emailRegex.test(email)) {
+        return res.status(400).json({ message: "Please enter a valid email." })
+    }
+
+    User.findOne({ email })
+        .then(foundUser => {
+            if (!foundUser) {
+                return res
+                    .status(400)
+                    .json({ message: "This user does not exist." })
+            }
+
+            User.findOneAndUpdate(
+                { email },
+                { resetToken },
+                { new: true }
+            ).then(foundUser => {
+                let mailDetails = {
+                    from: process.env.EMAIL,
+                    to: email,
+                    subject: "Reset your password on our app",
+                    html: `Hello,<br /><br />To reset your password, <a href="${process.env.ORIGIN}/reset-password/${resetToken}/${foundUser._id}">click here</a>.`,
+                }
+
+                transporter.sendMail(mailDetails, function (err, data) {
+                    if (err) {
+                        console.log(err)
+                    } else {
+                        console.log("Email sent successfully")
+                    }
+                })
+
+                res.status(200).json(res.body)
+            })
+        })
+        .catch(err => next(err))
+})
+
 // Reset password
-router.put("/reset-password/:token/:id", (req, res, next) => {
-    const { password } = req.body
+router.put("/reset-password", (req, res, next) => {
+    const { password, resetToken, id } = req.body
 
-    const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/
-
-    if (!regex.test(password)) {
+    if (!passwordRegex.test(password)) {
         return res.status(400).json({
             message:
                 "Password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter.",
         })
     }
 
-    return bcrypt
-        .genSalt(saltRounds)
-        .then(salt => bcrypt.hash(password, salt))
-        .then(hashedPassword => {
-            return User.findByIdAndUpdate(req.params.id, {
-                password: hashedPassword,
-            })
-                .then(updatedUser => {
-                    res.status(200).json({ user: updatedUser })
+    User.findById(id)
+        .then(foundUser => {
+            if (foundUser.resetToken !== resetToken) {
+                return res.status(400).json({
+                    message:
+                        "There was a problem trying to reset your password.",
                 })
-                .catch(err => next(err))
+            }
+
+            const salt = bcrypt.genSaltSync(saltRounds)
+            const hashedPassword = bcrypt.hashSync(password, salt)
+
+            User.findByIdAndUpdate(
+                id,
+                { password: hashedPassword, resetToken: "" },
+                { new: true }
+            ).then(updatedUser => {
+                res.status(200).json({ user: updatedUser })
+            })
         })
+        .catch(err => next(err))
 })
 
 module.exports = router

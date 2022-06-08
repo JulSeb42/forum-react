@@ -18,22 +18,16 @@ const conversationSchema = new Schema(
                     type: Schema.Types.ObjectId,
                     ref: "User",
                 },
-
-                message: {
-                    type: String,
-                    required: true,
-                },
-
-                createdDay: String,
-                createdTime: String,
+                message: String,
+                date: String,
+                time: String,
             },
         ],
 
         dateCreated: String,
         timeCreated: String,
-        dateLastMessage: String,
-        timeLastMessage: String,
-        read: Boolean,
+        readUser1: Boolean,
+        readUser2: Boolean,
     },
     {
         timestamps: true,

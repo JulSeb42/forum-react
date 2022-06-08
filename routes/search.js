@@ -1,17 +1,25 @@
+// Imports
 const router = require("express").Router()
 
 const Topic = require("../models/Topic.model")
-const User = require("../models/User.model")
 
-router.put("/search/:keywords", (req, res, next) => {
-    Topic.find({ title: req.params.keywords })
-        .then(topicFromDb => res.status(200).json(topicFromDb))
-        .catch(err => next(err))
-})
+// Get search results
+router.get("/search/:query", (req, res, next) => {
+    const query = req.params.query
+    const search = { $regex: query, $options: "-i" }
 
-router.get("/results", (req, res, next) => {
-    Topic.find({ title: req.params.keywords })
-        .then(topicFromDb => res.status(200).json(topicFromDb))
+    Topic.find({ search: search })
+        .populate("createdBy")
+        .populate({
+            path: "posts",
+            populate: {
+                path: "poster",
+                model: "User",
+            },
+        })
+        .then(foundTopics => {
+            return res.status(200).json(foundTopics)
+        })
         .catch(err => next(err))
 })
 

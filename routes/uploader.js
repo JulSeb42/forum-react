@@ -1,13 +1,15 @@
+// Imports
 const router = require("express").Router()
 
 const fileUploader = require("../config/cloudinary.config")
 
-router.put(
+// Upload picture
+router.post(
     "/upload-picture",
     fileUploader.single("imageUrl"),
     (req, res, next) => {
         if (!req.file) {
-            next(new Error("No file uploaded"))
+            next(new Error("No file uploaded."))
             return
         }
 

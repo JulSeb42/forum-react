@@ -1,32 +1,60 @@
-// Packages
+// Imports
 import React from "react"
+import PropTypes from "prop-types"
+import { Helmet, Main } from "tsx-library-julseb"
 
-// Components
-import Helmet from "./Helmet"
-import Header from "./Header"
-import Container from "./Container"
+import Header from "../header/Header"
+import Wrapper from "./Wrapper"
 
-function Page(props) {
+import siteData from "../../data/siteData"
+
+const Page = ({
+    title,
+    description,
+    keywords,
+    cover,
+    template = "1col",
+    children,
+    mainWidth,
+}) => {
     return (
         <>
             <Helmet
-                title={props.title}
-                description={props.description}
-                keywords={props.keywords}
+                title={`${title} | ${siteData.name}`}
+                description={description}
+                keywords={[siteData.keywords, keywords]}
+                siteName={siteData.name}
+                favicon={siteData.favicon}
+                author={siteData.author}
+                type={siteData.type}
+                cover={cover || siteData.cover}
+                language={siteData.language}
             />
 
             <Header />
 
-            <Container
-                onChangeSearch={props.onChangeSearch}
-                valueSearch={props.valueSearch}
-                onChangeCategory={props.onChangeCategory}
-                valueCategory={props.valueCategory}
+            <Wrapper
+                template={template || "1col"}
+                style={{ backgroundColor: "var(--background-color)" }}
             >
-                {props.children}
-            </Container>
+                {template === "1col" ? (
+                    <Main width={mainWidth}>{children}</Main>
+                ) : (
+                    children
+                )}
+            </Wrapper>
         </>
     )
+}
+
+Page.propTypes = {
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    keywords: PropTypes.array,
+    cover: PropTypes.string,
+    template: PropTypes.string,
+    mainWidth: PropTypes.number,
+    children: PropTypes.any,
 }
 
 export default Page

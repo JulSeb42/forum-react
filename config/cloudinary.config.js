@@ -11,8 +11,8 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
     cloudinary,
     params: {
-        allowed_formats: ["jpg", "png"],
-        folder: "forum-app",
+        allowed_formats: ["jpg", "png", "svg", "ico"],
+        folder: "forum-new",
     },
 })
 

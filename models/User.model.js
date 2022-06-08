@@ -1,6 +1,5 @@
 const { Schema, model } = require("mongoose")
 
-// TODO: Please make sure you edit the user model to whatever makes sense in this case
 const userSchema = new Schema(
     {
         email: {
@@ -8,75 +7,56 @@ const userSchema = new Schema(
             required: true,
             unique: true,
         },
-
         username: {
             type: String,
-            unique: true,
             required: true,
+            unique: true,
         },
-
         password: String,
         imageUrl: String,
-        gender: String,
-        location: String,
-        bio: String,
-
-        admin: Boolean,
-
+        verified: Boolean,
+        verifyToken: String,
+        resetToken: String,
         topics: [
             {
                 type: Schema.Types.ObjectId,
                 ref: "Topic",
             },
         ],
-
         posts: [
             {
                 type: Schema.Types.ObjectId,
                 ref: "Post",
             },
         ],
-
         conversations: [
             {
                 type: Schema.Types.ObjectId,
                 ref: "Conversation",
             },
         ],
-
-        contacted: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: "User",
-            },
-        ],
-        
-        contactedBy: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: "User",
-            },
-        ],
-
+        admin: Boolean,
         notifications: [
             {
-                type: Schema.Types.ObjectId,
-                ref: "Notification",
+                topic: {
+                    type: Schema.Types.ObjectId,
+                    ref: "Topic",
+                },
+                type: {
+                    type: String,
+                    enum: ["like", "comment"],
+                },
+                date: String,
+                time: String,
+                sender: {
+                    type: Schema.Types.ObjectId,
+                    ref: "User",
+                },
             },
         ],
-
-        unreadNotification: Boolean,
-
-        likedTopics: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: "Topic",
-            },
-        ],
-
-        verified: Boolean,
-        verifyToken: String,
-        resetToken: String,
+        location: String,
+        bio: String,
+        hasUnreadNotifications: Boolean,
     },
     {
         timestamps: true,

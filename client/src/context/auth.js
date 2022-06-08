@@ -1,73 +1,75 @@
-// Packages
+// Imports
 import React, { useState, useEffect, createContext } from "react"
-import axios from "axios"
 
-import localStorageExpires from "../components/utils/localStorageExpires"
+import authService from "../api/auth.service"
 
 const AuthContext = createContext()
 
-// const API_URL = "http://localhost:5005"
-
-function AuthProviderWrapper(props) {
+const AuthProviderWrapper = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const [user, setUser] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
+    const [user, setUser] = useState(null)
 
-    const loginUser = user => {
-        localStorageExpires("isLoggedIn", true, 864000000)
-        localStorage.setItem("user", JSON.stringify(user))
-        setUser(JSON.parse(localStorage.getItem("user")))
+    const loginUser = token => {
+        localStorage.setItem("authToken", token)
+        verifyStoredToken()
+    }
+
+    const setToken = token => {
+        localStorage.setItem("authToken", token)
         setIsLoggedIn(true)
-        verify()
     }
 
     const logoutUser = () => {
-        axios.put("/auth/logout").then(() => {
-            localStorage.removeItem("isLoggedIn")
-            localStorage.removeItem("user")
-            setIsLoggedIn(false)
-            setUser(null)
-        })
+        localStorage.removeItem("authToken")
+        setIsLoggedIn(false)
+        setUser(null)
     }
 
-    const verify = () => {
-        if (localStorage.getItem("isLoggedIn")) {
-            axios
-                .get(`/auth/loggedin`)
-                .then(() => {
-                    setUser(JSON.parse(localStorage.getItem("user")))
+    const verifyStoredToken = () => {
+        const storedToken = localStorage.getItem("authToken")
+
+        if (storedToken) {
+            authService
+                .loggedIn({
+                    headers: {
+                        Authorization: `Bearer ${storedToken}`,
+                    },
+                })
+                .then(res => {
+                    const user = res.data.user
+                    setUser(user)
                     setIsLoggedIn(true)
                     setIsLoading(false)
                 })
-                .catch(err => console.log(err))
+                .catch(err => {
+                    console.log(err)
+                    setIsLoggedIn(false)
+                    setUser(null)
+                    setIsLoading(false)
+                })
         } else {
             setIsLoading(false)
         }
     }
 
-    const updateUser = updatedUser => {
-        localStorage.setItem("user", JSON.stringify(updatedUser))
-        setUser(JSON.parse(localStorage.getItem("user")))
-    }
-
     useEffect(() => {
-        verify()
+        verifyStoredToken()
     }, [])
 
     return (
         <AuthContext.Provider
             value={{
                 isLoggedIn,
-                setIsLoggedIn,
+                isLoading,
                 user,
                 setUser,
                 loginUser,
                 logoutUser,
-                isLoading,
-                updateUser,
+                setToken,
             }}
         >
-            {props.children}
+            {children}
         </AuthContext.Provider>
     )
 }
