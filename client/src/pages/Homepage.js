@@ -1,12 +1,13 @@
 // Imports
 import React, { useContext, useState, useEffect } from "react"
-import { Font, Flexbox, Button } from "tsx-library-julseb"
+import { Font, Button } from "tsx-library-julseb"
 
 import { AuthContext } from "../context/auth"
 import topicsService from "../api/topics.service"
 
 import Page from "../components/layouts/Page"
 import TopicList from "../components/topics/TopicList"
+import TitleFlex from "../components/ui/TitleFlex"
 
 const Homepage = ({ edited, setEdited }) => {
     const { isLoggedIn } = useContext(AuthContext)
@@ -26,7 +27,7 @@ const Homepage = ({ edited, setEdited }) => {
 
     return (
         <Page title="Homepage">
-            <Flexbox justifyContent="space-between" alignItems="center">
+            <TitleFlex>
                 <Font.H1>All topics</Font.H1>
 
                 {isLoggedIn && (
@@ -34,7 +35,7 @@ const Homepage = ({ edited, setEdited }) => {
                         Add a new topic
                     </Button>
                 )}
-            </Flexbox>
+            </TitleFlex>
 
             <TopicList
                 topics={allTopics}

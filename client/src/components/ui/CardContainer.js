@@ -1,5 +1,5 @@
 // Imports
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { Variables } from "tsx-library-julseb"
 
 const CardContainer = styled.div`
@@ -9,6 +9,14 @@ const CardContainer = styled.div`
     box-shadow: ${Variables.Shadows.M};
     width: ${({ edit }) => edit && "100%"};
     max-width: ${({ edit }) => edit && "600px"};
+
+    ${({ edit }) =>
+        edit &&
+        css`
+            @media ${Variables.Breakpoints.Mobile} {
+                max-width: 90%;
+            }
+        `}
 `
 
 export default CardContainer

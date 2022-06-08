@@ -1,6 +1,12 @@
 // Imports
 import styled from "styled-components"
-import { Variables, Mixins, MarkdownContainer, Font } from "tsx-library-julseb"
+import {
+    Variables,
+    Mixins,
+    MarkdownContainer,
+    Font,
+    Grid,
+} from "tsx-library-julseb"
 
 import CardContainer from "../../ui/CardContainer"
 
@@ -13,6 +19,13 @@ const Container = styled(CardContainer)`
 
     small {
         color: ${Variables.Colors.Gray800};
+    }
+
+    @media ${Variables.Breakpoints.Mobile} {
+        ${Mixins.Flexbox({
+            direction: "column-reverse",
+            gap: "s"
+        })};
     }
 `
 
@@ -34,4 +47,10 @@ const Body = styled(MarkdownContainer)`
     -webkit-box-orient: vertical;
 `
 
-export { Container, Title, Body }
+const Footer = styled(Grid)`
+    @media ${Variables.Breakpoints.Mobile} {
+        grid-template-columns: repeat(3, 1fr);
+    }
+`
+
+export { Container, Title, Body, Footer }

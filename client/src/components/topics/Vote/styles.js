@@ -1,9 +1,17 @@
 // Imports
 import styled from "styled-components"
 
-import { Variables, Mixins } from "tsx-library-julseb"
+import { Variables, Mixins, Grid } from "tsx-library-julseb"
 
-const Container = styled.span`
+const Container = styled(Grid)`
+    @media ${Variables.Breakpoints.Mobile} {
+        justify-content: center;
+        width: 100%;
+        gap: 0;
+    }
+`
+
+const Content = styled.span`
     input {
         display: none;
 
@@ -40,4 +48,4 @@ const Label = styled.label`
     }
 `
 
-export { Container, Label }
+export { Content, Label, Container }

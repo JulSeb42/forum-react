@@ -1,7 +1,7 @@
 // Imports
 import React, { useState, useEffect, useContext } from "react"
 import { v4 as uuid } from "uuid"
-import { Grid,  Font } from "tsx-library-julseb"
+import { Font } from "tsx-library-julseb"
 
 import { AuthContext } from "../../../context/auth"
 import conversationsService from "../../../api/conversations.service"
@@ -10,6 +10,8 @@ import LoadContainer from "../../ui/LoadContainer"
 import CardConversation from "../CardConversation"
 
 import convertTimeShort from "../../../utils/convertTimeShort"
+
+import { Container } from "./styles"
 
 const ListCardsConversation = ({ small, id }) => {
     const { user } = useContext(AuthContext)
@@ -51,7 +53,7 @@ const ListCardsConversation = ({ small, id }) => {
     return isLoading ? (
         <LoadContainer />
     ) : (
-        <Grid alignContent="start" gap={small ? "xxs" : "s"}>
+        <Container small={small}>
             {sortedConversations.length > 0 ? (
                 sortedConversations.map((conversation, i) => (
                     <CardConversation
@@ -70,7 +72,7 @@ const ListCardsConversation = ({ small, id }) => {
             ) : (
                 <Font.P>You don't have any conversation yet.</Font.P>
             )}
-        </Grid>
+        </Container>
     )
 }
 

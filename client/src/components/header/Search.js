@@ -1,9 +1,30 @@
 // Imports
 import React, { useState } from "react"
 import { createSearchParams, useNavigate } from "react-router-dom"
-import { Input } from "tsx-library-julseb"
+import { Input, Variables } from "tsx-library-julseb"
+import styled, { css } from "styled-components"
 
-const Search = () => {
+const Container = styled.form`
+    ${({ mobile }) =>
+        mobile
+            ? css`
+                  display: none;
+
+                  @media ${Variables.Breakpoints.Mobile} {
+                      display: inherit;
+                      flex-grow: 1;
+                  }
+              `
+            : css`
+                  display: inline;
+
+                  @media ${Variables.Breakpoints.Mobile} {
+                      display: none;
+                  }
+              `}
+`
+
+const Search = ({ mobile }) => {
     const navigate = useNavigate()
 
     const [query, setQuery] = useState("")
@@ -19,15 +40,15 @@ const Search = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <Container mobile={mobile} onSubmit={handleSubmit}>
             <Input
                 placeholder="Search"
-                id="search"
+                id={`search-${mobile ? "-mobile" : ""}`}
                 type="search"
                 onChange={handleQuery}
                 value={query}
             />
-        </form>
+        </Container>
     )
 }
 

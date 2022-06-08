@@ -36,17 +36,19 @@ const Header = () => {
     }
 
     return (
-        <Container isScrolled={isScrolled}>
+        <Container isScrolled={isScrolled} isOpen={isOpen}>
             <MenuLinkStyled as={Link} to="/" logo={1}>
                 {siteData.name}
             </MenuLinkStyled>
+
+            <Search mobile />
 
             <MenuButton
                 width={28}
                 height={20}
                 onClick={() => setIsOpen(!isOpen)}
                 color="currentColor"
-                open={isOpen}
+                isOpen={isOpen}
             />
 
             <Nav isOpen={isOpen}>

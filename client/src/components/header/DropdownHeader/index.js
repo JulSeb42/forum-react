@@ -1,5 +1,5 @@
 // Imports
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, useLayoutEffect } from "react"
 import { v4 as uuid } from "uuid"
 import { DropdownContainer, Dropdown, Avatar, Hr } from "tsx-library-julseb"
 
@@ -27,6 +27,20 @@ const DropdownHeader = () => {
         },
     ]
 
+    const [isMobile, setIsMobile] = useState(true)
+
+    useLayoutEffect(() => {
+        window.addEventListener("resize", () => {
+            console.log(window.innerWidth)
+
+            if (window.innerWidth <= 600) {
+                setIsMobile(true)
+            } else {
+                setIsMobile(false)
+            }
+        })
+    })
+
     return (
         <DropdownContainer justifyContent="flex-end">
             <Button onClick={() => setIsOpen(!isOpen)}>
@@ -35,7 +49,7 @@ const DropdownHeader = () => {
                 {user.username}
             </Button>
 
-            <Dropdown isOpen={isOpen} position="right">
+            <Dropdown isOpen={isOpen} position={isMobile ? "left" : "right"}>
                 {links.map(link => (
                     <LinkDropdown
                         icon={link.icon}

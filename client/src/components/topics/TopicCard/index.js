@@ -8,7 +8,7 @@ import Vote from "../Vote"
 
 import { optionsMarkdownCard } from "../../../config/markdown.config"
 
-import { Container, Body, Title } from "./styles"
+import { Container, Body, Title, Footer } from "./styles"
 
 const TopicCard = ({ topic, edited, setEdited }) => {
     const { title, _id, category, posts, createdBy } = topic
@@ -31,7 +31,7 @@ const TopicCard = ({ topic, edited, setEdited }) => {
 
                 <Hr />
 
-                <Grid col={3}>
+                <Footer>
                     <Font.Small>
                         By{" "}
                         <Link to={`/users/${createdBy.username}`}>
@@ -54,7 +54,7 @@ const TopicCard = ({ topic, edited, setEdited }) => {
                         <Icon src="message" size={14} />
                         {posts.length - 1}
                     </Flexbox>
-                </Grid>
+                </Footer>
             </Grid>
         </Container>
     )

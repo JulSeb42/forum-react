@@ -11,11 +11,12 @@ const Container = styled.header`
     justify-content: space-between;
     padding: ${Variables.Spacers.M} 5vw;
     position: fixed;
-    background-color: ${({ isScrolled }) =>
-        isScrolled && Variables.Colors.White};
+    background-color: ${({ isScrolled, isOpen }) =>
+        (isScrolled || isOpen) && Variables.Colors.White};
     box-shadow: ${({ isScrolled }) => isScrolled && Variables.Shadows.L};
     transition: ${Variables.Transitions.Short};
     z-index: 999;
+    gap: ${Variables.Spacers.M};
 `
 
 const MenuButton = styled(Burger)`
@@ -41,7 +42,7 @@ const Nav = styled.nav`
         align-items: flex-start;
         left: 0;
         width: 100%;
-        top: ${props => (props.isOpen ? 56 : -200)}px;
+        top: ${props => (props.isOpen ? 56 : -250)}px;
         padding: ${Variables.Spacers.XS} 5vw;
         z-index: 999;
         background-color: ${Variables.Colors.White};

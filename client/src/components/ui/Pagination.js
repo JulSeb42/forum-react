@@ -1,7 +1,14 @@
 // Imports
 import React from "react"
 import { useNavigate, createSearchParams } from "react-router-dom"
-import { Pagination as Container, PaginationButton } from "tsx-library-julseb"
+import { Pagination as Container, PaginationButton, Variables } from "tsx-library-julseb"
+import styled from "styled-components"
+
+const Button = styled(PaginationButton)`
+    @media ${Variables.Breakpoints.Mobile} {
+        --size: 24px;
+    }
+`
 
 const Pagination = ({
     currentPage,
@@ -86,7 +93,7 @@ const Pagination = ({
 
     return (
         <Container>
-            <PaginationButton
+            <Button
                 onClick={prevPage}
                 prev
                 disabled={parseInt(currentPage) === 1 && true}
@@ -94,13 +101,13 @@ const Pagination = ({
 
             {getPaginationGroup()[0] !== 1 && (
                 <>
-                    <PaginationButton number={1} onClick={changePage} />
-                    <PaginationButton more />
+                    <Button number={1} onClick={changePage} />
+                    <Button more />
                 </>
             )}
 
             {getPaginationGroup().map(item => (
-                <PaginationButton
+                <Button
                     number={item}
                     key={item}
                     onClick={changePage}
@@ -111,16 +118,13 @@ const Pagination = ({
             {getPaginationGroup()[getPaginationGroup().length - 1] !==
                 totalPages && (
                 <>
-                    <PaginationButton more />
+                    <Button more />
 
-                    <PaginationButton
-                        number={totalPages}
-                        onClick={changePage}
-                    />
+                    <Button number={totalPages} onClick={changePage} />
                 </>
             )}
 
-            <PaginationButton
+            <Button
                 onClick={nextPage}
                 next
                 disabled={parseInt(currentPage) === totalPages && true}

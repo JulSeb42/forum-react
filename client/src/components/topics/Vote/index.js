@@ -1,6 +1,6 @@
 // Imports
 import React, { useState, useContext } from "react"
-import { Grid, Font, Icon, Flexbox } from "tsx-library-julseb"
+import { Font, Icon, Flexbox } from "tsx-library-julseb"
 import { getToday } from "js-utils-julseb"
 import getTimeSeconds from "../../../utils/getTimeSeconds"
 
@@ -8,7 +8,7 @@ import { AuthContext } from "../../../context/auth"
 import topicsService from "../../../api/topics.service"
 import usersService from "../../../api/users.service"
 
-import { Container, Label } from "./styles"
+import { Content, Label, Container } from "./styles"
 
 const Vote = ({ topic, edited, setEdited, topicCard }) => {
     const { user, setUser, setToken, isLoggedIn } = useContext(AuthContext)
@@ -79,13 +79,13 @@ const Vote = ({ topic, edited, setEdited, topicCard }) => {
     }
 
     return (
-        <Grid
+        <Container
             as={topicCard && Flexbox}
             alignItems={topicCard ? "center" : "start"}
             gap="xs"
             justifyItems="center"
         >
-            <Container>
+            <Content>
                 <input
                     type="checkbox"
                     id={`likes-${topic._id}`}
@@ -100,10 +100,10 @@ const Vote = ({ topic, edited, setEdited, topicCard }) => {
                 <Label htmlFor={`likes-${topic._id}`} aria-label="Like button">
                     <Icon src={isChecked ? "heart-full" : "heart"} size={24} />
                 </Label>
-            </Container>
+            </Content>
 
             <Font.P>{likes}</Font.P>
-        </Grid>
+        </Container>
     )
 }
 

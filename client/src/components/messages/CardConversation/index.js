@@ -32,7 +32,7 @@ const CardConversation = ({ conversation, user, small, separator, active }) => {
         window.location.reload(false)
     } 
 
-    const Content = () => {
+    const Content = ({ smallCard }) => {
         return (
             <>
                 <Avatar
@@ -44,7 +44,7 @@ const CardConversation = ({ conversation, user, small, separator, active }) => {
                 <Flexbox direction="column" style={{ flexGrow: 1 }}>
                     <Font.Strong>{otherUser.username}</Font.Strong>
 
-                    <Body>
+                    <Body small={smallCard}>
                         {name}
                         {lastMessage.message}
                     </Body>
@@ -66,7 +66,7 @@ const CardConversation = ({ conversation, user, small, separator, active }) => {
                     active={active}
                     onClick={goToConversation}
                 >
-                    <Content />
+                    <Content smallCard />
                 </SmallContainer>
             ) : (
                 <Container

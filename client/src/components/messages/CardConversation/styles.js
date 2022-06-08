@@ -35,7 +35,11 @@ const Body = styled(Font.Small)`
     overflow: hidden;
     white-space: pre;
     text-overflow: ellipsis;
-    max-width: 90px;
+    max-width: ${({ small }) => (small ? 90 : 500)}px;
+
+    @media ${Variables.Breakpoints.Mobile} {
+        max-width: ${({ small }) => (small ? 90 : 200)}px;
+    }
 `
 
 export { Container, SmallContainer, Body }

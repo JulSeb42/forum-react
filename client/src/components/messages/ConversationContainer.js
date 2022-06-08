@@ -9,9 +9,11 @@ import {
     Message,
     MessageInput,
     Alert,
+    Variables
 } from "tsx-library-julseb"
 import { v4 as uuid } from "uuid"
 import { convertDateShort, getToday } from "js-utils-julseb"
+import styled from "styled-components"
 
 import conversationsService from "../../api/conversations.service"
 
@@ -20,6 +22,14 @@ import LoadContainer from "../ui/LoadContainer"
 
 import getTimeSeconds from "../../utils/getTimeSeconds"
 import convertTimeShort from "../../utils/convertTimeShort"
+
+const Container = styled(Grid)`
+    grid-template-columns: var(--template-conversation);
+
+    @media ${Variables.Breakpoints.Mobile} {
+        grid-template-columns: repeat(1, 1fr);
+    }
+`
 
 const ConversationContainer = ({ conversation, isLoading, id, user }) => {
     // Messages
@@ -71,7 +81,7 @@ const ConversationContainer = ({ conversation, isLoading, id, user }) => {
     }, 100)
 
     return (
-        <Grid col="var(--template-conversation)" gap="s">
+        <Container gap="s">
             <ListCardsConversation small id={id} />
 
             {isLoading ? (
@@ -117,7 +127,7 @@ const ConversationContainer = ({ conversation, isLoading, id, user }) => {
                     {errorMessage}
                 </Alert>
             )}
-        </Grid>
+        </Container>
     )
 }
 
